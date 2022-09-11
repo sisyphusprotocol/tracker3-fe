@@ -1,0 +1,112 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(2.21deg, #fdfab4 -7.08%, #d28aed 99.52%);
+}
+
+.skip {
+  width: 0.8rem;
+  height: 0.2rem;
+  position: fixed;
+  left: 2.64rem;
+  top: 0.38rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.2rem;
+  text-align: right;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
+}
+
+.image {
+  position: absolute;
+  width: 3.433rem;
+  height: 4.09rem;
+  left: 0.5rem;
+  top:1rem;
+}
+
+.outline {
+  position: absolute;
+  left: 12.8%;
+  bottom: 2.5rem;
+  font-weight: 600;
+  font-size: 0.24rem;
+  line-height: 0.35rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
+  font-family: "Jost";
+  font-style: normal;
+}
+
+.desc {
+  position: absolute;
+  left: 12%;
+  bottom: 1.7rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.16rem;
+  line-height: 0.22rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
+  text-shadow: 0px 0.04rem 0.04rem rgba(0, 0, 0, 0.23);
+}
+
+.start {
+  position: absolute;
+  width: 2.71rem;
+  height: 0.57rem;
+  left: 0.49rem;
+  bottom: 0.78rem;
+  background: #7b61c5;
+  border-radius: 0.38rem;
+  display: flex;
+  align-items: center;
+}
+
+.start-text {
+  margin-left: 0.85rem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.2rem;
+  line-height: 0.29rem;
+  text-align: center;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
+}
+.start-icon {
+  margin-left: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.16rem;
+  width: 0.47rem;
+  height: 0.47rem;
+  background: radial-gradient(
+    57.78% 57.85% at 51.24% 59.68%,
+    #f79f40 0%,
+    #f7a542 16%,
+    #f8b44a 37%,
+    #face55 60%,
+    #fbe660 77%,
+    #fbf36f 91%,
+    #fbf672 93%,
+    #fbf676 95%,
+    #fbf783 96%,
+    #fcf897 98%,
+    #fdfab4 99%,
+    #fdfbc2 100%
+  );
+  border-radius: 0.56rem;
+}
+
+.connect {
+  position: absolute;
+  left: 0.55rem;
+  bottom: 0.8rem;
+}

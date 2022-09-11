@@ -1,0 +1,48 @@
+.nav {
+    position: fixed;
+    width: 100vw;
+    height: 0.61rem;
+    bottom: 0rem;
+    background: rgba(173, 165, 156, 0.19);
+    border-radius: 0.15rem 0.15rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-item {
+    margin-left: 0.32rem;
+    flex: 1;
+    width: 0.8rem;
+    height: 0.4rem;
+    position: relative;
+}
+
+.item-icon {
+    position: absolute;
+    top: -0.68rem;
+    bottom: 0.76rem;
+    width: 0.22rem;
+    height: 0.22rem;
+    align-items: center;
+    vertical-align: middle
+}
+
+.item-text {
+    position: absolute;
+    bottom: 0rem;
+    width: 0.8rem;
+    height: 0.1rem;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.12rem;
+    line-height: 0.15rem;
+    color: #313759;
+    margin-left: -0.06rem;
+}
+
+.common {
+    width: 0.22rem;
+    height: 0.22rem
+}

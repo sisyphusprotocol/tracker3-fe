@@ -1,0 +1,37 @@
+.container{
+    background:linear-gradient(#FDFBC2,rgba(197,112,213,.27));
+    height:100vh
+}
+
+.item-icon {
+    bottom: 1rem;
+}
+
+.find-img {
+    position: relative;
+    left: 0.78rem;
+    top: 0.57rem;
+    width: 2.14rem;
+    height: 1.05rem;
+}
+
+.find-button {
+    width: 2.81rem;
+    height: 0.51rem;
+    position: relative;
+    left: 0.47rem;
+    top: 1rem;
+}
+
+.find-list {
+    width: 3.58rem;
+    height: 3.8rem;
+    top: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.white {
+    margin-bottom: 1rem;
+}

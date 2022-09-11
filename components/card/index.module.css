@@ -1,0 +1,109 @@
+.card {
+  background: #ffffff;
+  /* Shadows/Soft Shadow/Soft Shadow - Style 1 */
+  box-shadow: 0px 0.18rem 0.4rem rgba(112, 144, 176, 0.12);
+  border-radius: 0.2rem;
+  width: 3.58rem;
+  height: 1.16rem;
+  position: relative;
+  left: 0.09rem;
+  margin-top: 0.05rem;
+  margin-bottom: 0.05rem;
+}
+
+.card-programName {
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.18rem;
+  line-height: 0.26rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  /* grey/dark */
+  color: #1c1721;
+  margin-left: 0.27rem;
+  padding-top: 0.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.card-dayCount {
+  margin-left: 0.27rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.13rem;
+  line-height: 0.19rem;
+  /* identical to box height */
+  font-feature-settings: "pnum" on, "lnum" on;
+  /* grey / medium */
+  color: #7f8187;
+}
+
+.card-progress {
+  width: 2.3rem;
+  margin-top: 0.1rem;
+  margin-left: 0.27rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.13rem;
+  line-height: 0.19rem;
+  /* identical to box height */
+  font-feature-settings: "pnum" on, "lnum" on;
+  /* grey / medium */
+  color: #7f8187;
+}
+
+.card-icon {
+  margin-top: -1.05rem;
+  padding-top: 0.05rem;
+
+  margin-left: 2.6rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.08rem;
+  /* background-color: purple; */
+}
+
+.card-icon-with-select {
+  margin-top: -1.3rem;
+  margin-left: 2.72rem;
+  margin-right: 0.34rem;
+  width: 0.52rem;
+  height: 0.5rem;
+  border-radius: 0.08rem;
+  /* background-color: purple; */
+}
+
+.select-button {
+  position: relative;
+  width: 0.64rem;
+  height: 0.23rem;
+  left: 2.66rem;
+  top: 0.6rem;
+  bottom: 0.08rem;
+
+  background: rgba(123, 97, 197, 0.9);
+  border-radius: 38px;
+}
+
+.select-text {
+  position: relative;
+
+  height: 4rem;
+
+  /* width: 64.13px;
+    left: 274.63px;
+    top: 701.33px; */
+
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+  text-align: center;
+  font-feature-settings: "pnum" on, "lnum" on;
+
+  color: #ffffff;
+}

@@ -1,0 +1,99 @@
+.container{
+    background:linear-gradient(#D28AED,#FDFBC2);
+    height:100vh
+}
+
+
+.item-icon {
+    bottom: 1rem;
+}
+
+.host-button {
+    width: 1.89rem;
+    height: 0.51rem;
+    left: 0.93rem;
+    top: 0.38rem;
+    position: relative;
+}
+
+
+.host-img {
+    width: 100vw;
+    text-align: center;
+    position: relative;
+    top: 0.5rem;
+}
+
+
+
+.host-yellow {
+    position: relative;
+    width: 3.57rem;
+    height: 0.74rem;
+    left: 0.09rem;
+    top: 0.5rem;
+    background: #FCEAA5;
+    border-radius: 0.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.yellow-title {
+    position: relative;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.2rem;
+    line-height: 0.24rem;
+    color: #000000;
+    margin-left: 0.25rem;
+    margin-top: 0.12rem;
+    padding-top: 0.1rem;
+}
+
+.yellow-desc {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    /* identical to box height */
+    color: #000000;
+    margin-left: 0.25rem;
+    margin-top: 0.08rem;
+}
+
+.host-title {
+    width: 2rem;
+    position: relative;
+    height: 0.29rem;
+    left: 0.83rem;
+    top: 0.5rem;
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.2rem;
+    line-height: 0.29rem;
+    /* identical to box height */
+    text-align: center;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.host-divide {
+    width: 3.1rem;
+    position: relative;
+    /* height: 0.1rem; */
+    left: 0.3rem;
+    top: 0.55rem;
+    border: 0.01rem solid rgba(0, 0, 0, 0.4);
+}
+
+.campaign-list {
+    width: 3.58rem;
+    /* height: 3.8rem; */
+    margin-top: 1rem;
+    top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
