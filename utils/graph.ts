@@ -74,7 +74,7 @@ export const CAMPAIGN_DETAIL = gql`
   }
 `;
 
-export declare type UserCampignResult = {
+export declare type UserCampaignResult = {
   userCampaign?: {
     id: string;
     userStatus:
@@ -82,7 +82,7 @@ export declare type UserCampignResult = {
       | "Signed"
       | "Admitted"
       | "Refused"
-      | "Sucess"
+      | "Success"
       | "Failure";
   };
 };

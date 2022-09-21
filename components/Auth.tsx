@@ -8,15 +8,15 @@ const WalletAuth = ({ children }) => {
   const { address } = useAccount();
 
   const router = useRouter();
-  const { connect } = useConnect({
+  const { connect, pendingConnector } = useConnect({
     connector: new InjectedConnector(),
   });
 
   useEffect(() => {
-    if ((signer === null || address === null) && router.pathname !== "/home") {
+    if ((signer === null || address === null) && !pendingConnector) {
       connect();
     }
-  }, [address, signer, router, connect]);
+  }, [address, signer, router, connect, pendingConnector]);
 
   return <>{children}</>;
 };

@@ -17,6 +17,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
+import { MoralisProvider } from "react-moralis";
 
 const queryClient = new QueryClient();
 
@@ -45,11 +46,16 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
     <Web3ReactProvider getLibrary={getLibrary}>
       <ApolloProvider client={client}>
         <QueryClientProvider client={queryClient}>
-          <WagmiConfig client={wagmiClient}>
-            <WalletAuth>
-              <Component {...pageProps} />
-            </WalletAuth>
-          </WagmiConfig>
+          <MoralisProvider
+            appId="N1QNMO76Unle5K2Bmm24k9fCOHqzgUFVefr4L7SD"
+            serverUrl="https://jbtrbndncyvu.usemoralis.com:2053/server"
+          >
+            <WagmiConfig client={wagmiClient}>
+              <WalletAuth>
+                <Component {...pageProps} />
+              </WalletAuth>
+            </WagmiConfig>
+          </MoralisProvider>
         </QueryClientProvider>
       </ApolloProvider>
     </Web3ReactProvider>

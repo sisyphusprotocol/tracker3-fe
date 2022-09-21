@@ -2,18 +2,24 @@ import * as React from "react";
 import styles from "./index.module.css";
 import _emoji from "../../assets/illustration.svg";
 import Button from "../../components/button";
-import Nav from "../../components/nav";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { InjectedConnector } from "@wagmi/core";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount, useConnect, useNetwork, useSwitchNetwork } from "wagmi";
 import { useIsMounted } from "../../hooks/useMounted";
+import { useLocalStorage } from "react-use";
 
 function Home() {
   const [which, setWhich] = React.useState(0);
+  const { chain } = useNetwork();
+  const { chains, switchNetwork } = useSwitchNetwork();
   const isMounted = useIsMounted();
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
+  const [alerted, setAlerted] = useLocalStorage<boolean>(
+    "ResolutionAlerted",
+    false
+  );
 
   const router = useRouter();
   // @ts-ignore
@@ -23,6 +29,14 @@ function Home() {
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+
+  React.useEffect(() => {
+    if (!alerted) {
+      alert("Switch to mobile view to get better experience");
+      setAlerted(true);
+    }
+  });
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.image}>
@@ -37,7 +51,7 @@ function Home() {
         d`&#39;`homme. Il faut imaginer Sisyphe heureux.
       </div>
 
-      {isMounted && isConnected ? (
+      {isMounted && isConnected && !chain?.unsupported ? (
         <Button
           className={styles.connect}
           onClick={() => {
@@ -45,6 +59,13 @@ function Home() {
           }}
         >
           {"Let's start"}
+        </Button>
+      ) : chain?.unsupported && switchNetwork ? (
+        <Button
+          className={styles.connect}
+          onClick={() => switchNetwork(chains[0].id)}
+        >
+          Switch To mumbai
         </Button>
       ) : (
         <Button className={styles.connect} onClick={() => connect()}>

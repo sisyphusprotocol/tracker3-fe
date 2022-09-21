@@ -41,7 +41,7 @@ const Selects = () => {
           id: shortenAddress(userCampaign.user.id),
           config: genConfig(),
           isSelect:
-            ["Admitted", "Sucess", "Failure"].indexOf(
+            ["Admitted", "Success", "Failure"].indexOf(
               userCampaign.userStatus
             ) !== -1,
           tokenId: userCampaign.tokenId,

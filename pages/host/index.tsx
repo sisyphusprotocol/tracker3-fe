@@ -23,7 +23,7 @@ function Host() {
     }
   );
 
-  const { data: participatedCampigns } = useQuery<CreatedCampaignType>(
+  const { data: participatedCampaigns } = useQuery<CreatedCampaignType>(
     PARTICIPATED_CAMPAIGN,
     {
       variables: { user: address?.toLowerCase(), time: now() },
@@ -45,7 +45,7 @@ function Host() {
         </div>
       </div>
       <div className={styles["campaign-list"]}>
-        {participatedCampigns?.campaigns?.map((campaign, key) => {
+        {participatedCampaigns?.campaigns?.map((campaign, key) => {
           return (
             <Card
               id={campaign.id}

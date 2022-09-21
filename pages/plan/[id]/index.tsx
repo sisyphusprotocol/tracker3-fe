@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from "react";
 import style from "../style.module.css";
 import Detail from "../../../components/Detail";
-import client from "../../../apollo-client";
-import { CampaignDetail, getCampaignDetail } from "../../../utils/campaign";
 import {
   CampaignDetailResult,
   CAMPAIGN_DETAIL,
-  UserCampignResult,
+  UserCampaignResult,
   USER_CAMPAIGN_DETAIL,
 } from "../../../utils/graph";
 
 import {
   useAccount,
-  useContract,
   useContractWrite,
   usePrepareContractWrite,
   useSigner,
 } from "wagmi";
-import { Campaign, ERC20 } from "../../../contracts/types";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import Button from "../../../components/button";
 import { now } from "../../../utils/convert";
 import { useTokenAllowance } from "../../../hooks/useAllowance";
-import { ethers } from "ethers";
+import { BigNumber } from "ethers";
 import { Campaign_ABI, ERC20_ABI } from "../../../contracts/contants";
 import { useTraceTraction } from "../../../hooks/useTraceTranscation";
 import TxConfirmedModal from "../../../components/modal";
+import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 
 // example Id: 0x90a3c9178fd231b9b9c8928beeb1aa4bdce8b642
 
@@ -36,6 +33,18 @@ const Plan = () => {
   const router = useRouter();
   const { data: signer } = useSigner();
   const { address } = useAccount();
+
+  const Web3Api = useMoralisWeb3Api();
+  const { data: balances } = useMoralisWeb3ApiCall(
+    Web3Api.account.getTokenBalances,
+    {
+      chain: "mumbai",
+      address: address,
+      token_addresses: ["0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784"],
+    },
+    { autoFetch: true }
+  );
+  console.log("balance: ", balances);
 
   /**
    * status:
@@ -57,7 +66,7 @@ const Plan = () => {
     error,
     data,
     refetch: refetchUserStatus,
-  } = useQuery<UserCampignResult>(USER_CAMPAIGN_DETAIL, {
+  } = useQuery<UserCampaignResult>(USER_CAMPAIGN_DETAIL, {
     variables: {
       userCampaign: `${address?.toLowerCase()}-${router.query.id}`,
     },
@@ -94,12 +103,12 @@ const Plan = () => {
   });
 
   // approve tx
-  const { write, data: arrpoveTxData } = useContractWrite(config);
+  const { write, data: approveTxData } = useContractWrite(config);
   const {
     tx: approveTx,
     modalShow: approveModalShow,
     setModalShow: setApproveModalShow,
-  } = useTraceTraction(arrpoveTxData?.hash, () => {
+  } = useTraceTraction(approveTxData?.hash, () => {
     refetch();
   });
 
@@ -131,7 +140,7 @@ const Plan = () => {
         } else {
           setStatus(4);
         }
-        // If the campign has not started
+        // If the campaign has not started
       } else {
         if (data?.userCampaign?.userStatus == "Admitted") {
           setStatus(3);
@@ -158,7 +167,17 @@ const Plan = () => {
 
   const handleClick = async () => {
     if (status === 0) {
-      approve();
+      // check whether use have enough token
+      if (
+        balances.length &&
+        BigNumber.from(balances[0].balance).gte(
+          BigNumber.from(props?.data?.campaign?.requiredAmount)
+        )
+      ) {
+        approve();
+      } else {
+        alert("You don't have enough token");
+      }
     } else if (status === 1) {
       // refetch after the tx confirmed
       signUpWrite();
