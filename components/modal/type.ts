@@ -9,4 +9,4 @@ export type ModalProps = {
   hostReward?: string;
 };
 
-export type ModalType = "sign" | "create" | "clock" | "get" | "hoster" | "approve" | "claim";
+export type ModalType = "sign" | "create" | "clock" | "get" | "host" | "approve" | "claim";

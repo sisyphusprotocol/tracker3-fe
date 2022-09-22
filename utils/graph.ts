@@ -214,7 +214,7 @@ export declare type CanCreateCampaignResult = {
   };
 };
 
-export const CAN_CREATE_CAMPAGIN = gql`
+export const CAN_CREATE_CAMPAIGN = gql`
   query ($user: String!) {
     user(id: $user) {
       canBeHost

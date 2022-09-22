@@ -11,7 +11,7 @@ import {
   CampaignListResult,
   CAMPAIGN_LIST,
   CanCreateCampaignResult,
-  CAN_CREATE_CAMPAGIN,
+  CAN_CREATE_CAMPAIGN,
 } from "../../utils/graph";
 import { timeStampToPeriodLength } from "../../utils/convert";
 import { useQuery } from "@apollo/client";
@@ -31,7 +31,7 @@ function Find() {
   );
 
   const { data: CanCreateCampaign } = useQuery<CanCreateCampaignResult>(
-    CAN_CREATE_CAMPAGIN,
+    CAN_CREATE_CAMPAIGN,
     {
       variables: { user: address?.toLowerCase() },
     }

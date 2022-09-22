@@ -43,7 +43,7 @@ const descData: Record<ModalType, string> = {
   create: "You have created the program successfully!",
   clock: "Well done!",
   get: "You have gained NFT of this achievement!",
-  hoster: "You have selected your members successfully!",
+  host: "You have selected your members successfully!",
   claim: "Achievement!",
 };
 
