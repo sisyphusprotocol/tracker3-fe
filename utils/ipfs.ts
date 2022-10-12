@@ -1,7 +1,8 @@
 import { NFTStorage, File } from "nft.storage";
 
 // It doesn't matter as it's a temporary plan
-const NFT_STORAGE_KEY = "";
+const NFT_STORAGE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDM2NGFkNjBjZWQwRTUyMDQ5OGRFMzg4RTNmNzNjM0ZkMURmNmRhMkIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2MTg4MDA0NzY2OCwibmFtZSI6Ik5veV9zaXN5cGh1c19mcm9udCJ9.ocuEy59INQl0sJCnGnkpuwVUsLzjIRDxqJslRvONjpg";
 
 export function parseCid(uri: string): string {
   // TODO: more check
