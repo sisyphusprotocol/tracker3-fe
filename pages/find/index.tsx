@@ -38,11 +38,11 @@ function Find() {
   );
 
   const handleClick = () => {
-    if (CanCreateCampaign?.user?.canBeHost) {
-      router.push("/plan/create");
-    } else {
-      alert("You are not eligible to create campaign, please contact team");
-    }
+    router.push("/plan/create");
+    // if (CanCreateCampaign?.user?.canBeHost) {
+    // } else {
+    //   alert("You are not eligible to create campaign, please contact team");
+    // }
   };
 
   useEffect(() => {
