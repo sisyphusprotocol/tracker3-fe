@@ -74,6 +74,7 @@ const Create = () => {
           metadata.days,
           86400,
           `ipfs://${cid}`,
+          "0x",
         ],
       });
     });
