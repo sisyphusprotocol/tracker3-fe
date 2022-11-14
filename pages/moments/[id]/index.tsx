@@ -59,12 +59,12 @@ function useMomentDetail() {
 
   const challengeData: IChallenge = {
     campaign: data?.record?.userCampaign.campaign.address,
-    challengeId: data?.record?.challenge.id,
+    challengeId: data?.record?.challenge?.id,
     status: data?.record?.challenge?.result || "None",
     agreeCount: Number(data?.record?.challenge?.agreeCount),
     disagreeCount: Number(data?.record?.challenge?.disagreeCount),
     noVoteCount: Number(data?.record?.challenge?.noVoteCount),
-    deadline: Number(data?.record.challenge.deadline),
+    deadline: Number(data?.record?.challenge?.deadline),
   };
 
   return { data: data, challengeData: challengeData };
