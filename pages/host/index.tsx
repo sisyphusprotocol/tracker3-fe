@@ -1,81 +1,254 @@
 import Button from "../../components/button";
 import Nav from "../../components/nav";
-import Card from "../../components/card";
+import Info from "../../components/info";
 import styles from "./index.module.css";
 import _img from "../../assets/sisyphus.png";
 import Image from "next/image";
-import {  useAccount } from "wagmi";
-
-import {  now,  timeStampToPeriodLength } from "../../utils/convert";
-import {  useQuery } from "@apollo/client";
+import Tab from "../../components/tab";
+import ScheduleCard from "../../components/schedule-card";
+import { useAccount, useContract, useSigner } from "wagmi";
 import {
-   CreatedCampaignType,
-   CREATED_CAMPAIGN,
-   PARTICIPATED_CAMPAIGN,
+  CREATED_CAMPAIGN_LIST,
+  CreatedCampaignList,
+  JoinNotStartCampaignList,
+  JOIN_NOT_START_CAMPAIGN_LIST,
+  JoinOnGoingCampaignList,
+  JOIN_ON_GOING_CAMPAIGN_LIST,
+  JoinFinishedCampaignList,
+  JOIN_FINISHED_CAMPAIGN_LIST,
 } from "../../utils/graph";
+import { now, timeStampToPeriodLength } from "../../utils/convert";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
-function Host() {
+function CreatedCampaigns() {
   const { address } = useAccount();
-  const { data: createdCampaignList } = useQuery<CreatedCampaignType>(
-    CREATED_CAMPAIGN,
+
+  const { data: campaignList } = useQuery<CreatedCampaignList>(
+    CREATED_CAMPAIGN_LIST,
     {
-      variables: { user: address?.toLowerCase(), time: now() },
+      variables: { user: address?.toLowerCase() },
+      onCompleted: (data) => {
+        console.log(data);
+      },
     }
   );
-
-  const { data: participatedCampaigns } = useQuery<CreatedCampaignType>(
-    PARTICIPATED_CAMPAIGN,
-    {
-      variables: { user: address?.toLowerCase(), time: now() },
-    }
-  );
-
-  if (!address) return null;
 
   return (
-    <div className={styles.container}>
-      <Button className={styles["host-button"]}>My Tracker</Button>
-      <div className={styles["host-img"]}>
-        <Image src={_img} className={styles["host-img"]} alt="" />
-      </div>
-      <div className={styles["host-yellow"]}>
-        <div className={styles["yellow-title"]}>Hi, Jerry!</div>
-        <div className={styles["yellow-desc"]}>
-          I fell in love with you at first sight! ❤️❤️❤️
-        </div>
-      </div>
-      <div className={styles["campaign-list"]}>
-        {participatedCampaigns?.campaigns?.map((campaign, key) => {
-          return (
-            <Card
-              id={campaign.id}
-              periodLength={timeStampToPeriodLength(campaign.totalTime)}
+    <div className={styles["schedule-list"]}>
+      {campaignList?.campaigns.map((campaign) => {
+        return (
+          <div key={campaign.id}>
+            <ScheduleCard
               uri={campaign.uri}
-              key={key}
+              address={campaign.id}
+              isFinish={true}
+              type="created"
+              startTime={Number(campaign.startTime)}
+              endTime={Number(campaign.endTime)}
+              token={"111"}
+              tokenAmount={"1"}
+              lastingDays={"1"}
+              progressCurrent={Math.floor(
+                (moment().unix() - 1668365934) / 86400
+              )}
+              progressSchedule={1}
             />
-          );
-        })}
-      </div>
-     {!createdCampaignList?.campaigns?.length ?<div className={styles["host-title"]}>No more campaigns</div>:
-      <div>
-        <div className={styles["host-title"]}>Created program</div>
-        <div className={styles["host-divide"]}></div>
-        <div className={styles["campaign-list"]}>
-          {createdCampaignList?.campaigns?.map((campaign) => {
-            return (
-              <Card
-                id={campaign.id}
-                periodLength={timeStampToPeriodLength(campaign.totalTime)}
-                uri={campaign.uri}
-                key={campaign.id}
-              />
-            );
-          })}
-        </div>
-      </div>}
-      <Nav />
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-export default Host;
+function OnGoingCampaigns() {
+  const { address } = useAccount();
+  const time = moment().unix();
+
+  const { data: campaignList } = useQuery<JoinOnGoingCampaignList>(
+    JOIN_ON_GOING_CAMPAIGN_LIST,
+    {
+      variables: { user: address?.toLowerCase(), time: time },
+      onCompleted: (data) => {
+        console.log(data);
+      },
+    }
+  );
+
+  return (
+    <div className={styles["schedule-list"]}>
+      {campaignList?.campaigns.map((campaign) => {
+        return (
+          <div key={campaign.id}>
+            <ScheduleCard
+              uri={campaign.uri}
+              address={campaign.id}
+              isFinish={true}
+              type={"ongoing"}
+              startTime={campaign.startTime}
+              endTime={campaign.endTime}
+              token={campaign.targetToken.id}
+              tokenAmount={campaign.requiredAmount}
+              lastingDays={campaign.epochCount}
+              progressCurrent={Math.floor(
+                (now() - Number(campaign.startTime)) / campaign.periodLength
+              )}
+              progressSchedule={Number(campaign.epochCount)}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function NotStartCampaigns() {
+  const { address } = useAccount();
+  const time = moment().unix();
+
+  const { data: campaignList } = useQuery<JoinNotStartCampaignList>(
+    JOIN_NOT_START_CAMPAIGN_LIST,
+
+    {
+      variables: { user: address?.toLowerCase(), time: time },
+      onCompleted: (data) => {
+        console.log(data);
+      },
+    }
+  );
+
+  return (
+    <div className={styles["schedule-list"]}>
+      {campaignList?.campaigns.map((campaign) => {
+        return (
+          <div key={campaign.id}>
+            <ScheduleCard
+              uri={campaign.uri}
+              address={campaign.id}
+              isFinish={true}
+              type={"notStarted"}
+              userStatus={campaign.users[0].userStatus}
+              startTime={campaign.startTime}
+              endTime={campaign.endTime}
+              token={campaign.targetToken.id}
+              tokenAmount={campaign.requiredAmount}
+              lastingDays={campaign.epochCount}
+              progressCurrent={Math.floor(
+                (moment().unix() - campaign.startTime) / campaign.periodLength
+              )}
+              progressSchedule={Number(campaign.epochCount)}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function FinishedCampaigns() {
+  const { address } = useAccount();
+  const time = moment().unix();
+
+  const { data: campaignList } = useQuery<JoinFinishedCampaignList>(
+    JOIN_FINISHED_CAMPAIGN_LIST,
+
+    {
+      variables: { user: address?.toLowerCase(), time: time },
+      onCompleted: (data) => {
+        console.log(data);
+      },
+    }
+  );
+
+  return (
+    <div className={styles["schedule-list"]}>
+      {campaignList?.campaigns.map((campaign) => {
+        return (
+          <div key={campaign.id}>
+            <ScheduleCard
+              uri={campaign.uri}
+              address={campaign.id}
+              isFinish={true}
+              type={"ongoing"}
+              startTime={campaign.startTime}
+              endTime={campaign.endTime}
+              token={campaign.targetToken.id}
+              periodLength={campaign.periodLength}
+              tokenAmount={campaign.requiredAmount}
+              lastingDays={campaign.epochCount}
+              progressCurrent={Math.min(
+                Math.floor(
+                  (moment().unix() - campaign.startTime) / campaign.periodLength
+                ),
+                Number(campaign.epochCount)
+              )}
+              progressSchedule={Number(campaign.epochCount)}
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+type TabType = "OnGoing" | "NotStart" | "Finished" | "Created";
+
+function Find() {
+  const [currentTab, setCurrentTab] = useState<TabType>("OnGoing");
+
+  const tabItems = [
+    {
+      label: "OnGoing",
+      activeCb: () => setCurrentTab("OnGoing"), // 
+    },
+    {
+      label: "Not Started",
+      activeCb: () => setCurrentTab("NotStart"),
+    },
+    {
+      label: "Finished",
+      activeCb: () => setCurrentTab("Finished"),
+    },
+    {
+      label: "Created",
+      activeCb: () => setCurrentTab("Created"),
+    },
+  ];
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.top}>
+        <Info />
+      </div>
+      <div className={styles["find-img"]}>
+        <Image src={_img} alt="" />
+      </div>
+      <div className={styles["host-yellow"]}>
+        <div className={styles["yellow-title"]}>Hi, Jerry!</div>
+        <div className={styles["yellow-desc"]}>
+          {"It always seems impossible until it's done."}
+        </div>
+      </div>
+      <div className={styles["campaign-tabs"]}>
+        <Tab tabItems={tabItems} />
+      </div>
+      {(() => {
+        switch (currentTab) {
+          case "Created":
+            return <CreatedCampaigns />;
+          case "NotStart":
+            return <NotStartCampaigns />;
+          case "OnGoing":
+            return <OnGoingCampaigns />;
+          case "Finished":
+            return <FinishedCampaigns />;
+          default:
+            return <div></div>;
+        }
+      })()}
+    </div>
+  );
+}
+
+export default Find;

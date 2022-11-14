@@ -1,0 +1,30 @@
+.wrapper {
+  height: 100vh;
+  padding-top: 0.96rem;
+  overflow: auto;
+  padding-bottom: 1rem;
+  background: linear-gradient(
+    180deg,
+    #fdfbc2 0%,
+    rgba(207, 112, 213, 0.61) 100%
+  );
+}
+
+.card-content {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  color: #262626;
+  margin: 0.15rem 0;
+}
+
+.card-wrapper {
+  padding: 0.25rem;
+  background: rgba(255, 254, 254, 0.7);
+  box-shadow: 0px 1px 25px -1px rgba(229, 229, 229, 0.1);
+  backdrop-filter: blur(10.225px);
+  border-radius: 5px;
+  margin-bottom: 0.1rem;
+}

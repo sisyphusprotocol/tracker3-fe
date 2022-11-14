@@ -13,7 +13,7 @@ export function parseCid(uri: string): string {
 }
 
 export async function getContent(cid: string) {
-  const res = await fetch(`https://ipfs.io/ipfs/${cid}`);
+  const res = await fetch(`https://nftstorage.link/ipfs/${cid}`);
   if (res.status == 200) {
     return res.json();
   }

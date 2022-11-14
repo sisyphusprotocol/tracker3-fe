@@ -12,3 +12,16 @@ export function packTokenAmount(str: string, precision: number = 18): string {
     return ethers.utils.formatEther(balance.sub(reminder));
   }
 }
+
+// Direct rounding
+export function packTokenAmountToFix(str: string, precision: number = 18): string {
+  if (!str) {
+    return str;
+  } else {
+    const balance = BigNumber.from(str);
+    const reminder = balance.mod(
+      BigNumber.from(10).pow(BigNumber.from(18 - precision))
+    );
+    return Math.round(Number(ethers.utils.formatEther(balance.sub(reminder)))).toString();
+  }
+}

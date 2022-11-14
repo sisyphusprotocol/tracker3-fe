@@ -10,20 +10,21 @@ import {
   useSigner,
 } from "wagmi";
 import { Calendar } from "../../../components/calendar";
+import ScheduleCard from "../../../components/schedule-card";
 import {
   CampaignDetailResult,
   CampaignTokenIdResult,
   CAMPAIGN_DETAIL,
-  CAMPAIGN_TOKENID,
+  CAMPAIGN_TOKEN_ID,
   PersonalPunchResult,
   PERSONAL_PUNCH,
 } from "../../../utils/graph";
 import Campaign_ABI from "../../../contracts/Campaign.json";
 
 import { weekMap } from "../../../utils/time";
-import { useCurrentEpoch } from "../../../hooks/useCampaignStatus";
+import { useCurrentEpoch } from "../../../hooks/useCampaign";
 import { now } from "../../../utils/convert";
-import { useTraceTraction } from "../../../hooks/useTraceTranscation";
+import { useTraceTraction } from "../../../hooks/useTraceTransaction";
 import TxConfirmedModal from "../../../components/modal";
 const Progress = () => {
   const { address } = useAccount();
@@ -32,6 +33,9 @@ const Progress = () => {
 
   const { data: detail } = useQuery<CampaignDetailResult>(CAMPAIGN_DETAIL, {
     variables: { addr: router.query.id },
+    onCompleted(data) {
+      console.log(data.campaign.endTime);
+    },
   });
 
   const currentEpoch = useCurrentEpoch(router.query.id as string);
@@ -52,25 +56,27 @@ const Progress = () => {
     }
   }, [detail?.campaign.startTime, detail?.campaign.totalTime]);
 
-  const { loading, data } = useQuery<PersonalPunchResult>(PERSONAL_PUNCH, {
-    variables: {
-      userCampaignEpoch: `${address?.toLowerCase()}-${
-        router.query.id
-      }-${currentEpoch}`,
-    },
-    pollInterval: 10000,
-    fetchPolicy: "network-only",
-    onCompleted(data) {
-      if (data?.record?.contentUri.length > 0) {
-        setChecked(true);
-      } else {
-        setChecked(false);
-      }
-    },
-  });
+  const { loading, data: CheckInHistory } = useQuery<PersonalPunchResult>(
+    PERSONAL_PUNCH,
+    {
+      variables: {
+        userCampaign: `${address?.toLowerCase()}-${router.query.id}`,
+        userCampaignEpoch: `${address?.toLowerCase()}-${
+          router.query.id
+        }-${currentEpoch}`,
+      },
+      onCompleted(data) {
+        if (data?.record?.contentUri.length > 0) {
+          setChecked(true);
+        } else {
+          setChecked(false);
+        }
+      },
+    }
+  );
 
   const { data: tokenIdData } = useQuery<CampaignTokenIdResult>(
-    CAMPAIGN_TOKENID,
+    CAMPAIGN_TOKEN_ID,
     {
       variables: {
         userCampaign: `${address ? address.toLowerCase() : ""}-${
@@ -80,7 +86,7 @@ const Progress = () => {
       pollInterval: 10000,
       fetchPolicy: "network-only",
       onCompleted(data) {
-        if (data?.userCampaign.userRewardClaimed) {
+        if (data?.userCampaign?.userRewardClaimed) {
           setClaimed(true);
         } else {
           setClaimed(false);
@@ -96,8 +102,10 @@ const Progress = () => {
     functionName: "claim",
     signer: signer,
     args: [tokenIdData?.userCampaign?.tokenId],
-    enabled: !!tokenIdData?.userCampaign?.tokenId,
+    enabled:
+      !!tokenIdData?.userCampaign?.tokenId && detail?.campaign.endTime < now(),
   });
+
   const { write: claimWrite, data: claimWriteTxData } =
     useContractWrite(config);
 
@@ -105,7 +113,7 @@ const Progress = () => {
     claimWriteTxData?.hash
   );
 
-  const onClick = () => {
+  const onCheckClick = () => {
     // If the campaign started, can punch in
     if (detail?.campaign.startTime <= moment().unix()) {
       router.push(`/plan/${router.query.id}/punch`);
@@ -138,7 +146,13 @@ const Progress = () => {
   return (
     <div>
       <Calendar
-        onCheckClick={onClick}
+        nextToDo={detail?.campaign.endTime > now() ? "Check" : "Claim"}
+        checkedTimeStamp={CheckInHistory?.userCampaign?.records?.map(
+          (record) => {
+            return Number(record?.timestamp);
+          }
+        )}
+        onCheckClick={onCheckClick}
         onClaimClick={onClaimClick}
         options={options}
         checked={checked}
@@ -158,6 +172,16 @@ const Progress = () => {
           setModalShow(false);
         }}
       />
+      <div
+        style={{ position: "fixed", bottom: "0.8451rem", left: "0.1927rem" }}
+      >
+        <ScheduleCard
+          isFinish={false}
+          uri={detail?.campaign.uri}
+          scheduleName={"Writing Schedule"}
+          lastingDays={"Achievement!"}
+        />
+      </div>
     </div>
   );
 };

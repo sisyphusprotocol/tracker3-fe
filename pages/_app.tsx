@@ -11,13 +11,15 @@ import { useLayoutEffect } from "react";
 import { createClient, WagmiConfig, chain, configureChains } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
+import Nav from "../components/nav";
+
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
-import { MoralisProvider } from "react-moralis";
+import { GlobalTxConformModal } from "../components/modal";
 
 const queryClient = new QueryClient();
 
@@ -46,16 +48,13 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
     <Web3ReactProvider getLibrary={getLibrary}>
       <ApolloProvider client={client}>
         <QueryClientProvider client={queryClient}>
-          <MoralisProvider
-            appId="N1QNMO76Unle5K2Bmm24k9fCOHqzgUFVefr4L7SD"
-            serverUrl="https://jbtrbndncyvu.usemoralis.com:2053/server"
-          >
-            <WagmiConfig client={wagmiClient}>
-              <WalletAuth>
-                <Component {...pageProps} />
-              </WalletAuth>
-            </WagmiConfig>
-          </MoralisProvider>
+          <WagmiConfig client={wagmiClient}>
+            <WalletAuth>
+              <Component {...pageProps} />
+              <Nav />
+              <GlobalTxConformModal />
+            </WalletAuth>
+          </WagmiConfig>
         </QueryClientProvider>
       </ApolloProvider>
     </Web3ReactProvider>

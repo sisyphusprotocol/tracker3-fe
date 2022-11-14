@@ -32,11 +32,13 @@
 
 .outline {
   position: absolute;
+  width: 3rem;
+  height: 1.32rem;
   left: 12.8%;
-  bottom: 2.5rem;
+  bottom: 2.3911rem;
   font-weight: 600;
-  font-size: 0.24rem;
-  line-height: 0.35rem;
+  font-size: 0.36rem;
+  line-height: 0.43rem;
   font-feature-settings: "pnum" on, "lnum" on;
   color: #ffffff;
   font-family: "Jost";
@@ -46,15 +48,16 @@
 .desc {
   position: absolute;
   left: 12%;
-  bottom: 1.7rem;
+  bottom: 1.6rem;
+  width: 2.58rem;
+  height: 0.709rem;
   font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: 0.16rem;
+  font-size: 0.14rem;
   line-height: 0.22rem;
-  font-feature-settings: "pnum" on, "lnum" on;
-  color: #ffffff;
-  text-shadow: 0px 0.04rem 0.04rem rgba(0, 0, 0, 0.23);
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #7B60C4;
 }
 
 .start {

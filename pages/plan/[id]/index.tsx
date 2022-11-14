@@ -10,6 +10,7 @@ import {
 
 import {
   useAccount,
+  useBalance,
   useContractWrite,
   usePrepareContractWrite,
   useSigner,
@@ -21,9 +22,9 @@ import { now } from "../../../utils/convert";
 import { useTokenAllowance } from "../../../hooks/useAllowance";
 import { BigNumber } from "ethers";
 import { Campaign_ABI, ERC20_ABI } from "../../../contracts/contants";
-import { useTraceTraction } from "../../../hooks/useTraceTranscation";
+import { useTraceTraction } from "../../../hooks/useTraceTransaction";
 import TxConfirmedModal from "../../../components/modal";
-import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
+import { setPriority } from "os";
 
 // example Id: 0x90a3c9178fd231b9b9c8928beeb1aa4bdce8b642
 
@@ -34,17 +35,10 @@ const Plan = () => {
   const { data: signer } = useSigner();
   const { address } = useAccount();
 
-  const Web3Api = useMoralisWeb3Api();
-  const { data: balances } = useMoralisWeb3ApiCall(
-    Web3Api.account.getTokenBalances,
-    {
-      chain: "mumbai",
-      address: address,
-      token_addresses: ["0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784"],
-    },
-    { autoFetch: true }
-  );
-  console.log("balance: ", balances);
+  const { data: balanceData } = useBalance({
+    addressOrName: address,
+    token: "0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784",
+  });
 
   /**
    * status:
@@ -76,7 +70,7 @@ const Plan = () => {
   });
 
   const { config: signUpConfig, refetch } = usePrepareContractWrite({
-    addressOrName: props.data?.campaign.id,
+    addressOrName: props?.data?.campaign.id,
     contractInterface: Campaign_ABI,
     functionName: "signUp",
     signer: signer,
@@ -126,6 +120,7 @@ const Plan = () => {
       3: "Admitted",
       4: "NotParticipate",
       5: "Refund",
+      6: "Go to CheckIn",
     };
     setButtonText(map[status]);
   }, [status]);
@@ -136,7 +131,8 @@ const Plan = () => {
       // If the campaign has already started
       if (props.data.campaign.startTime <= now()) {
         if (data?.userCampaign?.userStatus == "Admitted") {
-          setStatus(3);
+          // it's time to check in
+          setStatus(6);
         } else {
           setStatus(4);
         }
@@ -169,8 +165,7 @@ const Plan = () => {
     if (status === 0) {
       // check whether use have enough token
       if (
-        balances.length &&
-        BigNumber.from(balances[0].balance).gte(
+        balanceData?.value?.gte(
           BigNumber.from(props?.data?.campaign?.requiredAmount)
         )
       ) {
@@ -181,7 +176,7 @@ const Plan = () => {
     } else if (status === 1) {
       // refetch after the tx confirmed
       signUpWrite();
-    } else if (status === 3) {
+    } else if (status === 6) {
       router.push(`/plan/${router.query.id}/progress`);
     }
   };

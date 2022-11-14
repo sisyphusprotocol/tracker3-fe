@@ -1,0 +1,21 @@
+.wrapper{
+    width: 3.4rem;
+    height: 0.32rem;
+    position: relative;
+}
+
+.input {
+    width: 3.4rem;
+    height: 0.32rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 0.01rem solid #7B60C4;
+    border-radius: 0.1rem;
+}
+
+.search {
+    position: absolute;
+    right: 0.058rem;
+    top: 0.06rem;
+    width: 0.202rem;
+    height: 0.202rem;
+}

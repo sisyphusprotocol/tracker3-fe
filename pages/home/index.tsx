@@ -45,10 +45,9 @@ function Home() {
       <div className={styles.skip} onClick={skip}>
         Skip
       </div>
-      <div className={styles.outline}>Sisyphus Protocol -- Tracker 3</div>
+      <div className={styles.outline}>SISYPHUS  PROTOCOL<br/>Tracker 3</div>
       <div className={styles.desc}>
-        La lutte elle-même vers les sommets suffit à remplir un cœur
-        d`&#39;`homme. Il faut imaginer Sisyphe heureux.
+      La lutte elle-même vers les sommets suffit à remplir un cur d&#39;homme. Il faut imaginer Sisyphe heureux.
       </div>
 
       {isMounted && isConnected && !chain?.unsupported ? (

@@ -1,8 +1,8 @@
 import { getAddress } from "ethers/lib/utils";
 import moment from "moment";
 
-export function shortenDes(des: string, length: number): string {
-  return des.slice(0, length) + "...";
+export function shortenDes(des: string | undefined, length: number): string {
+  return des?.slice(0, length);
 }
 
 export function timeStampToPeriodLength(mss: number): string {
@@ -35,6 +35,7 @@ export function isAddress(value: any): string | false {
 }
 
 export function shortenAddress(address: string, chars = 4): string {
+  if (!address) return "";
   const parsed = isAddress(address);
   if (!parsed) {
     throw Error(`Invalid 'address' parameter '${address}'.`);

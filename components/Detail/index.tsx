@@ -3,7 +3,8 @@ import { CampaignDetail, getCampaignDetail } from "../../utils/campaign";
 import style from "./style.module.css";
 import { shortenAddress, timeStampToPeriodLength } from "../../utils/convert";
 import { useQuery } from "@tanstack/react-query";
-import { packTokenAmount } from "../../utils/token";
+import { packTokenAmountToFix } from "../../utils/token";
+import { TokenMap } from "../../contracts/contants";
 
 function timeStampToDate(timestamp: number): string {
   return new Date(timestamp).toLocaleString();
@@ -30,7 +31,7 @@ const Detail = (props: IDetail) => {
 
   return (
     <>
-      <div className={style.title}>{data && data.title}</div>
+      <div className={style.title}>{data?.title || "Loading..."}</div>
 
       <div className={style.line}>
         <div>Starting Date</div>
@@ -47,15 +48,13 @@ const Detail = (props: IDetail) => {
 
       <div className={style.line}>
         <div>Token</div>
-        <div className={style.content}>
-          {props.token && shortenAddress(props.token)}
-        </div>
+        <div className={style.content}>{TokenMap[props?.token]}</div>
       </div>
 
       <div className={style.line}>
         <div>Stake</div>
         <div className={style.content}>
-          {packTokenAmount(props.requiredAmount)} TSS
+          {packTokenAmountToFix(props.requiredAmount)}
         </div>
       </div>
 
@@ -72,7 +71,7 @@ const Detail = (props: IDetail) => {
       </div>
 
       <div className={style.desctitle}>Description</div>
-      <div className={style.desc}>{data && data.description}</div>
+      <div className={style.desc}>{data?.description || "loading..."}</div>
     </>
   );
 };

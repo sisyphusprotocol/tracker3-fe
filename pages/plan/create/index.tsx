@@ -19,7 +19,7 @@ import {
   CampaignFactory_ABI,
   CAMPAIGN_FACTORY_ADDRESS,
 } from "../../../contracts/contants";
-import { useTraceTraction } from "../../../hooks/useTraceTranscation";
+import { useTraceTraction } from "../../../hooks/useTraceTransaction";
 
 // eslint-disable-next-line react/display-name
 const Create = () => {

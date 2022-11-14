@@ -1,0 +1,40 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.1rem;
+}
+
+.tab-item {
+    width: 0.8rem;
+    height: 0.24rem;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
+    backdrop-filter: blur(0.02rem);
+    background: linear-gradient(95.34deg, rgba(255, 255, 255, 0.8) 19.94%, rgba(255, 255, 255, 0.48) 89.63%);
+}
+
+.tab-item-selected {
+    width: 0.8rem;
+    height: 0.24rem;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
+    backdrop-filter: blur(0.02rem);
+    background: #7B60C4;
+}
+
+.tab-item-text {
+    font-family: 'SF Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    color: #3F3F3F;
+}
+

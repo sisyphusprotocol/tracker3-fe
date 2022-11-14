@@ -13,12 +13,26 @@ export declare type CampaignDetail = {
   memberCount?: number;
 };
 
+export declare type RecordDetail = {
+  text: string;
+  imgs: string[];
+  timestamp: number;
+};
+
 export async function getCampaignDetail(uri: string) {
   const data = await getContent(parseCid(uri));
 
   const detail: { title: string; description: string } = JSON.parse(
     JSON.stringify(data)
   );
+
+  return detail;
+}
+
+export async function getRecordDetail(uri: string): Promise<RecordDetail> {
+  const data = await getContent(parseCid(uri));
+
+  const detail: RecordDetail = JSON.parse(JSON.stringify(data));
 
   return detail;
 }

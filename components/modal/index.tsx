@@ -47,6 +47,32 @@ const descData: Record<ModalType, string> = {
   claim: "Achievement!",
 };
 
+
+//  modal 
+export function useGlobalTxConfirmModal() {
+  const [modalData, setModalData] = useState<ModalProps>({
+    isShow: false,
+    txHash: "",
+    gasFee: "",
+  });
+  return { data: modalData, setData: setModalData };
+}
+
+//  modal 
+export const GlobalTxConformModal = () => {
+  const { data } = useGlobalTxConfirmModal();
+  return (
+    <TxConfirmedModal
+      isShow={data.isShow}
+      txHash={data.txHash}
+      type={data.type}
+      staked={data.staked}
+      userReward={data.userReward}
+      hostReward={data.hostReward}
+    />
+  );
+};
+
 // TODO: tx failed
 const TxConfirmedModal = (props: ModalProps) => {
   const { isShow, setShow, type } = props;

@@ -1,0 +1,95 @@
+.wrapper {
+  width: 3.4rem;
+  height: 1rem;
+  background: linear-gradient(95.34deg, rgba(255, 255, 255, 0.8) 19.94%, rgba(255, 255, 255, 0.48) 89.63%);
+  box-shadow: 0.02rem 0.06rem 0.11rem -0.06rem rgba(120, 61, 140, 0.25);
+  backdrop-filter: blur(2px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 0.2rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 510;
+  font-size: 0.18rem;
+  line-height: 0.21rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  width: 1.72rem;
+  height: 0.38rem;
+  color: #262626;
+  position: absolute;
+  left: 0.1599rem;
+  top: 0.1371rem;
+}
+
+.img-icon {
+  width: 0.76rem;
+  height: 0.76rem;
+  position: absolute;
+  left: 2.4619rem;
+  top: 0.1253rem;
+  display: flex;
+}
+
+.lasting-days {
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.13rem;
+  position: absolute;
+  left: 0.1599rem;
+  top: 0.4071rem;
+}
+
+.progress {
+  position: absolute;
+  left: 0.1599rem;
+  top: 0.7118rem;
+}
+
+.counts {
+  position: absolute;
+  left: 0.1599rem;
+  bottom: 0.0813rem;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.24rem;
+  line-height: 0.29rem;
+  /* identical to box height */
+  color: #7b60c4;
+}
+
+.notStarted{
+  position: absolute;
+  left: 0.1599rem;
+  bottom: 0.0813rem;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.24rem;
+  line-height: 0.29rem;
+  /* identical to box height */
+  color: #7b60c4;
+}
+.notStarted-text{
+  font-family: 'SF Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+/* identical to box height */
+  color: #929292;
+  margin-top: -0.24rem;
+}
+
+.notStarted-tag {
+  position: absolute;
+  left: 1.05rem;
+  bottom: 0.051rem;
+
+}

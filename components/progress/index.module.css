@@ -1,0 +1,64 @@
+.wrapper {
+  width: 1.5rem;
+  height: 0.1rem;
+  background: #7b60c4;
+  border-radius: 0.38rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap:0.05rem;
+}
+
+.progress {
+  margin-left: 0.01rem;
+  background: #ffdf65;
+  border-radius: 0.38rem;
+  height: 0.08rem;
+}
+
+.finish {
+  background: #adadad;
+}
+
+.finish-progress {
+  background: #474747;
+}
+
+.done {
+  display: flex;
+  flex-direction: row;
+  gap:0.1rem;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 590;
+  font-size: 0.13rem;
+  line-height: 0.16rem;
+  /* identical to box height */
+
+  font-feature-settings: "pnum" on, "lnum" on;
+
+  color: #7b60c4;
+}
+
+.text {
+  margin-top: -0.03rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.13rem;
+  line-height: 0.19rem;
+  /* identical to box height */
+
+  font-feature-settings: "pnum" on, "lnum" on;
+
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.tag {
+    margin-top: -0.04rem;
+}

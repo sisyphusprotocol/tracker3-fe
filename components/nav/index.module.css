@@ -3,46 +3,58 @@
     width: 100vw;
     height: 0.61rem;
     bottom: 0rem;
-    background: rgba(173, 165, 156, 0.19);
-    border-radius: 0.15rem 0.15rem 0 0;
+    background: rgba(255, 254, 254, 0.7);
+    box-shadow: 0px 1px 0.25rem -1px rgba(229, 229, 229, 0.1);
+    backdrop-filter: blur(0.1px);
+    border-radius: 0.2rem 0.2rem 0px 0px;
+}
+
+.list{
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
 .nav-item {
-    margin-left: 0.32rem;
     flex: 1;
-    width: 0.8rem;
-    height: 0.4rem;
-    position: relative;
+    display: flex;
+    margin-top: 0.08rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.item-icon {
-    position: absolute;
-    top: -0.68rem;
-    bottom: 0.76rem;
-    width: 0.22rem;
-    height: 0.22rem;
+.item-container {
+    display: flex;
+    width: 0.25rem;
+    height: 0.25rem;
+    position:relative;
     align-items: center;
-    vertical-align: middle
+    justify-content: center;
+}
+.item-icon {
+    display: flex;
+    width: 0.25rem;
+    height: 0.25rem;
+    transition: all .5s;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.active-item-icon{
+    display: flex;
+    width: 0.25rem;
+    height: 0.25rem;
+    position:absolute;
+    bottom: 12px;
+    transition: all .5s;
+    transform: scale(1.5);
 }
 
 .item-text {
-    position: absolute;
-    bottom: 0rem;
-    width: 0.8rem;
-    height: 0.1rem;
-    font-family: 'Inter';
+    font-family: 'SF Pro';
     font-style: normal;
     font-weight: 400;
-    font-size: 0.12rem;
-    line-height: 0.15rem;
-    color: #313759;
-    margin-left: -0.06rem;
-}
-
-.common {
-    width: 0.22rem;
-    height: 0.22rem
+    font-size: 10px;
+    line-height: 22px;
 }

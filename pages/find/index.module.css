@@ -1,37 +1,160 @@
 .container{
-    background:linear-gradient(#FDFBC2,rgba(197,112,213,.27));
+    background: linear-gradient(180deg, #FFF8F2 0%, #FEF0BE 43.23%, #EDC2FE 100%);
     height:100vh
+}
+
+.info{
+    position: fixed;
+    top: 0.4rem;
+    left: 0.19rem;
+}
+
+
+.search{
+    position: fixed;
+    top: 0.12rem;
+    left: 0.19rem;
 }
 
 .item-icon {
     bottom: 1rem;
 }
 
-.find-img {
-    position: relative;
-    left: 0.78rem;
-    top: 0.57rem;
-    width: 2.14rem;
-    height: 1.05rem;
+.host-button-wrapper {
+    width: 0.98rem;
+    height: 1.08rem;
+    right: 0.13rem;
+    top: 1.5784rem;
+    position: fixed;
+    background: #7B60C4;
+    border-radius: 0.1rem;
 }
 
-.find-button {
-    width: 2.81rem;
-    height: 0.51rem;
-    position: relative;
-    left: 0.47rem;
-    top: 1rem;
+.host-button-title {
+    margin-left:0.1012rem;
+    margin-top: 0.17rem;
+    width: 0.57rem;
+    height: 0.34rem;
+    font-family: 'SF Pro';
+    font-style: normal;
+    font-weight: 510;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
 }
 
-.find-list {
+.host-button-desc {
+    margin-left:0.1012rem;
+    width: 0.8rem;
+    height: 0.3471rem;
+    font-family: 'SF Pro';
+    font-style: normal;
+    font-weight: 274;
+    font-size: 0.11rem;
+    line-height: 0.13rem;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #FFFFFF;
+}
+
+.host-img {
+    position: fixed;
+    top: 1.5784rem;
+    left: 0.19rem;
+    width: 2.3288rem;
+    height: 1.08rem;
+    left: 0.1934rem;
+    display: flex;
+}
+
+
+
+.host-yellow {
+    position: absolute;
+    width: 3.57rem;
+    height: 0.74rem;
+    left: 0.09rem;
+    top: 0.5rem;
+    background: #7B60C4;
+    border-radius: 0.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.yellow-title {
+    /* position: absolute; */
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.2rem;
+    line-height: 0.24rem;
+    color: #FFFFFF;
+    margin-left: 0.25rem;
+    margin-top: 0.12rem;
+    padding-top: 0.1rem;
+}
+
+.yellow-desc {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    /* identical to box height */
+    color: #FFFFFF;
+    margin-left: 0.25rem;
+    margin-top: 0.08rem;
+}
+
+.host-title {
+    width: 2rem;
+    position: absolute;
+    height: 0.29rem;
+    left: 0.83rem;
+    top: 4rem;
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.2rem;
+    line-height: 0.29rem;
+    /* identical to box height */
+    text-align: center;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.host-divide {
+    width: 3.1rem;
+    position: relative;
+    /* height: 0.1rem; */
+    left: 0.3rem;
+    top: 0.55rem;
+    border: 0.01rem solid rgba(0, 0, 0, 0.4);
+}
+
+.campaign-list {
     width: 3.58rem;
-    height: 3.8rem;
-    top: 1.3rem;
+    /* height: 3.8rem; */
+    margin-top: 1rem;
+    top: 1.5rem;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
-.white {
-    margin-bottom: 1rem;
+.campaign-tabs {
+    position: fixed;
+    top: 2.907rem;
+    left: 0.19rem;
+}
+
+.schedule-list {
+    position: fixed;
+    top: 3.37rem;
+    left: 0.1901rem;
+    width: 3.8rem;
+    height: 4rem;
+    overflow-y:scroll;
+    display: flex;
+    flex-direction: column;
+    gap:0.15rem;
 }

@@ -2,7 +2,6 @@ import classNames from "classnames";
 import styles from "./device/index.module.css";
 
 export default function Iphone13() {
-  const url = "https://app.tracker3.io/";
   return (
     <div className={classNames(styles.container)}>
       <div className={classNames(styles.device, styles["device-iphone-13"])}>
@@ -13,7 +12,7 @@ export default function Iphone13() {
               width="100%"
               height="100%"
               className={styles["device-iframes-13"]}
-              src={url}
+              src="/"
             ></iframe>
           </div>
         </div>

@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import { useCampaignHost } from "../../hooks/useCampaignStatus";
+import { useCampaignHost } from "../../hooks/useCampaign";
 import _emoji from "../../assets/defaultCampaign.svg";
 import { shortenDes } from "../../utils/convert";
 import styles from "./index.module.css";
@@ -52,11 +52,11 @@ function Card(props: ICard) {
         }}
       >
         <div className={styles["card-programName"]}>
-          <Suspense fallback={<h1>{"loading"}</h1>}>{data?.title}</Suspense>
+          {data?.title || "Loading..."}
         </div>
         <div className={styles["card-dayCount"]}>{props.periodLength}</div>
         <div className={styles["card-progress"]}>
-          {data ? shortenDes(data.description, 36) : ""}
+          {shortenDes(data?.description, 36) || "loading"}...
         </div>
       </div>
       {select ? (
