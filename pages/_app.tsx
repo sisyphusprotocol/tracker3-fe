@@ -7,7 +7,7 @@ import type { AppProps } from "next/app";
 import getLibrary from "../getLibrary";
 import "../styles/globals.css";
 import { rem } from "../utils/rem";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { createClient, WagmiConfig, chain, configureChains } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
@@ -20,6 +20,8 @@ import {
 } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
 import { GlobalTxConformModal } from "../components/modal";
+import Loading from "../components/loading";
+import ReactLoading from "react-loading";
 
 const queryClient = new QueryClient();
 
@@ -44,15 +46,53 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
     rem();
     return () => {};
   }, []);
+
+  const [isMobile, setIsModbile] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (location.pathname !== "/mobile" && window.self === window.top) {
+      if (screen.width >= 800 && screen.height >= 600) {
+        setTimeout(() => {
+          window.location.replace("/mobile/");
+        }, 500);
+      } else {
+        setIsModbile(true);
+      }
+    } else {
+      setVisible(false);
+    }
+  }, []);
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <ApolloProvider client={client}>
         <QueryClientProvider client={queryClient}>
           <WagmiConfig client={wagmiClient}>
             <WalletAuth>
-              <Component {...pageProps} />
-              <Nav />
-              <GlobalTxConformModal />
+              {visible ? (
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: 300,
+                  }}
+                >
+                  <ReactLoading
+                    type={"spin"}
+                    color="#d3a2d7"
+                    height={100}
+                    width={100}
+                  />
+                </div>
+              ) : (
+                <>
+                  <Component {...pageProps} />
+                  {isMobile && <Nav />}
+                  <GlobalTxConformModal />
+                </>
+              )}
             </WalletAuth>
           </WagmiConfig>
         </QueryClientProvider>
