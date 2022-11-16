@@ -20,7 +20,6 @@ import {
 } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
 import { GlobalTxConformModal } from "../components/modal";
-import Loading from "../components/loading";
 import ReactLoading from "react-loading";
 
 const queryClient = new QueryClient();
