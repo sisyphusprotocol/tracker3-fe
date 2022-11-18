@@ -4,17 +4,15 @@ import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
 
 import navList from "./constant";
-const unShowPath = ["/mobile", "/home", "/moments/"];
+const unShowPath = [/\/mobile/, /\/home"/, /\/moments\//, /\/$/];
 function Nav() {
   const router = useRouter();
-
-  const { address } = useAccount();
 
   const turnTo = (url: string) => {
     router.push(url);
   };
 
-  const show = !unShowPath.some((path) => router.pathname.startsWith(path));
+  const show = !unShowPath.some((path) => router.pathname.match(path));
   function isActive(navigate: string) {
     return router.pathname.startsWith(navigate);
   }

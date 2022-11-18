@@ -19,7 +19,7 @@ import { wagmiClient } from "../utils/wagmiConfig";
 const queryClient = new QueryClient();
 
 function NextWeb3App({ Component, pageProps }: AppProps) {
-  useLayoutEffect(() => {
+  useEffect(() => {
     rem();
     return () => {};
   }, []);
@@ -29,7 +29,7 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (location.pathname !== "/mobile" && window.self === window.top) {
-      if (screen.width >= 800 && screen.height >= 600) {
+      if (screen.width >= 800 && screen.height >= 540) {
         setTimeout(() => {
           window.location.replace("/mobile/");
         }, 500);
