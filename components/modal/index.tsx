@@ -1,20 +1,21 @@
 import React, {
-  memo,
+  createContext,
   ReactElement,
+  useContext,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import bg from "../../assets/createPlane/achievement.png";
-import bg2 from "../../assets/createPlane/illustration.png";
+import bg2 from "../../assets/cover.svg";
 import Button from "../button";
 import styles from "./index.module.css";
 import type { ModalProps, ModalType } from "./type";
 import Image from "next/image";
-import { packTokenAmount } from "../../utils/token";
+import { packTokenAmount, packTokenAmountToFix } from "../../utils/token";
 import { BigNumber } from "ethers";
+import { useSetState } from "react-use";
+import { TokenMap } from "../../contracts/contants";
 
 const Portal: React.FC<{ children: ReactElement }> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -39,67 +40,83 @@ const Portal: React.FC<{ children: ReactElement }> = ({ children }) => {
 
 const descData: Record<ModalType, string> = {
   approve: "You have approved your token successfully",
-  sign: "You have signed up the program successfully!",
-  create: "You have created the program successfully!",
-  clock: "Well done!",
-  get: "You have gained NFT of this achievement!",
-  host: "You have selected your members successfully!",
+  sign: "You have signed up the campaign successfully!",
+  create: "You have created the campaign successfully!",
+  check: "Well done!",
+  select: "You have selected your members successfully!",
   claim: "Achievement!",
+  challenge: "You have started a challenge",
+  vote: "You have voted successfully!",
 };
 
+export const modalContext =
+  createContext<[ModalProps, React.Dispatch<React.SetStateAction<ModalProps>>]>(
+    null
+  );
 
-//  modal 
-export function useGlobalTxConfirmModal() {
-  const [modalData, setModalData] = useState<ModalProps>({
+// modal provider
+export function ModalProvider({ children }) {
+  const [modalData, setModalData] = useSetState<ModalProps>({
     isShow: false,
-    txHash: "",
-    gasFee: "",
   });
-  return { data: modalData, setData: setModalData };
+
+  return (
+    <modalContext.Provider value={[modalData, setModalData]}>
+      {children}
+      <GlobalTxConformModal />
+    </modalContext.Provider>
+  );
 }
 
-//  modal 
-export const GlobalTxConformModal = () => {
-  const { data } = useGlobalTxConfirmModal();
-  return (
-    <TxConfirmedModal
-      isShow={data.isShow}
-      txHash={data.txHash}
-      type={data.type}
-      staked={data.staked}
-      userReward={data.userReward}
-      hostReward={data.hostReward}
-    />
-  );
-};
-
-// TODO: tx failed
-const TxConfirmedModal = (props: ModalProps) => {
-  const { isShow, setShow, type } = props;
-
-  const data = {
-    title: "Bravo!",
-    desc: descData[type],
-    staked: props.staked,
-    Trx: props.txHash,
-    Gas: `${props.gasFee}  MATIC`,
+//  modal
+export function GlobalTxConformModal() {
+  const defaultModalProps: ModalProps = {
+    isShow: false,
+    onClick: null,
+    type: null,
+    title: null,
+    desc: null,
+    gasFee: null,
+    token: null,
+    staked: null,
+    userReward: null,
+    hostReward: null,
   };
+  const [data, setData] = useContext(modalContext);
+  const {
+    title,
+    isShow,
+    onClick,
+    type,
+    txHash,
+    token,
+    gasFee,
+    staked,
+    userReward,
+    hostReward,
+  } = data;
+
+  const desc = descData[type];
+  const Gas = `${gasFee}  MATIC`;
 
   const poolReward =
-    props?.userReward &&
-    props?.staked &&
-    BigNumber.from(props?.userReward)
-      .sub(BigNumber.from(props?.staked))
-      .toString();
+    userReward &&
+    staked &&
+    BigNumber.from(userReward).sub(BigNumber.from(staked)).toString();
 
-  const { title, desc, Trx, Gas, staked } = data;
   return isShow ? (
     <Portal>
-      <div className={styles.cover} onClick={() => setShow(!isShow)}>
+      <div
+        className={styles.cover}
+        onClick={() => {
+          setData(defaultModalProps);
+          onClick && onClick();
+        }}
+      >
         <div className={styles.container}>
           <div className={styles.flex}>
             <div className={styles["itemImg"]}>
-              <Image src={bg2} alt="" />
+              <Image quality={100} src={bg2} alt="" />
             </div>
 
             <div className={styles.desc}>
@@ -111,24 +128,30 @@ const TxConfirmedModal = (props: ModalProps) => {
               {staked && (
                 <div className={styles.detailItem}>
                   <div className={styles.label}>Staked</div>
-                  <div>{packTokenAmount(staked)} TSS</div>
+                  <div>
+                    {packTokenAmountToFix(staked)} {TokenMap[token]}
+                  </div>
                 </div>
               )}
               {poolReward && (
                 <div className={styles.detailItem}>
                   <div className={styles.label}>PoolReward</div>
-                  <div>{packTokenAmount(poolReward)} TSS</div>
+                  <div>
+                    {packTokenAmount(poolReward, 6)} {TokenMap[token]}
+                  </div>
                 </div>
               )}
-              {props?.hostReward && (
+              {hostReward && (
                 <div className={styles.detailItem}>
                   <div className={styles.label}>HostReward</div>
-                  <div>{packTokenAmount(props?.hostReward)} TSS</div>
+                  <div>
+                    {packTokenAmount(hostReward, 6)} {TokenMap[token]}
+                  </div>
                 </div>
               )}
               <div className={styles.detailItem}>
                 <div className={styles.label}>Trx</div>
-                <div>{Trx}</div>
+                <div>{txHash}</div>
               </div>
               <div className={styles.detailItem}>
                 <div className={styles.label}>Gas</div>
@@ -140,7 +163,9 @@ const TxConfirmedModal = (props: ModalProps) => {
         </div>
       </div>
     </Portal>
-  ) : null;
-};
+  ) : (
+    <div />
+  );
+}
 
-export default TxConfirmedModal;
+// export default TxConfirmedModal;

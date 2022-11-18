@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar, { genConfig, AvatarFullConfig } from "react-nice-avatar";
 import style from "./style.module.css";
 import Button from "../../../../components/button";
+import Top from "../../../../components/calendar/components/top";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CampaignSignedResult, CAMPAIGN_SIGNED } from "../../../../utils/graph";
@@ -10,6 +11,8 @@ import { useAccount, useContract, useSigner } from "wagmi";
 import { ethers } from "ethers";
 import { Campaign } from "../../../../contracts/types";
 import { Campaign_ABI } from "../../../../contracts/contants";
+import { useCampaignAdmit } from "../../../../hooks/useCampaignWrite";
+import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
 
 type Info = {
   id: string;
@@ -22,17 +25,19 @@ type Info = {
 const Selects = () => {
   const router = useRouter();
   const [list, setList] = useState<Info[]>([]);
-  const { address } = useAccount();
-  const { data: signer } = useSigner();
-  const campaign = useContract<Campaign>({
-    addressOrName: router.query.id
-      ? (router.query.id as string)
-      : ethers.constants.AddressZero,
-    contractInterface: Campaign_ABI,
-    signerOrProvider: signer,
+  const [allowList, setAllowList] = useState([]);
+
+  const campaignAddr = router?.query?.id as string;
+
+  const { execute, data } = useCampaignAdmit({
+    campaignAddr: campaignAddr,
+    tokenIds: allowList,
+  });
+  useTraceTransaction(data?.hash, { type: "select" }, () => {
+    router.push(`/plan/${campaignAddr}`);
   });
 
-  const { data, refetch } = useQuery<CampaignSignedResult>(CAMPAIGN_SIGNED, {
+  const { refetch } = useQuery<CampaignSignedResult>(CAMPAIGN_SIGNED, {
     variables: { campaign: router.query.id },
     onCompleted(data) {
       console.log(data);
@@ -48,7 +53,6 @@ const Selects = () => {
         }))
       );
     },
-    fetchPolicy: "network-only",
   });
 
   const changeListItem = (index) => {
@@ -58,18 +62,18 @@ const Selects = () => {
   };
 
   const handleSubmit = () => {
-    const res = list.filter((i) => i.isSelect);
-    campaign.admit(res.map((r) => r.tokenId)).then(() => {
-      setTimeout(() => {
-        refetch();
-      }, 5000);
-    });
+    execute();
   };
+
+  useEffect(() => {
+    setAllowList(list.filter((i) => i.isSelect).map((i) => i.tokenId));
+    console.log(allowList);
+  }, [list]);
 
   return (
     <div className={style["bg"]}>
+      <Top title="Selection" />
       <div className={style["outer"]}>
-        <div className={style["title"]}>Selection</div>
         <div className={style["label"]}>Writing protocol</div>
         <div className={style["list-container"]}>
           {list.map((item, index) => {
@@ -81,7 +85,11 @@ const Selects = () => {
               >
                 <Avatar
                   {...item.config}
-                  style={{ width: ".45rem", height: ".50rem" }}
+                  style={{
+                    width: ".45rem",
+                    height: ".50rem",
+                    marginLeft: "0.19rem",
+                  }}
                 />
                 <div className={style["list-item-info"]}>{item.id}</div>
                 <div className={style[item.isSelect ? "selected" : "circle"]} />

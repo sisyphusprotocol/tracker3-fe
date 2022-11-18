@@ -1,97 +1,96 @@
-.container{
-    background: linear-gradient(180deg, #FFF8F2 0%, #FEF0BE 43.23%, #EDC2FE 100%);
-    height:100vh
+.container {
+  background: linear-gradient(180deg, #fff8f2 0%, #fef0be 43.23%, #edc2fe 100%);
+  height: 100vh;
 }
 
 .top {
-    position: fixed;
-    top: 0.4388rem;
-    left: 0.224rem
+  position: fixed;
+  top: 0.4rem;
+  left: 0.24rem;
 }
 
 .item-icon {
-    bottom: 1rem;
+  bottom: 1rem;
 }
 
 .find-img {
-    position: fixed;
-    left: calc((100vw - 3.4rem)/2);
-    top: 1.083rem;
-    width: 3.40rem;
-    height: 1.9099rem;
+  position: fixed;
+  left: calc((100vw - 3.4rem) / 2);
+  top: 1.05rem;
+  width: 3.4rem;
+  height: 1.9099rem;
 }
 
 .find-button {
-    width: 2.81rem;
-    height: 0.51rem;
-    position: fixed;
-    left: 0.47rem;
-    top: 1rem;
+  width: 2.81rem;
+  height: 0.51rem;
+  position: fixed;
+  left: 0.47rem;
+  top: 1rem;
 }
 
 .find-list {
-    width: 3.58rem;
-    height: 3.8rem;
-    top: 1.3rem;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
+  width: 3.58rem;
+  height: 3.8rem;
+  top: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
 }
 
 .white {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .host-yellow {
-    width: 3.238rem;
-    height: 0.74rem;
-    position: fixed;
-    left: calc((100vw - 3.238rem) /2);
-    bottom: 4.27rem;
-    background: #7B60C4;
-    border-radius: 0.2rem;
+  width: 3.4rem;
+  height: 0.74rem;
+  position: fixed;
+  left: calc((100vw - 3.4rem) / 2);
+  bottom: 4.27rem;
+  background: #7b60c4;
+  border-radius: 0.2rem;
 }
 
 .yellow-title {
-    /* position: absolute; */
+  /* position: absolute; */
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.2rem;
-    line-height: 0.24rem;
-    color: #FFFFFF;
-    margin-left: 0.25rem;
-    margin-top: 0.12rem;
-
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.2rem;
+  line-height: 0.24rem;
+  color: #ffffff;
+  margin-left: 0.25rem;
+  margin-top: 0.12rem;
 }
 
 .yellow-desc {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.14rem;
-    line-height: 0.17rem;
-    /* identical to box height */
-    color: #FFFFFF;
-    margin-left: 0.25rem;
-    margin-top: 0.08rem;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  /* identical to box height */
+  color: #ffffff;
+  margin-left: 0.25rem;
+  margin-top: 0.08rem;
 }
 
 .campaign-tabs {
-    position: fixed;
-    bottom: 3.71rem;
-    left: 0.124rem;
+  position: fixed;
+  bottom: 3.71rem;
+  left: calc((100vw - 3.4rem) / 2);
 }
 
 .schedule-list {
-    position: fixed;
-    top: 4.66rem;
-    left: 0.1901rem;
-    width: 3.8rem;
-    height: 2.6rem;
-    overflow-y:scroll;
-    display: flex;
-    flex-direction: column;
-    gap:0.15rem;
+  position: fixed;
+  top: 4.66rem;
+  left: 0.1901rem;
+  width: 3.8rem;
+  height: 2.6rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }

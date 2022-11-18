@@ -1,49 +1,15 @@
 import style from "./index.module.css";
-import Image from "next/image";
-import comment from "../../assets/moments/button-msg.svg";
-import like from "../../assets/moments/like.svg";
-import challenge from "../../assets/moments/question.svg";
 import MomentsGrid from "./momentsGrid";
 import CardTop from "./info";
 import { useRouter } from "next/router";
-import {
-  useCampaignTokenId,
-  useRecordContent,
-  useStartChallenge,
-} from "../../hooks/useCampaign";
+import { useCampaignTokenId, useRecordContent } from "../../hooks/useCampaign";
 import { useAccount } from "wagmi";
 import { Campaign_ABI } from "../../contracts/contants";
-import { useTraceTraction } from "../../hooks/useTraceTransaction";
 import { useCallback } from "react";
-import { useGlobalTxConfirmModal } from "../modal";
+import { useStartChallenge } from "../../hooks/useCampaignWrite";
+import { useTraceTransaction } from "../../hooks/useTraceTransaction";
+import ButtonList from "./buttonList";
 
-// moments button
-export const ButtonList = ({ challengeCallBack }) => {
-  const list = [
-    {
-      title: "Challenge",
-      icon: challenge,
-      callback: challengeCallBack,
-    },
-    {
-      title: "Comments",
-      icon: comment,
-      callback: () => console.log("Comments"),
-    },
-    { title: "Like", icon: like, callback: () => console.log("Like") },
-  ];
-
-  return (
-    <div className={style["button-list-wrapper"]}>
-      {list.map(({ title, icon, callback }) => (
-        <div className={style["button"]} key={title} onClick={callback}>
-          <Image src={icon} alt="" />
-          <span>{title}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
 
 interface IMomentPart {
   id: string;
@@ -68,12 +34,17 @@ function MomentPart(props: IMomentPart) {
     props.userAddr
   );
 
-  const { write: startChallenge, data } = useStartChallenge({
+  const {
+    execute: startChallenge,
+    write,
+    data,
+  } = useStartChallenge({
     campaignAddr: props.campaignAddr,
     challengerTokenId: challengerId,
     cheaterTokenId: cheaterId,
     epoch: props.current - 1,
   });
+  useTraceTransaction(data?.hash, { type: "challenge" });
 
   const challengeCallBack = useCallback(() => {
     if (challengerId === cheaterId) {
@@ -95,7 +66,7 @@ function MomentPart(props: IMomentPart) {
         onClick={() => router.push(`/moments/${props.id}`)}
       />
       <div className={style["card-content"]}>{detail?.text}</div>
-      <MomentsGrid images={detail?.imgs} />
+      <MomentsGrid images={detail?.images} />
       <div className={style["line"]} />
       <ButtonList challengeCallBack={challengeCallBack} />
     </>

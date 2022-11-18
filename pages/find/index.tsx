@@ -4,11 +4,15 @@ import Info from "../../components/info";
 import Tab from "../../components/tab";
 import ScheduleCard from "../../components/schedule-card";
 import styles from "./index.module.css";
-import _img from "../../assets/sisyphus.png";
+import _img from "../../assets/sisyphus_2.svg";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
-import { now, timeStampToPeriodLength } from "../../utils/convert";
+import {
+  now,
+  shortenAddress,
+  timeStampToPeriodLength,
+} from "../../utils/convert";
 import { useQuery } from "@apollo/client";
 import {
   NotStartCampaignList,
@@ -122,8 +126,11 @@ function Find() {
 
   return (
     <div className={styles.container}>
-      <Info className={styles.info} />
+      <Info id={shortenAddress(address, 2)} className={styles.info} />
       <Search onSearch={onSearch} className={styles.search} />
+      <div className={styles["host-img"]}>
+        <Image src={_img} className={styles["host-img"]} alt="" />
+      </div>
       <div onClick={handleClick} className={styles["host-button-wrapper"]}>
         <div>
           <div className={styles["host-button-title"]}>Create Protocol</div>
@@ -131,9 +138,6 @@ function Find() {
             You can create a new protocol of your own!
           </div>
         </div>
-      </div>
-      <div className={styles["host-img"]}>
-        <Image src={_img} className={styles["host-img"]} alt="" />
       </div>
 
       {/* tab */}

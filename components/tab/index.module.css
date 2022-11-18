@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 0.1rem;
+    gap: 0.13rem;
 }
 
 .tab-item {
-    width: 0.8rem;
+    width: auto;
     height: 0.24rem;   
     display: flex;
     justify-content: center;
@@ -18,7 +18,7 @@
 }
 
 .tab-item-selected {
-    width: 0.8rem;
+    width: auto;
     height: 0.24rem;   
     display: flex;
     justify-content: center;
@@ -30,6 +30,8 @@
 }
 
 .tab-item-text {
+    margin-left: 0.11rem;
+    margin-right: 0.11rem;
     font-family: 'SF Pro';
     font-style: normal;
     font-weight: 400;

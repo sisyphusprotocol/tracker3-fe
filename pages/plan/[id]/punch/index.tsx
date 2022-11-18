@@ -1,59 +1,62 @@
-import * as React from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 import Button from "../../../../components/button";
 import Top from "../../../../components/calendar/components/top";
 import { useAccount, useContract, useSigner } from "wagmi";
-import { Campaign } from "../../../../contracts/types";
 import { useRouter } from "next/router";
-import { BigNumber, ethers } from "ethers";
 import { useQuery } from "@apollo/client";
 import {
   CampaignTokenIdResult,
   CAMPAIGN_TOKEN_ID,
 } from "../../../../utils/graph";
-import { uploadJson } from "../../../../utils/ipfs";
 import { now } from "../../../../utils/convert";
 import _upload from "./images/upload.png";
 import _yuyin from "./images/yuyin.png";
-import { Campaign_ABI } from "../../../../contracts/contants";
+import {
+  useCampaignTokenId,
+  useUploadRecordUri,
+} from "../../../../hooks/useCampaign";
+import { useCampaignCheckIn } from "../../../../hooks/useCampaignWrite";
+import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
 
 function Sign() {
-  const { data: signer } = useSigner();
   const { address } = useAccount();
-  const uploadRef = React.useRef<any>();
+  const uploadRef = useRef<any>();
   const router = useRouter();
-  const campaign = useContract<Campaign>({
-    addressOrName: router.query.id
-      ? (router.query.id as string)
-      : ethers.constants.AddressZero,
-    contractInterface: Campaign_ABI,
-    signerOrProvider: signer,
+  const campaignAddr = router.query.id as string;
+
+  const { data: tokenId } = useCampaignTokenId(
+    campaignAddr,
+    address?.toLowerCase()
+  );
+
+  const [text, setText] = useState("");
+  const [images, setImages] = useState([]);
+  const [enableUpload, setEnableUpload] = useState(false);
+
+  const { data: cid } = useUploadRecordUri({
+    text: text,
+    images: images,
+    timestamp: now(),
+    enable: enableUpload,
   });
 
-  const { loading, data } = useQuery<CampaignTokenIdResult>(CAMPAIGN_TOKEN_ID, {
-    variables: {
-      userCampaign: `${address ? address.toLowerCase() : ""}-${
-        campaign.address
-      }`,
-    },
-    onError(error) {
-      console.error(error);
-    },
-    onCompleted(data) {
-      console.log(data);
-    },
-    pollInterval: 1000,
+  const {
+    execute,
+    write,
+    data: CheckInData,
+  } = useCampaignCheckIn({
+    campaignAddr: campaignAddr,
+    tokenId: tokenId,
+    uri: `ipfs://${cid}`,
+  });
+  useTraceTransaction(CheckInData?.hash, { type: "check" }, () => {
+    router.push(`/plan/${campaignAddr}/progress`);
   });
 
-  const [text, setText] = React.useState("");
-  const [images, setImages] = React.useState([]);
-
-  // if (!signer && address) return null;
-
-  const handleUpload = (e) => {
+  const handleLoadImages = (e) => {
     const file = e.target.files[0];
-
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -62,25 +65,20 @@ function Sign() {
     };
   };
 
-  const confirm = () => {
-    if (!loading) {
-      uploadJson({ text: text, images: images, timestamp: now() }).then(
-        (cid) => {
-          campaign
-            .checkIn(`ipfs://${cid}`, BigNumber.from(data.userCampaign.tokenId))
-            .then(() => {
-              router.push(`/plan/${router.query.id}/progress`);
-            });
-        }
-      );
-    } else {
-      console.log("loading");
-    }
-  };
-
   const clickUploadIcon = () => {
     uploadRef.current.click();
   };
+
+  const confirm = () => {
+    setEnableUpload(true);
+  };
+
+  useEffect(() => {
+    if (cid && write) {
+      execute();
+      setEnableUpload(false);
+    }
+  }, [cid, execute, write]);
 
   return (
     <div className={style.wrapper}>
@@ -113,11 +111,7 @@ function Sign() {
         </div>
         <div className={style["yuyin-img"]}>
           {" "}
-          <Image
-            src={_yuyin}
-            alt=""
-            className={style["yuyin-img"]}
-          />
+          <Image src={_yuyin} alt="" className={style["yuyin-img"]} />
         </div>
       </div>
 
@@ -127,7 +121,7 @@ function Sign() {
         type="file"
         ref={uploadRef}
         className={style.upload}
-        onChange={handleUpload}
+        onChange={handleLoadImages}
       ></input>
       {/* preview */}
       <div className={style.preview}>

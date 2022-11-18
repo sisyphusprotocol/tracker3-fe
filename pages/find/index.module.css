@@ -1,160 +1,155 @@
-.container{
-    background: linear-gradient(180deg, #FFF8F2 0%, #FEF0BE 43.23%, #EDC2FE 100%);
-    height:100vh
+.container {
+  background: linear-gradient(180deg, #fff8f2 0%, #fef0be 43.23%, #edc2fe 100%);
+  height: 100vh;
 }
 
-.info{
-    position: fixed;
-    top: 0.4rem;
-    left: 0.19rem;
+.info {
+  position: fixed;
+  top: 0.4rem;
+  left: 0.24rem;
 }
 
-
-.search{
-    position: fixed;
-    top: 0.12rem;
-    left: 0.19rem;
+.search {
+  position: fixed;
+  top: 0.3rem;
+  left: 0.19rem;
 }
 
 .item-icon {
-    bottom: 1rem;
+  bottom: 1rem;
 }
 
 .host-button-wrapper {
-    width: 0.98rem;
-    height: 1.08rem;
-    right: 0.13rem;
-    top: 1.5784rem;
-    position: fixed;
-    background: #7B60C4;
-    border-radius: 0.1rem;
+  width: 0.98rem;
+  height: 1.08rem;
+  right: calc((100vw - 3.4rem)/2);
+  top: 1.5784rem;
+  position: fixed;
+  background: #7b60c4;
+  border-radius: 0.1rem;
 }
 
 .host-button-title {
-    margin-left:0.1012rem;
-    margin-top: 0.17rem;
-    width: 0.57rem;
-    height: 0.34rem;
-    font-family: 'SF Pro';
-    font-style: normal;
-    font-weight: 510;
-    font-size: 0.14rem;
-    line-height: 0.17rem;
-    font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #FFFFFF;
+  margin-left: 0.1012rem;
+  margin-top: 0.17rem;
+  width: 0.57rem;
+  height: 0.34rem;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 510;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
 }
 
 .host-button-desc {
-    margin-left:0.1012rem;
-    width: 0.8rem;
-    height: 0.3471rem;
-    font-family: 'SF Pro';
-    font-style: normal;
-    font-weight: 274;
-    font-size: 0.11rem;
-    line-height: 0.13rem;
-    font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #FFFFFF;
+  margin-left: 0.1012rem;
+  width: 0.8rem;
+  height: 0.3471rem;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 274;
+  font-size: 0.11rem;
+  line-height: 0.13rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
 }
 
 .host-img {
-    position: fixed;
-    top: 1.5784rem;
-    left: 0.19rem;
-    width: 2.3288rem;
-    height: 1.08rem;
-    left: 0.1934rem;
-    display: flex;
+  position: fixed;
+  top: 1.5784rem;
+  left: calc((100vw - 3.4rem)/2);
+  width: 2.3288rem;
+  height: 1.08rem;
 }
 
-
-
 .host-yellow {
-    position: absolute;
-    width: 3.57rem;
-    height: 0.74rem;
-    left: 0.09rem;
-    top: 0.5rem;
-    background: #7B60C4;
-    border-radius: 0.2rem;
-    margin-bottom: 0.8rem;
+  position: absolute;
+  width: 3.57rem;
+  height: 0.74rem;
+  left: 0.09rem;
+  top: 0.5rem;
+  background: #7b60c4;
+  border-radius: 0.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .yellow-title {
-    /* position: absolute; */
+  /* position: absolute; */
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.2rem;
-    line-height: 0.24rem;
-    color: #FFFFFF;
-    margin-left: 0.25rem;
-    margin-top: 0.12rem;
-    padding-top: 0.1rem;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.2rem;
+  line-height: 0.24rem;
+  color: #ffffff;
+  margin-left: 0.25rem;
+  margin-top: 0.12rem;
+  padding-top: 0.1rem;
 }
 
 .yellow-desc {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.14rem;
-    line-height: 0.17rem;
-    /* identical to box height */
-    color: #FFFFFF;
-    margin-left: 0.25rem;
-    margin-top: 0.08rem;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  /* identical to box height */
+  color: #ffffff;
+  margin-left: 0.25rem;
+  margin-top: 0.08rem;
 }
 
 .host-title {
-    width: 2rem;
-    position: absolute;
-    height: 0.29rem;
-    left: 0.83rem;
-    top: 4rem;
-    font-family: 'Jost';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 0.2rem;
-    line-height: 0.29rem;
-    /* identical to box height */
-    text-align: center;
-    font-feature-settings: 'pnum' on, 'lnum' on;
-    color: rgba(0, 0, 0, 0.6);
+  width: 2rem;
+  position: absolute;
+  height: 0.29rem;
+  left: 0.83rem;
+  top: 4rem;
+  font-family: "Jost";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.2rem;
+  line-height: 0.29rem;
+  /* identical to box height */
+  text-align: center;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .host-divide {
-    width: 3.1rem;
-    position: relative;
-    /* height: 0.1rem; */
-    left: 0.3rem;
-    top: 0.55rem;
-    border: 0.01rem solid rgba(0, 0, 0, 0.4);
+  width: 3.1rem;
+  position: relative;
+  /* height: 0.1rem; */
+  left: 0.3rem;
+  top: 0.55rem;
+  border: 0.01rem solid rgba(0, 0, 0, 0.4);
 }
 
 .campaign-list {
-    width: 3.58rem;
-    /* height: 3.8rem; */
-    margin-top: 1rem;
-    top: 1.5rem;
-    display: flex;
-    flex-direction: column;
+  width: 3.58rem;
+  /* height: 3.8rem; */
+  margin-top: 1rem;
+  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .campaign-tabs {
-    position: fixed;
-    top: 2.907rem;
-    left: 0.19rem;
+  position: fixed;
+  top: 2.907rem;
+  left: calc((100vw - 3.4rem) / 2);
 }
 
 .schedule-list {
-    position: fixed;
-    top: 3.37rem;
-    left: 0.1901rem;
-    width: 3.8rem;
-    height: 4rem;
-    overflow-y:scroll;
-    display: flex;
-    flex-direction: column;
-    gap:0.15rem;
+  position: fixed;
+  top: 3.37rem;
+  left: 0.1901rem;
+  width: 3.8rem;
+  height: 4rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }

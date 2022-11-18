@@ -1,9 +1,8 @@
 import Nav from "../../../components/moment/nav";
 import style from "../index.module.css";
 import Tabs from "../../../components/moment/tabs";
-import { useList } from "..";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import CardTop from "../../../components/moment/info";
 import MomentsGrid from "../../../components/moment/momentsGrid";
 import Challenge, { IChallenge } from "../../../components/moment/id/challenge";
@@ -11,6 +10,7 @@ import Comments from "../../../components/moment/id/comments";
 import { useRecordContent } from "../../../hooks/useCampaign";
 import { useQuery } from "@apollo/client";
 import { MomentDetail, MOMENT_Detail } from "../../../utils/graph";
+import ButtonList from "../../../components/moment/buttonList";
 
 interface IMomentDetailPart {
   id: string;
@@ -36,7 +36,7 @@ export function MomentDetailPart(props: IMomentDetailPart) {
         total={props.total}
       />
       <div className={style["card-content"]}>{detail?.text}</div>
-      <MomentsGrid images={detail?.imgs} />
+      <MomentsGrid images={detail?.images} />
       <div className={style["line"]} />
       <div style={{ marginTop: ".36rem" }}>
         <Tabs
@@ -59,7 +59,7 @@ function useMomentDetail() {
 
   const challengeData: IChallenge = {
     campaign: data?.record?.userCampaign.campaign.address,
-    challengeId: data?.record?.challenge?.id,
+    challengeId: data?.record?.challenge?.number,
     status: data?.record?.challenge?.result || "None",
     agreeCount: Number(data?.record?.challenge?.agreeCount),
     disagreeCount: Number(data?.record?.challenge?.disagreeCount),
@@ -91,6 +91,9 @@ export default function Detail() {
           uri={data?.record.contentUri}
           challenge={challengeData}
         />
+      </div>
+      <div className={style["nav-wrapper"]}>
+        <ButtonList challengeCallBack={1} />
       </div>
     </div>
   );

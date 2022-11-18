@@ -23,11 +23,11 @@
 }
 
 .image {
-  position: absolute;
-  width: 3.433rem;
-  height: 4.09rem;
-  left: 0.5rem;
-  top:1rem;
+  position: fixed;
+  width: 3.48rem;
+  height: 3.41rem;
+  left: 0rem;
+  top:1.1197rem;
 }
 
 .outline {

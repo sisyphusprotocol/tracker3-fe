@@ -2,12 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 0.60rem;
+  width: auto;
   height: 0.23rem;
   border-radius: 0.11876rem;
 }
 
 .tag-name {
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
   font-family: "Jost";
   font-style: normal;
   font-weight: 700;
@@ -23,7 +25,6 @@
 }
 
 .yellow {
-    background: #FFDF65;
-    color: #7B60C4
+  background: #ffdf65;
+  color: #7b60c4;
 }
-

@@ -21,7 +21,7 @@ export declare type NotStartCampaignList = {
     totalTime: number;
     requiredAmount: string;
     memberCount: string;
-    epochCount: string;
+    epochCount: number;
     uri: string;
     targetToken: {
       id: string;
@@ -61,7 +61,7 @@ export declare type OnGoingCampaignList = {
     periodLength: number;
     requiredAmount: string;
     memberCount: string;
-    epochCount: string;
+    epochCount: number;
     uri: string;
     targetToken: {
       id: string;
@@ -103,7 +103,7 @@ export declare type JoinNotStartCampaignList = {
     periodLength: number;
     requiredAmount: string;
     memberCount: string;
-    epochCount: string;
+    epochCount: number;
     uri: string;
     targetToken: {
       id: string;
@@ -129,6 +129,7 @@ export const JOIN_NOT_START_CAMPAIGN_LIST = gql`
       totalTime
       requiredAmount
       memberCount
+      epochCount
       targetToken {
         id
       }
@@ -153,7 +154,7 @@ export declare type JoinOnGoingCampaignList = {
     periodLength: number;
     requiredAmount: string;
     memberCount: string;
-    epochCount: string;
+    epochCount: number;
     uri: string;
     targetToken: {
       id: string;
@@ -167,6 +168,7 @@ export const JOIN_ON_GOING_CAMPAIGN_LIST = gql`
       where: {
         users_: { user: $user, userStatus: Admitted }
         startTime_lt: $time
+        endTime_gte: $time
       }
       orderBy: startTime
       orderDirection: desc
@@ -197,7 +199,7 @@ export declare type JoinFinishedCampaignList = {
     periodLength: number;
     requiredAmount: string;
     memberCount: string;
-    epochCount: string;
+    epochCount: number;
     uri: string;
     targetToken: {
       id: string;
@@ -234,6 +236,7 @@ export declare type CampaignDetailResult = {
     startTime: number;
     endTime: number;
     periodLength: string;
+    epochCount: number;
     totalTime: number;
     requiredAmount: string;
     memberCount: number;
@@ -251,6 +254,7 @@ export const CAMPAIGN_DETAIL = gql`
       startTime
       endTime
       periodLength
+      epochCount
       totalTime
       requiredAmount
       memberCount
@@ -288,9 +292,11 @@ export declare type CreatedCampaignList = {
   campaigns: {
     id: string;
     uri: string;
-    startTime: string;
-    endTime: string;
-    totalTime: string;
+    startTime: number;
+    endTime: number;
+    totalTime: number;
+    periodLength: number;
+    epochCount: number;
     users: { id: string; user: { id: string } }[];
   }[];
 };
@@ -307,7 +313,8 @@ export const CREATED_CAMPAIGN_LIST = gql`
       startTime
       endTime
       totalTime
-      endTime
+      periodLength
+      epochCount
       users {
         id
       }
@@ -357,6 +364,9 @@ export declare type CampaignTokenIdResult = {
   userCampaign: {
     // BigInt string
     tokenId: string;
+    pendingReward: string;
+    pendingUserReward: string;
+    pendingHostReward: string;
     userRewardClaimed: boolean;
     hostRewardClaimed: boolean;
     userRewardClaimedAmount: string;
@@ -368,6 +378,9 @@ export const CAMPAIGN_TOKEN_ID = gql`
   query ($userCampaign: String!) {
     userCampaign(id: $userCampaign) {
       tokenId
+      pendingReward
+      pendingUserReward
+      pendingHostReward
       userRewardClaimed
       hostRewardClaimed
       userRewardClaimedAmount
@@ -512,6 +525,7 @@ export declare type MomentDetail = {
     };
     challenge?: {
       id: string;
+      number: string;
       result: "Voting" | "VoteNotEnough" | "Approved" | "Failed";
       agreeCount: string;
       disagreeCount: string;
@@ -541,6 +555,7 @@ export const MOMENT_Detail = gql`
       }
       challenge {
         id
+        number
         result
         agreeCount
         disagreeCount

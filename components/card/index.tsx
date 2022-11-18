@@ -2,13 +2,13 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
-import { useCampaignHost } from "../../hooks/useCampaign";
 import _emoji from "../../assets/defaultCampaign.svg";
 import { shortenDes } from "../../utils/convert";
 import styles from "./index.module.css";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { getCampaignDetail } from "../../utils/campaign";
+import { useCampaignHost } from "../../hooks/useCampaginRead";
 
 interface ICard {
   children?: React.ReactNode;

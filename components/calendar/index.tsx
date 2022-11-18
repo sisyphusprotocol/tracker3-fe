@@ -23,13 +23,15 @@ export const Calendar = (props: ICalendar) => {
         <Top />
         <Cal checkedTimeStamp={props.checkedTimeStamp} />
         {props.nextToDo === "Check" ? (
-          props.checked ? (
-            <Info buttonContent="✔️" onClick={props.onCheckClick} />
-          ) : (
-            <Info buttonContent="Go To Check" onClick={props.onCheckClick} />
-          )
+          <Info
+            buttonContent={props.checked ? "" : "Go To Check"}
+            onClick={props.onCheckClick}
+          />
         ) : (
-          <Info buttonContent="Claim" onClick={props.onClaimClick} />
+          <Info
+            buttonContent={props.claimed ? "   Claimed" : "Claim"}
+            onClick={props.onClaimClick}
+          />
         )}
       </div>
     </div>

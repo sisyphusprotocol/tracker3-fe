@@ -1,8 +1,6 @@
-import Button from "../../components/button";
-import Nav from "../../components/nav";
 import Info from "../../components/info";
 import styles from "./index.module.css";
-import _img from "../../assets/sisyphus.png";
+import _img from "../../assets/sisyphus.svg";
 import Image from "next/image";
 import Tab from "../../components/tab";
 import ScheduleCard from "../../components/schedule-card";
@@ -17,9 +15,9 @@ import {
   JoinFinishedCampaignList,
   JOIN_FINISHED_CAMPAIGN_LIST,
 } from "../../utils/graph";
-import { now, timeStampToPeriodLength } from "../../utils/convert";
+import { now, shortenAddress } from "../../utils/convert";
 import { useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import moment from "moment";
 
 function CreatedCampaigns() {
@@ -45,13 +43,13 @@ function CreatedCampaigns() {
               address={campaign.id}
               isFinish={true}
               type="created"
-              startTime={Number(campaign.startTime)}
-              endTime={Number(campaign.endTime)}
+              startTime={campaign.startTime}
+              endTime={campaign.endTime}
               token={"111"}
               tokenAmount={"1"}
-              lastingDays={"1"}
+              lastingDays={campaign.epochCount}
               progressCurrent={Math.floor(
-                (moment().unix() - 1668365934) / 86400
+                (moment().unix() - campaign.startTime) / campaign.periodLength
               )}
               progressSchedule={1}
             />
@@ -91,10 +89,13 @@ function OnGoingCampaigns() {
               token={campaign.targetToken.id}
               tokenAmount={campaign.requiredAmount}
               lastingDays={campaign.epochCount}
-              progressCurrent={Math.floor(
-                (now() - Number(campaign.startTime)) / campaign.periodLength
+              progressCurrent={Math.min(
+                Math.floor(
+                  (now() - campaign.startTime) / campaign.periodLength
+                ),
+                campaign.epochCount
               )}
-              progressSchedule={Number(campaign.epochCount)}
+              progressSchedule={campaign.epochCount}
             />
           </div>
         );
@@ -137,7 +138,7 @@ function NotStartCampaigns() {
               progressCurrent={Math.floor(
                 (moment().unix() - campaign.startTime) / campaign.periodLength
               )}
-              progressSchedule={Number(campaign.epochCount)}
+              progressSchedule={campaign.epochCount}
             />
           </div>
         );
@@ -155,9 +156,7 @@ function FinishedCampaigns() {
 
     {
       variables: { user: address?.toLowerCase(), time: time },
-      onCompleted: (data) => {
-        console.log(data);
-      },
+      onCompleted: (data) => {},
     }
   );
 
@@ -181,7 +180,7 @@ function FinishedCampaigns() {
                 Math.floor(
                   (moment().unix() - campaign.startTime) / campaign.periodLength
                 ),
-                Number(campaign.epochCount)
+                campaign.epochCount
               )}
               progressSchedule={Number(campaign.epochCount)}
             />
@@ -195,6 +194,8 @@ function FinishedCampaigns() {
 type TabType = "OnGoing" | "NotStart" | "Finished" | "Created";
 
 function Find() {
+  const { address } = useAccount();
+
   const [currentTab, setCurrentTab] = useState<TabType>("OnGoing");
 
   const tabItems = [
@@ -219,7 +220,7 @@ function Find() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Info />
+        <Info id={shortenAddress(address, 2)} />
       </div>
       <div className={styles["find-img"]}>
         <Image src={_img} alt="" />

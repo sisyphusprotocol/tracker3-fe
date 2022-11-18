@@ -1,44 +1,22 @@
 import { ApolloProvider } from "@apollo/client";
 import client from "../apollo-client";
 import { Web3ReactProvider } from "@web3-react/core";
-import { publicProvider } from "wagmi/providers/public";
-
 import type { AppProps } from "next/app";
 import getLibrary from "../getLibrary";
 import "../styles/globals.css";
 import { rem } from "../utils/rem";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { createClient, WagmiConfig, chain, configureChains } from "wagmi";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { WagmiConfig } from "wagmi";
 
 import Nav from "../components/nav";
 
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
-import { GlobalTxConformModal } from "../components/modal";
+import { ModalProvider } from "../components/modal";
 import ReactLoading from "react-loading";
+import { wagmiClient } from "../utils/wagmiConfig";
 
 const queryClient = new QueryClient();
-
-const { chains, provider, webSocketProvider } = configureChains(
-  [chain.polygonMumbai],
-  [publicProvider()]
-);
-
-const metaMaskConnector = new MetaMaskConnector({
-  chains,
-});
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: [metaMaskConnector],
-  provider: provider,
-  webSocketProvider,
-});
 
 function NextWeb3App({ Component, pageProps }: AppProps) {
   useLayoutEffect(() => {
@@ -46,7 +24,7 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
     return () => {};
   }, []);
 
-  const [isMobile, setIsModbile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -56,7 +34,7 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
           window.location.replace("/mobile/");
         }, 500);
       } else {
-        setIsModbile(true);
+        setIsMobile(true);
       }
     } else {
       setVisible(false);
@@ -69,7 +47,7 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <WagmiConfig client={wagmiClient}>
             <WalletAuth>
-              {visible ? (
+              {visible && !isMobile ? (
                 <div
                   style={{
                     position: "relative",
@@ -87,9 +65,10 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
                 </div>
               ) : (
                 <>
-                  <Component {...pageProps} />
-                  {isMobile && <Nav />}
-                  <GlobalTxConformModal />
+                  <ModalProvider>
+                    <Component {...pageProps} />
+                    <Nav />
+                  </ModalProvider>
                 </>
               )}
             </WalletAuth>

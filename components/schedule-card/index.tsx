@@ -17,7 +17,7 @@ interface IScheduleCard {
   notStartText?: string;
   notStartTag?: string;
   scheduleName?: string; // Fitness schedule 
-  lastingDays: string; //14 days (....)
+  lastingDays: number; // 14
   lastingDaysTag?: React.ReactNode; //  14 daystag failure
   isFinish: boolean; //  
   // counts?: string; // 20 USDC
@@ -33,7 +33,7 @@ interface IScheduleCard {
   endTime?: number;
   // token address string
   token?: string;
-  // token Amount
+  // token Amount in hex string
   tokenAmount?: string;
 
   periodLength?: number;
@@ -135,7 +135,8 @@ function ScheduleCard(props: IScheduleCard) {
           default:
             return (
               <div className={styles["counts"]}>
-                {packTokenAmountToFix(props.tokenAmount)} {TokenMap[props.token]}
+                {packTokenAmountToFix(props.tokenAmount)}{" "}
+                {TokenMap[props.token]}
               </div>
             );
         }

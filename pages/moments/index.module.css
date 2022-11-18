@@ -2,7 +2,7 @@
   height: 100vh;
   padding-top: 0.96rem;
   overflow: auto;
-  padding-bottom: 1rem;
+  padding-bottom: .66rem;
   background: linear-gradient(
     180deg,
     #fdfbc2 0%,
@@ -27,4 +27,18 @@
   backdrop-filter: blur(10.225px);
   border-radius: 5px;
   margin-bottom: 0.1rem;
+}
+
+.nav-wrapper{
+  position: fixed;
+  bottom:0;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: .56rem;
+  background: rgba(255, 254, 254, 0.7);
+  box-shadow: 0px 1px 25px -1px rgba(229, 229, 229, 0.1);
+  backdrop-filter: blur(10.225px);
+  padding:0 .2rem;
+  padding-bottom:.05rem
 }

@@ -2,7 +2,8 @@ import style from "./index.module.css";
 import { useEffect, useState } from "react";
 import ProgressBar from "./progressbar";
 import moment from "moment";
-import { useVoteForChallenge } from "../../../hooks/useCampaign";
+import { useVoteForChallenge } from "../../../hooks/useCampaignWrite";
+import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
 
 export interface IChallenge {
   // campaign address
@@ -19,11 +20,12 @@ export interface IChallenge {
 export default function Challenge(props: IChallenge) {
   const [active, setActive] = useState(0);
 
-  const { write: vote } = useVoteForChallenge({
+  const { execute: vote, data } = useVoteForChallenge({
     campaignAddr: props.campaign,
     challengeId: props.challengeId,
     choice: active === 0,
   });
+  useTraceTransaction(data?.hash, { type: "vote" });
 
   // 0 1 2
   const list = ["AGREE", "DISAGREE", "NOT VOTE"];
@@ -68,7 +70,6 @@ export default function Challenge(props: IChallenge) {
                   </div>
                   <div
                     onClick={() => {
-                      console.log(vote);
                       vote();
                     }}
                     className={style["vote"]}

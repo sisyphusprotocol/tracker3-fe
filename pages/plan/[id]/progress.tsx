@@ -1,10 +1,9 @@
 import { useQuery } from "@apollo/client";
 import moment from "moment";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import {
   useAccount,
-  useContract,
   useContractWrite,
   usePrepareContractWrite,
   useSigner,
@@ -22,10 +21,11 @@ import {
 import Campaign_ABI from "../../../contracts/Campaign.json";
 
 import { weekMap } from "../../../utils/time";
-import { useCurrentEpoch } from "../../../hooks/useCampaign";
 import { now } from "../../../utils/convert";
-import { useTraceTraction } from "../../../hooks/useTraceTransaction";
-import TxConfirmedModal from "../../../components/modal";
+import { useCurrentEpoch } from "../../../hooks/useCampaginRead";
+import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
+import { useCampaignRewardResultOnModal } from "../../../hooks/useCampaign";
+import { modalContext } from "../../../components/modal";
 const Progress = () => {
   const { address } = useAccount();
   const { data: signer } = useSigner();
@@ -33,9 +33,7 @@ const Progress = () => {
 
   const { data: detail } = useQuery<CampaignDetailResult>(CAMPAIGN_DETAIL, {
     variables: { addr: router.query.id },
-    onCompleted(data) {
-      console.log(data.campaign.endTime);
-    },
+    onCompleted() {},
   });
 
   const currentEpoch = useCurrentEpoch(router.query.id as string);
@@ -83,8 +81,6 @@ const Progress = () => {
           router.query.id
         }`,
       },
-      pollInterval: 10000,
-      fetchPolicy: "network-only",
       onCompleted(data) {
         if (data?.userCampaign?.userRewardClaimed) {
           setClaimed(true);
@@ -96,7 +92,7 @@ const Progress = () => {
   );
 
   // claim tx
-  const { config } = usePrepareContractWrite({
+  const { config, data } = usePrepareContractWrite({
     addressOrName: router.query.id as string,
     contractInterface: Campaign_ABI,
     functionName: "claim",
@@ -109,8 +105,22 @@ const Progress = () => {
   const { write: claimWrite, data: claimWriteTxData } =
     useContractWrite(config);
 
-  const { modalShow, setModalShow, tx } = useTraceTraction(
-    claimWriteTxData?.hash
+  const { refetch: refetchResult } = useCampaignRewardResultOnModal(
+    detail?.campaign.id,
+    address?.toLowerCase()
+  );
+
+  useTraceTransaction(
+    claimWriteTxData?.hash,
+    {
+      // TODO: success and fail judge
+      type: "claim",
+      token: detail?.campaign.targetToken.id,
+      staked: detail?.campaign.requiredAmount,
+    },
+    () => {
+      setTimeout(() => refetchResult, 5000);
+    }
   );
 
   const onCheckClick = () => {
@@ -160,26 +170,16 @@ const Progress = () => {
         dayLength={dayLength}
         timeToClaim={timeToClaim}
       />
-      <TxConfirmedModal
-        txHash={tx.hash}
-        gasFee={tx.gasFee}
-        isShow={modalShow}
-        type="claim"
-        staked={detail?.campaign?.requiredAmount}
-        userReward={tokenIdData?.userCampaign?.userRewardClaimedAmount}
-        hostReward={tokenIdData?.userCampaign?.hostRewardClaimedAmount}
-        setShow={() => {
-          setModalShow(false);
-        }}
-      />
       <div
         style={{ position: "fixed", bottom: "0.8451rem", left: "0.1927rem" }}
       >
         <ScheduleCard
           isFinish={false}
           uri={detail?.campaign.uri}
+          startTime={detail?.campaign.startTime}
+          endTime={detail?.campaign.endTime}
           scheduleName={"Writing Schedule"}
-          lastingDays={"Achievement!"}
+          lastingDays={detail?.campaign.epochCount}
         />
       </div>
     </div>

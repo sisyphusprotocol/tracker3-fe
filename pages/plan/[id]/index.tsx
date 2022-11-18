@@ -22,9 +22,8 @@ import { now } from "../../../utils/convert";
 import { useTokenAllowance } from "../../../hooks/useAllowance";
 import { BigNumber } from "ethers";
 import { Campaign_ABI, ERC20_ABI } from "../../../contracts/contants";
-import { useTraceTraction } from "../../../hooks/useTraceTransaction";
-import TxConfirmedModal from "../../../components/modal";
-import { setPriority } from "os";
+
+import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
 
 // example Id: 0x90a3c9178fd231b9b9c8928beeb1aa4bdce8b642
 
@@ -64,9 +63,6 @@ const Plan = () => {
     variables: {
       userCampaign: `${address?.toLowerCase()}-${router.query.id}`,
     },
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "network-only",
-    pollInterval: 5000,
   });
 
   const { config: signUpConfig, refetch } = usePrepareContractWrite({
@@ -75,17 +71,14 @@ const Plan = () => {
     functionName: "signUp",
     signer: signer,
     args: [],
-    enabled: true,
+    // enable when userStatus is undefined, which means the user signUp is not record on chain
+    enabled: !data?.userCampaign?.userStatus,
   });
 
   // sign up tx
   const { write: signUpWrite, data: signUpTxData } =
     useContractWrite(signUpConfig);
-  const {
-    tx: signUpTx,
-    modalShow: signUpModalShow,
-    setModalShow: setSignUpModalShow,
-  } = useTraceTraction(signUpTxData?.hash);
+  useTraceTransaction(signUpTxData?.hash, { type: "sign" });
 
   const { config } = usePrepareContractWrite({
     addressOrName: props.data?.campaign.targetToken.id,
@@ -98,11 +91,7 @@ const Plan = () => {
 
   // approve tx
   const { write, data: approveTxData } = useContractWrite(config);
-  const {
-    tx: approveTx,
-    modalShow: approveModalShow,
-    setModalShow: setApproveModalShow,
-  } = useTraceTraction(approveTxData?.hash, () => {
+  useTraceTransaction(approveTxData?.hash, { type: "approve" }, () => {
     refetch();
   });
 
@@ -121,6 +110,7 @@ const Plan = () => {
       4: "NotParticipate",
       5: "Refund",
       6: "Go to CheckIn",
+      7: "Go to Claim",
     };
     setButtonText(map[status]);
   }, [status]);
@@ -131,8 +121,13 @@ const Plan = () => {
       // If the campaign has already started
       if (props.data.campaign.startTime <= now()) {
         if (data?.userCampaign?.userStatus == "Admitted") {
-          // it's time to check in
-          setStatus(6);
+          // if campaign end, go to claim
+          if (props?.data?.campaign.endTime <= now()) {
+            setStatus(7);
+          } else {
+            // it's time to check in
+            setStatus(6);
+          }
         } else {
           setStatus(4);
         }
@@ -151,10 +146,6 @@ const Plan = () => {
       }
     }
   }, [currentAllowance, data, props]);
-
-  useEffect(() => {
-    console.log("write", write, "singUp", signUpWrite);
-  }, [write, signUpWrite]);
 
   // TODO: approved status
   const approve = () => {
@@ -176,7 +167,7 @@ const Plan = () => {
     } else if (status === 1) {
       // refetch after the tx confirmed
       signUpWrite();
-    } else if (status === 6) {
+    } else if (status === 6 || status === 7) {
       router.push(`/plan/${router.query.id}/progress`);
     }
   };
@@ -201,24 +192,6 @@ const Plan = () => {
         >
           {buttonText}
         </Button>
-        <TxConfirmedModal
-          txHash={approveTx.hash}
-          gasFee={approveTx.gasFee}
-          isShow={approveModalShow}
-          type="approve"
-          setShow={() => {
-            setApproveModalShow(false);
-          }}
-        />
-        <TxConfirmedModal
-          txHash={signUpTx.hash}
-          gasFee={signUpTx.gasFee}
-          isShow={signUpModalShow}
-          type="sign"
-          setShow={() => {
-            setSignUpModalShow(false);
-          }}
-        />
       </div>
     </div>
   );

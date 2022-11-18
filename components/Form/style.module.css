@@ -10,7 +10,7 @@
 }
 
 .inputContainer {
-  background: #D9D9D9;
+  background: #E8E0F0;
   border-radius: 5px;
   height: .30rem;
   width: 100%;
@@ -65,7 +65,7 @@
   margin-top: .05rem;
   left: 0rem;
   overflow: hidden;
-  background: #D9D9D9;
+  background: #E8E0F0;
   transition: height .5s;
   border-radius: .05rem;
   z-index: 999;

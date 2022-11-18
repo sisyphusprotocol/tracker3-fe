@@ -15,7 +15,7 @@ export declare type CampaignDetail = {
 
 export declare type RecordDetail = {
   text: string;
-  imgs: string[];
+  images: string[];
   timestamp: number;
 };
 

@@ -11,7 +11,7 @@ const Tabs = ({
   tabs: Record<"Challenge" | "Comments", JSX.Element>;
 }) => {
   // 
-  const [active, setActive] = useState<"Challenge" | "Comments">("Comments");
+  const [active, setActive] = useState<"Challenge" | "Comments">("Challenge");
 
   const isActive = title =>
     classNames(style["button"], active === title ? style["active"] : "");

@@ -1,84 +1,67 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "../style.module.css";
 import Form, { FormConfig } from "../../../components/Form";
-import {
-  useContractWrite,
-  usePrepareContractWrite,
-  useSigner,
-  useWaitForTransaction,
-} from "wagmi";
-import { CampaignFactoryUpgradable } from "../../../contracts/types";
 import { ethers } from "ethers";
-import { useRouter } from "next/router";
-import { uploadJson } from "../../../utils/ipfs";
-import TxConfirmedModal from "../../../components/modal";
-import { shortenTxHash } from "../../../utils/convert";
-import { packTokenAmount } from "../../../utils/token";
 import moment from "moment";
-import {
-  CampaignFactory_ABI,
-  CAMPAIGN_FACTORY_ADDRESS,
-} from "../../../contracts/contants";
-import { useTraceTraction } from "../../../hooks/useTraceTransaction";
+
+import { useCreateCampaign } from "../../../hooks/useCampaignWrite";
+import { useUploadCampaignUri } from "../../../hooks/useCampaign";
+import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
+import { useRouter } from "next/router";
 
 // eslint-disable-next-line react/display-name
 const Create = () => {
   const router = useRouter();
-  const { data: signer } = useSigner();
-
   const [metadata, setMetadata] = useState({
     name: "Writing Campaign",
     desc: "Writing protocol is a 21 day tracker to ...",
     days: 1,
     token: "0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784",
-    startDate: moment()
-      .add(1, "day")
-      .hours(0)
-      .minutes(0)
-      .format("YYYY-MM-DDTHH:mm"),
+    startDate: moment().add(5, "minutes").format("YYYY-MM-DDTHH:mm"),
     amount: 1,
   });
 
-  // TODO: switch to new if I'm ready
-  const { write: createCampaignWrite, data: txData } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    addressOrName: CAMPAIGN_FACTORY_ADDRESS,
-    contractInterface: CampaignFactory_ABI,
-    functionName: "createCampaign",
+  const [enableUpload, setEnableUpload] = useState(false);
+  const [startCreate, setStartCreate] = useState(false);
+
+  const { data: cid } = useUploadCampaignUri({
+    name: metadata.name,
+    description: metadata.desc,
+    enable: enableUpload,
   });
 
-  const { modalShow, tx } = useTraceTraction(txData?.hash);
+  const { write, data } = useCreateCampaign({
+    token: metadata.token,
+    amount: ethers.utils.parseEther(metadata.amount.toString()).toString(),
+    name: metadata.name,
+    symbol: "SISY-NFT",
+    startTime: moment(metadata?.startDate, "YYYY-MM-DDTHH:mm").unix(),
+    totalPeriod: metadata.days,
+    // tmp set here
+    periodLength: 86400,
+    challengeLength: 86400,
+    campaignUri: `ipfs://${cid}`,
+  });
 
-  const handleClick = async (data: {
-    title: string;
-    token: string;
-    amount: number;
-    name: string;
-    desc: string;
-    days: number;
-    startDate: Date;
-  }) => {
-    // TODO: fix order error
-    await uploadJson({
-      // TODO: all title change to name later
-      title: data.name,
-      description: data.desc,
-    }).then((cid) => {
-      createCampaignWrite({
-        recklesslySetUnpreparedArgs: [
-          metadata.token,
-          ethers.utils.parseEther(metadata.amount.toString()).toString(),
-          metadata.name,
-          "SISY-NFT",
-          moment(metadata?.startDate, "YYYY-MM-DDTHH:mm").unix(),
-          metadata.days,
-          86400,
-          `ipfs://${cid}`,
-          "0x",
-        ],
-      });
-    });
+  useTraceTransaction(data?.hash, {
+    type: "create",
+    onClick: () => {
+      router.push("/find");
+    },
+  });
+
+  const handleClick = () => {
+    setEnableUpload(true);
+    setStartCreate(true);
   };
+
+  useEffect(() => {
+    if (startCreate && write && cid) {
+      write();
+      setStartCreate(false);
+      setEnableUpload(false);
+    }
+  }, [startCreate, write, cid]);
 
   const formConfig: FormConfig[] = [
     {
@@ -123,16 +106,6 @@ const Create = () => {
           update={setMetadata}
         />
       </div>
-      <TxConfirmedModal
-        txHash={tx.hash}
-        gasFee={tx.gasFee}
-        isShow={modalShow}
-        type="create"
-        // TODO: use calculate create2 address and redirect
-        setShow={() => {
-          router.push("/find");
-        }}
-      />
     </div>
   );
 };
