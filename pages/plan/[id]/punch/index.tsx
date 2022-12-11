@@ -19,6 +19,7 @@ import {
 } from "../../../../hooks/useCampaign";
 import { useCampaignCheckIn } from "../../../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
+import { useCampaignDetails } from "../../../../hooks/useCampaginRead";
 
 function Sign() {
   const { address } = useAccount();
@@ -30,6 +31,8 @@ function Sign() {
     campaignAddr,
     address?.toLowerCase()
   );
+
+  const { data: detail } = useCampaignDetails(campaignAddr);
 
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
@@ -83,13 +86,11 @@ function Sign() {
   return (
     <div className={style.wrapper}>
       <div className={style.top}>
-        <Top title="Content" />
+        <Top title="Clock In" />
       </div>
       <div className={style.rules}>
-        <div className={style["rule-title"]}>Writing protocol</div>
-        <div className={style["rule-desc"]}>
-          Some notes on the requirements for this...
-        </div>
+        <div className={style["rule-title"]}>{detail?.title}</div>
+        <div className={style["rule-desc"]}>{detail?.description}</div>
       </div>
       {/* test input */}
       <div className={style.input}>

@@ -24,6 +24,9 @@
   backdrop-filter: blur(0.02rem);
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 0.2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 .rule-title {
   font-family: "SF Pro";
@@ -45,7 +48,11 @@
   font-size: 0.14rem;
   line-height: 0.17rem;
   margin-left: 0.1708rem;
+  margin-right: 0.1rem;
   margin-top: 0.02rem;
+  margin-bottom: 0.02rem;
+
+  overflow-y: auto;
   /* identical to box height */
 
   color: #262626;
@@ -111,9 +118,9 @@
 .btn {
   position: fixed;
   left: 1.3285rem;
-  top: 6.61rem;
+  top: 5.61rem;
   width: 1.15rem !important; 
- height: 0.35rem !important;
+  height: 0.35rem !important;
 }
 
 .preview {
