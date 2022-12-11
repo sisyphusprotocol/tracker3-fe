@@ -1,6 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { BigNumber } from "ethers";
 import { useContractRead } from "wagmi";
 import { Campaign_ABI } from "../contracts/contants";
+import { getCampaignDetail } from "../utils/campaign";
 
 export function useTokenOwner(campaign: string, tokenId: string): string {
   const { data } = useContractRead({
@@ -44,4 +46,24 @@ export function useCampaignStatus(campaign: string): BigNumber | undefined {
     watch: true,
   });
   return data ? BigNumber.from(data) : BigNumber.from(0);
+}
+
+export function useCampaignDetails(campaign: string) {
+  const { data: uri } = useContractRead({
+    addressOrName: campaign,
+    contractInterface: Campaign_ABI,
+    functionName: "campaignUri",
+    args: [],
+    watch: true,
+  });
+
+  const { data, isLoading } = useQuery<{ title: string; description: string }>(
+    ["metadata", uri],
+    () => {
+      return getCampaignDetail(uri.toString());
+    },
+    { retry: 10, enabled: !!uri }
+  );
+
+  return { data, isLoading };
 }

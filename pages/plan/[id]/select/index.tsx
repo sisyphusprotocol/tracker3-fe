@@ -7,12 +7,9 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CampaignSignedResult, CAMPAIGN_SIGNED } from "../../../../utils/graph";
 import { shortenAddress } from "../../../../utils/convert";
-import { useAccount, useContract, useSigner } from "wagmi";
-import { ethers } from "ethers";
-import { Campaign } from "../../../../contracts/types";
-import { Campaign_ABI } from "../../../../contracts/contants";
 import { useCampaignAdmit } from "../../../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
+import { useCampaignDetails } from "../../../../hooks/useCampaginRead";
 
 type Info = {
   id: string;
@@ -55,6 +52,8 @@ const Selects = () => {
     },
   });
 
+  const { data: detail } = useCampaignDetails(router.query.id as string);
+
   const changeListItem = (index) => {
     const res = [...list];
     res[index].isSelect = !res[index].isSelect;
@@ -74,7 +73,7 @@ const Selects = () => {
     <div className={style["bg"]}>
       <Top title="Selection" />
       <div className={style["outer"]}>
-        <div className={style["label"]}>Writing protocol</div>
+        <div className={style["label"]}>{detail?.title}</div>
         <div className={style["list-container"]}>
           {list.map((item, index) => {
             return (
