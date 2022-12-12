@@ -77,11 +77,11 @@ function Sign() {
   };
 
   useEffect(() => {
-    if (cid && write) {
+    if (enableUpload && cid && write) {
       execute();
       setEnableUpload(false);
     }
-  }, [cid, execute, write]);
+  }, [enableUpload, cid, execute, write]);
 
   return (
     <div className={style.wrapper}>

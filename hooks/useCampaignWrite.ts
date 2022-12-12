@@ -93,7 +93,7 @@ export function useCampaignAdmit({
   return { execute: execute, data: data };
 }
 
-// admit user
+// user upload record to check in
 export function useCampaignCheckIn({
   campaignAddr,
   tokenId,

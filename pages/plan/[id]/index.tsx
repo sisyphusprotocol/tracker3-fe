@@ -72,7 +72,7 @@ const Plan = () => {
     signer: signer,
     args: [],
     // enable when userStatus is undefined, which means the user signUp is not record on chain
-    enabled: !data?.userCampaign?.userStatus,
+    enabled: !!data && !data?.userCampaign?.userStatus,
   });
 
   // sign up tx
@@ -98,7 +98,7 @@ const Plan = () => {
   const currentAllowance = useTokenAllowance(
     config.address,
     address,
-    router.query.id as `0x${string}`  
+    router.query.id as `0x${string}`
   );
 
   useEffect(() => {
