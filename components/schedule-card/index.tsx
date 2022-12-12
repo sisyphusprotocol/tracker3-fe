@@ -24,7 +24,7 @@ interface IScheduleCard {
   progressCurrent?: number;
   progressSchedule?: number;
   // campaign contract address
-  address?: string;
+  address: string;
   // ipfs uri,  ipfs 
   uri: string;
   // start timestamp

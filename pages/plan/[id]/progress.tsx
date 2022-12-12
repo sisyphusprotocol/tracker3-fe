@@ -30,9 +30,10 @@ const Progress = () => {
   const { address } = useAccount();
   const { data: signer } = useSigner();
   const router = useRouter();
+  const campaignAddr = router.query.id as string;
 
   const { data: detail } = useQuery<CampaignDetailResult>(CAMPAIGN_DETAIL, {
-    variables: { addr: router.query.id },
+    variables: { addr: campaignAddr },
     onCompleted() {},
   });
 
@@ -174,6 +175,7 @@ const Progress = () => {
         style={{ position: "fixed", bottom: "0.8451rem", left: "0.1927rem" }}
       >
         <ScheduleCard
+          address={campaignAddr}
           isFinish={false}
           uri={detail?.campaign.uri}
           startTime={detail?.campaign.startTime}
