@@ -6,7 +6,7 @@ import { shortenTxHash } from "../utils/convert";
 import { packTokenAmount } from "../utils/token";
 
 export function useTraceTransaction(
-  txHash: string,
+  txHash: `0x${string}`,
   modalData: Partial<ModalProps>,
   callback?: Function
 ) {

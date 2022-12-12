@@ -6,8 +6,8 @@ import { getCampaignDetail } from "../utils/campaign";
 
 export function useTokenOwner(campaign: string, tokenId: string): string {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "ownerOf",
     args: [tokenId],
     watch: true,
@@ -17,8 +17,8 @@ export function useTokenOwner(campaign: string, tokenId: string): string {
 
 export function useCurrentEpoch(campaign: string): BigNumber | undefined {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "currentEpoch",
     args: [],
     watch: true,
@@ -28,8 +28,8 @@ export function useCurrentEpoch(campaign: string): BigNumber | undefined {
 
 export function useCampaignHost(campaign: string): { host: string } {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "owner",
     args: [],
     enabled: !!campaign,
@@ -39,8 +39,8 @@ export function useCampaignHost(campaign: string): { host: string } {
 
 export function useCampaignStatus(campaign: string): BigNumber | undefined {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "status",
     args: [],
     watch: true,
@@ -50,8 +50,8 @@ export function useCampaignStatus(campaign: string): BigNumber | undefined {
 
 export function useCampaignDetails(campaign: string) {
   const { data: uri } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "campaignUri",
     args: [],
     watch: true,

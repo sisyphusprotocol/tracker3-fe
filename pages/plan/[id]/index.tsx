@@ -35,7 +35,7 @@ const Plan = () => {
   const { address } = useAccount();
 
   const { data: balanceData } = useBalance({
-    addressOrName: address,
+    address: address,
     token: "0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784",
   });
 
@@ -66,8 +66,8 @@ const Plan = () => {
   });
 
   const { config: signUpConfig, refetch } = usePrepareContractWrite({
-    addressOrName: props?.data?.campaign.id,
-    contractInterface: Campaign_ABI,
+    address: props?.data?.campaign.id,
+    abi: Campaign_ABI,
     functionName: "signUp",
     signer: signer,
     args: [],
@@ -81,8 +81,8 @@ const Plan = () => {
   useTraceTransaction(signUpTxData?.hash, { type: "sign" });
 
   const { config } = usePrepareContractWrite({
-    addressOrName: props.data?.campaign.targetToken.id,
-    contractInterface: ERC20_ABI,
+    address: props.data?.campaign.targetToken.id,
+    abi: ERC20_ABI,
     functionName: "approve",
     signer: signer,
     args: [props.data?.campaign.id, props.data?.campaign.requiredAmount],
@@ -96,9 +96,9 @@ const Plan = () => {
   });
 
   const currentAllowance = useTokenAllowance(
-    config.addressOrName,
+    config.address,
     address,
-    router.query.id as string
+    router.query.id as `0x${string}`  
   );
 
   useEffect(() => {

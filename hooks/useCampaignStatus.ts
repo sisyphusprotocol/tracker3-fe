@@ -5,8 +5,8 @@ import { Campaign_ABI } from "../contracts/contants";
 
 export function useCurrentEpoch(campaign: string): BigNumber | undefined {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "currentEpoch",
     args: [],
     watch: true,
@@ -16,8 +16,8 @@ export function useCurrentEpoch(campaign: string): BigNumber | undefined {
 
 export function useCampaignHost(campaign: string): { host: string } {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "owner",
     args: [],
     enabled: !!campaign,
@@ -27,8 +27,8 @@ export function useCampaignHost(campaign: string): { host: string } {
 
 export function useCampaignStatus(campaign: string): BigNumber | undefined {
   const { data } = useContractRead({
-    addressOrName: campaign,
-    contractInterface: Campaign_ABI,
+    address: campaign,
+    abi: Campaign_ABI,
     functionName: "status",
     args: [],
     watch: true,

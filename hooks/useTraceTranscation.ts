@@ -3,7 +3,7 @@ import { useWaitForTransaction } from "wagmi";
 import { shortenTxHash } from "../utils/convert";
 import { packTokenAmount } from "../utils/token";
 
-export function useTraceTraction(txHash: string, callback?: any) {
+export function useTraceTraction(txHash: `0x${string}`, callback?: any) {
   const [modalShow, setModalShow] = useState<boolean>(false);
   // transaction hash
   const [tx, setTx] = useState({

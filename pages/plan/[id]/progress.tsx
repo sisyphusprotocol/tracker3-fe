@@ -93,8 +93,8 @@ const Progress = () => {
 
   // claim tx
   const { config, data } = usePrepareContractWrite({
-    addressOrName: router.query.id as string,
-    contractInterface: Campaign_ABI,
+    address: router.query.id as string,
+    abi: Campaign_ABI,
     functionName: "claim",
     signer: signer,
     args: [tokenIdData?.userCampaign?.tokenId],

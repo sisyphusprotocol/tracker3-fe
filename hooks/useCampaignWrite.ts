@@ -36,8 +36,8 @@ export function useCreateCampaign({
 }) {
   const { data: signer } = useSigner();
   const { config, refetch, error } = usePrepareContractWrite({
-    addressOrName: CAMPAIGN_FACTORY_ADDRESS,
-    contractInterface: CampaignFactory_ABI,
+    address: CAMPAIGN_FACTORY_ADDRESS,
+    abi: CampaignFactory_ABI,
     functionName: "createCampaign",
     signer: signer,
     args: [
@@ -71,8 +71,8 @@ export function useCampaignAdmit({
 }) {
   const { data: signer } = useSigner();
   const { config, refetch, error } = usePrepareContractWrite({
-    addressOrName: campaignAddr,
-    contractInterface: Campaign_ABI,
+    address: campaignAddr,
+    abi: Campaign_ABI,
     functionName: "admit",
     signer: signer,
     args: [tokenIds],
@@ -105,8 +105,8 @@ export function useCampaignCheckIn({
 }) {
   const { data: signer } = useSigner();
   const { config, refetch, error } = usePrepareContractWrite({
-    addressOrName: campaignAddr,
-    contractInterface: Campaign_ABI,
+    address: campaignAddr,
+    abi: Campaign_ABI,
     functionName: "checkIn",
     signer: signer,
     args: [uri, tokenId],
@@ -141,8 +141,8 @@ export function useStartChallenge({
 }) {
   const { data: signer } = useSigner();
   const { config, refetch, error } = usePrepareContractWrite({
-    addressOrName: campaignAddr,
-    contractInterface: Campaign_ABI,
+    address: campaignAddr,
+    abi: Campaign_ABI,
     functionName: "challenge",
     signer: signer,
     args: [challengerTokenId, cheaterTokenId, epoch],
@@ -184,8 +184,8 @@ export function useVoteForChallenge({
   );
 
   const { config, refetch, error } = usePrepareContractWrite({
-    addressOrName: campaignAddr,
-    contractInterface: Campaign_ABI,
+    address: campaignAddr,
+    abi: Campaign_ABI,
     functionName: "vote",
     signer: signer,
     args: [tokenId, challengeId, choice],
