@@ -4,12 +4,11 @@ import CardTop from "./info";
 import { useRouter } from "next/router";
 import { useCampaignTokenId, useRecordContent } from "../../hooks/useCampaign";
 import { useAccount } from "wagmi";
-import { Campaign_ABI } from "../../contracts/contants";
 import { useCallback } from "react";
 import { useStartChallenge } from "../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../hooks/useTraceTransaction";
 import ButtonList from "./buttonList";
-
+import { useCampaignDetails } from "../../hooks/useCampaginRead";
 
 interface IMomentPart {
   id: string;
@@ -33,6 +32,8 @@ function MomentPart(props: IMomentPart) {
     props.campaignAddr,
     props.userAddr
   );
+
+  const { data: cDetail } = useCampaignDetails(props.campaignAddr);
 
   const {
     execute: startChallenge,
@@ -59,6 +60,7 @@ function MomentPart(props: IMomentPart) {
   return (
     <>
       <CardTop
+        title={cDetail?.title}
         userAddr={props.userAddr}
         timestamp={props.timestamp}
         current={props.current}
@@ -108,12 +110,12 @@ export type ListDate = {
   id: string; // moment id
   userAddr: string; // user id
   campaignAddr: string; // campaign contract address
-  time: number; //  
+  time: number; //
   content: string; //
   moments: any[]; // list TODO: mockstring[]urlstring
 
-  current: number; // 
-  total: number; // 
+  current: number; //
+  total: number; //
   comments: IComment[];
 
   uri?: string; // ipfs uri get content and moments

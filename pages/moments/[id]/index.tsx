@@ -11,9 +11,11 @@ import { useRecordContent } from "../../../hooks/useCampaign";
 import { useQuery } from "@apollo/client";
 import { MomentDetail, MOMENT_Detail } from "../../../utils/graph";
 import ButtonList from "../../../components/moment/buttonList";
+import { useCampaignDetails } from "../../../hooks/useCampaginRead";
 
 interface IMomentDetailPart {
   id: string;
+  campaignAddr: string;
   userAddr: string;
   timestamp: number;
   current: number;
@@ -27,9 +29,13 @@ export function MomentDetailPart(props: IMomentDetailPart) {
 
   useEffect(() => console.log(props), [props]);
 
+  // cDetail = Campaign Detail
+  const { data: cDetail } = useCampaignDetails(props.campaignAddr);
+
   return (
     <>
       <CardTop
+        title={cDetail?.title}
         userAddr={props.userAddr}
         timestamp={props.timestamp}
         current={props.current}
@@ -77,13 +83,14 @@ export default function Detail() {
 
   if (!router.query.id) return null;
 
-  // 
+  //
   return (
     <div className={style["wrapper"]}>
       <Nav title="Moment" showBack={true} />
       <div className={style["card-wrapper"]} style={{ margin: "0 .08rem" }}>
         <MomentDetailPart
           id={data?.record.id}
+          campaignAddr={challengeData?.campaign}
           timestamp={Number(data?.record.timestamp)}
           userAddr={data?.record.userCampaign.user.address}
           current={Number(data?.record.epoch) + 1}

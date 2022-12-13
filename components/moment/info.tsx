@@ -19,6 +19,7 @@ function timeToNowString(timestamp: number): string {
 
 // Info
 const CardTop = ({
+  title,
   userAddr,
   current,
   total,
@@ -31,7 +32,7 @@ const CardTop = ({
       <div className={style["card-info"]}>
         <div className={style["card-info-id"]}>{shortenAddress(userAddr)}</div>
         <div className={style["card-info-other"]}>
-          Writing program ({current}/{total}) {timeToNowString(timestamp)}
+          {title} ({current}/{total}) {timeToNowString(timestamp)}
         </div>
       </div>
     </div>

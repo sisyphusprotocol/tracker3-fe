@@ -54,7 +54,9 @@ export function useCampaignDetails(campaign: string) {
     abi: Campaign_ABI,
     functionName: "campaignUri",
     args: [],
-    watch: true,
+    scopeKey: campaign,
+    cacheTime: 100_000,
+    suspense: true,
   });
 
   const { data, isLoading } = useQuery<{ title: string; description: string }>(
