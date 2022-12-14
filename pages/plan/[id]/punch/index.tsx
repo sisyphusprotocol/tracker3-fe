@@ -5,11 +5,7 @@ import Button from "../../../../components/button";
 import Top from "../../../../components/calendar/components/top";
 import { useAccount, useContract, useSigner } from "wagmi";
 import { useRouter } from "next/router";
-import { useQuery } from "@apollo/client";
-import {
-  CampaignTokenIdResult,
-  CAMPAIGN_TOKEN_ID,
-} from "../../../../utils/graph";
+
 import { now } from "../../../../utils/convert";
 import _upload from "./images/upload.png";
 import _yuyin from "./images/yuyin.png";

@@ -1,10 +1,11 @@
 .bg {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
-  background: #FDFBC2;
+  background: #fdfbc2;
   width: 100vw;
   height: 100vh;
+  overflow: auto;
 }
 
 .wrapper-flex {
@@ -16,48 +17,48 @@
 }
 
 .top-nav {
-  padding: 0 .14rem;
-  margin-top: .23rem;
-  background: #FFFFFF;
+  padding: 0 0.14rem;
+  margin-top: 0.23rem;
+  background: #ffffff;
   width: 3.58rem;
-  height: .6rem;
-  box-shadow: 0px .18rem .4rem rgba(112, 144, 176, 0.12);
-  border-radius: .2rem;
+  height: 0.6rem;
+  box-shadow: 0px 0.18rem 0.4rem rgba(112, 144, 176, 0.12);
+  border-radius: 0.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .top-nav-left {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .18rem;
-  line-height: .26rem;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #9E6DFB;
+  font-size: 0.18rem;
+  line-height: 0.26rem;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #9e6dfb;
 }
 
 .top-nav-right {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .14rem;
-  line-height: .20rem;
+  font-size: 0.14rem;
+  line-height: 0.2rem;
   text-align: right;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #7F8187;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #7f8187;
 }
 
 .title {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 500;
-  font-size: .2rem;
-  margin-top: .39rem;
-  line-height: .29rem;
+  font-size: 0.2rem;
+  margin-top: 0.39rem;
+  line-height: 0.29rem;
   text-align: center;
-  font-feature-settings: 'pnum' on, 'lnum' on;
+  font-feature-settings: "pnum" on, "lnum" on;
   color: rgba(0, 0, 0, 0.82);
   position: relative;
 }
@@ -78,8 +79,8 @@
   width: 1.23rem;
   height: 1.23rem;
   border-radius: 50%;
-  background: linear-gradient(180deg, #FFFFFF 0%, #DFE2E3 100%);
-  border: .06rem solid rgb(244, 237, 250);
+  background: linear-gradient(180deg, #ffffff 0%, #dfe2e3 100%);
+  border: 0.06rem solid rgb(244, 237, 250);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,86 +88,85 @@
 }
 
 .day {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .38rem;
+  font-size: 0.38rem;
   display: flex;
   align-items: center;
   text-align: center;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #1C1721;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #1c1721;
 }
 
 .day-label {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .14rem;
-  line-height: .2rem;
+  font-size: 0.14rem;
+  line-height: 0.2rem;
   display: flex;
   align-items: center;
   text-align: center;
-  letter-spacing: .02rem;
+  letter-spacing: 0.02rem;
   text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #7F8187;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #7f8187;
 }
 
 .calendar {
-  margin-top: .88rem;
+  margin-top: 0.88rem;
   width: 100%;
-  height: .49rem;
+  height: 0.49rem;
   display: flex;
   justify-content: space-evenly;
 }
 
 .choose-day {
-  width: .3rem;
-  height: .3rem;
-  background: #8B7FA3;
+  width: 0.3rem;
+  height: 0.3rem;
+  background: #8b7fa3;
   border-radius: 22.9761px;
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 500;
-  font-size: .14rem;
-  line-height: .3rem;
+  font-size: 0.14rem;
+  line-height: 0.3rem;
   text-align: center;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  transition: all .5s;
-  color: #FFFFFF;
+  font-feature-settings: "pnum" on, "lnum" on;
+  transition: all 0.5s;
+  color: #ffffff;
   overflow: hidden;
-
 }
 
 .choost-info {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .12rem;
-  line-height: .12rem;
-  transform: scale(.75);
+  font-size: 0.12rem;
+  line-height: 0.12rem;
+  transform: scale(0.75);
   text-align: center;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #FFFFFF;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #ffffff;
 }
 
 .info-card {
-  padding: 0 .14rem;
-  margin-top: .23rem;
-  background: #FFFFFF;
+  padding: 0 0.14rem;
+  margin-top: 0.23rem;
+  background: #ffffff;
   width: 3.58rem;
-  height: .6rem;
-  box-shadow: 0px .18rem .4rem rgba(112, 144, 176, 0.12);
-  border-radius: .2rem;
+  height: 0.6rem;
+  box-shadow: 0px 0.18rem 0.4rem rgba(112, 144, 176, 0.12);
+  border-radius: 0.2rem;
   display: flex;
   align-items: center;
 }
 
 .check-yes {
-  background: #8D5DF9;
-  width: .21rem;
-  height: .21rem;
+  background: #8d5df9;
+  width: 0.21rem;
+  height: 0.21rem;
   border-radius: 50%;
   position: relative;
 }
@@ -178,19 +178,19 @@
   top: 38%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
-  width: .1rem;
-  height: .05rem;
+  width: 0.1rem;
+  height: 0.05rem;
   border-left: 2px solid white;
   border-bottom: 2px solid white;
 }
 
 .check-info {
-  font-family: 'Jost';
+  font-family: "Jost";
   font-style: normal;
   font-weight: 400;
-  font-size: .18rem;
-  line-height: .26rem;
+  font-size: 0.18rem;
+  line-height: 0.26rem;
   margin-left: 0.22rem;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #1C1721;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #1c1721;
 }

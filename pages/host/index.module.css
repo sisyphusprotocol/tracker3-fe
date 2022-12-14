@@ -1,12 +1,14 @@
 .container {
   background: linear-gradient(180deg, #fff8f2 0%, #fef0be 43.23%, #edc2fe 100%);
   height: 100vh;
-  weight: 100vw;
+  width: 100vw;
+  overflow: auto;
 }
 
 .top {
   position: relative;
-  top: 0.4rem;
+  top: 0.3rem;
+  margin: 0.1rem;
 }
 
 .item-icon {
@@ -15,25 +17,9 @@
 
 .find-img {
   position: relative;
-  top: 0.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.1rem;
   height: 1.9099rem;
-}
-
-.find-button {
-  width: 2.81rem;
-  height: 0.51rem;
-  position: fixed;
-  left: 0.47rem;
-  top: 1rem;
-}
-
-.find-list {
-  width: 3.58rem;
-  height: 3.8rem;
-  top: 1.3rem;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
 }
 
 .white {
@@ -42,9 +28,10 @@
 
 .host-yellow {
   width: 3.4rem;
-  height: 0.74rem;
+  min-height: 0.74rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
   position: relative;
-  top: 0.7rem;
   background: #7b60c4;
   border-radius: 0.2rem;
 }
@@ -76,17 +63,17 @@
 
 .campaign-tabs {
   position: relative;
-  top: 1.15rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
 }
 
 .schedule-list {
   position: relative;
-  top: 1.3rem;
-  left: 0.1901rem;
   width: 3.8rem;
-  height: 2.6rem;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.15rem;
+  margin-top: 0.1rem;
+  padding-bottom: 0.8rem;
 }

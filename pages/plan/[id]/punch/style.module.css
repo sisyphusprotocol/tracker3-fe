@@ -3,18 +3,25 @@
   height: 100vh;
 
   background: linear-gradient(180deg, #fff8f2 0%, #fef0be 43.23%, #edc2fe 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  padding-bottom: 0.8rem;
 }
 
 .top {
-    display: flex !important;
+  display: flex !important;
+  width: 100%;
 }
 
 .rules {
   width: 3.4rem;
   height: 0.8352rem;
-  position: fixed;
-  left: 0.1941rem;
-  top: 1.4135rem;
+  position: relative;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+
   background: linear-gradient(
     95.34deg,
     rgba(255, 255, 255, 0.8) 19.94%,
@@ -59,9 +66,9 @@
 }
 
 .input {
-  position: fixed;
-  left: 0.445rem;
-  top: 2.5174rem;
+  position: relative;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
   width: 2.8412rem;
   height: 2.5174rem;
   background: linear-gradient(
@@ -75,27 +82,27 @@
   border-radius: 0.2rem;
 }
 
-.textarea{
-    padding: 0.1rem 0.1rem 0.1rem 0.1rem;
-    width: 100%;
-    font-size: 0.16rem;
-    height: 2.14rem;
-    border:  0rem;
-    background: transparent;
-    /* box-shadow: 0.02rem 0.06rem 0.11rem -0.06rem rgba(120, 61, 140, 0.25);
+.textarea {
+  padding: 0.1rem 0.1rem 0.1rem 0.1rem;
+  width: 100%;
+  font-size: 0.16rem;
+  height: 2.14rem;
+  border: 0rem;
+  background: transparent;
+  /* box-shadow: 0.02rem 0.06rem 0.11rem -0.06rem rgba(120, 61, 140, 0.25);
     backdrop-filter: blur(0.02rem); */
-      /* Note: backdrop-filter has minimal browser support */
-    border-radius: 0.2rem;
-    resize: none;
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 0.2rem;
+  resize: none;
 }
 .textarea:focus {
   outline: none;
 }
 .divide {
-    margin-top:-0.2rem;
-    background: #A0A0A0;
-    border: 0.01rem solid #CACACA;
-}  
+  margin-top: -0.2rem;
+  background: #a0a0a0;
+  border: 0.01rem solid #cacaca;
+}
 .upload {
   width: 0.3rem;
   height: 0.3rem;
@@ -106,21 +113,21 @@
 }
 
 .upload-img {
-    display: flex;
-    margin-left: 0.5588rem;
-    margin-top: 0.072rem;
+  display: flex;
+  margin-left: 0.5588rem;
+  margin-top: 0.072rem;
 }
 .yuyin-img {
   display: flex;
-    margin-left: 2.02rem;
-    margin-top: -0.218rem;
+  margin-left: 2.02rem;
+  margin-top: -0.218rem;
 }
 
 .btn {
-  position: fixed;
-  left: 1.3285rem;
-  top: 5.61rem;
-  width: 1.15rem !important; 
+  position: relative;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  width: 1.15rem !important;
   height: 0.35rem !important;
 }
 

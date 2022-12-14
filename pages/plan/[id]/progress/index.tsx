@@ -155,35 +155,33 @@ const Progress = () => {
 
   return (
     <div className={style["bg"]}>
-      <div className="fixed flex-y top-0 bottom-3 w-screen overflow-y-auto">
-        <Calendar
-          nextToDo={detail?.campaign.endTime > now() ? "Check" : "Claim"}
-          checkedTimeStamp={CheckInHistory?.userCampaign?.records?.map(
-            (record) => {
-              return Number(record?.timestamp);
-            }
-          )}
-          onCheckClick={onCheckClick}
-          onClaimClick={onClaimClick}
-          options={options}
-          checked={checked}
-          claimed={claimed}
-          dayLength={dayLength}
-          timeToClaim={timeToClaim}
-        >
-          <div className="mt-0.5 flex-y items-center mb-1">
-            <ScheduleCard
-              address={campaignAddr}
-              isFinish={false}
-              uri={detail?.campaign.uri}
-              startTime={detail?.campaign.startTime}
-              endTime={detail?.campaign.endTime}
-              scheduleName={"Writing Schedule"}
-              lastingDays={detail?.campaign.epochCount}
-            />
-          </div>
-        </Calendar>
-      </div>
+      <Calendar
+        nextToDo={detail?.campaign.endTime > now() ? "Check" : "Claim"}
+        checkedTimeStamp={CheckInHistory?.userCampaign?.records?.map(
+          (record) => {
+            return Number(record?.timestamp);
+          }
+        )}
+        onCheckClick={onCheckClick}
+        onClaimClick={onClaimClick}
+        options={options}
+        checked={checked}
+        claimed={claimed}
+        dayLength={dayLength}
+        timeToClaim={timeToClaim}
+      >
+        <div className="mt-0.5 flex-y items-center mb-1">
+          <ScheduleCard
+            address={campaignAddr}
+            isFinish={false}
+            uri={detail?.campaign.uri}
+            startTime={detail?.campaign.startTime}
+            endTime={detail?.campaign.endTime}
+            scheduleName={"Writing Schedule"}
+            lastingDays={detail?.campaign.epochCount}
+          />
+        </div>
+      </Calendar>
     </div>
   );
 };

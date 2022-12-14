@@ -219,7 +219,7 @@ function Find() {
 
   return (
     <div className={styles.container}>
-      <div className="relative flex flex-col h-screen items-center w-screen ">
+      <div className="relative flex flex-col h-screen items-center w-auto ">
         <div className={styles.top}>
           <Info id={shortenAddress(address, 2)} />
         </div>
