@@ -10,7 +10,6 @@ export function useTokenOwner(campaign: string, tokenId: string): string {
     abi: Campaign_ABI,
     functionName: "ownerOf",
     args: [tokenId],
-    watch: true,
   });
   return data?.toString() || "";
 }

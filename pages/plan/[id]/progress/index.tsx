@@ -8,8 +8,9 @@ import {
   usePrepareContractWrite,
   useSigner,
 } from "wagmi";
-import { Calendar } from "../../../components/calendar";
-import ScheduleCard from "../../../components/schedule-card";
+import { Calendar } from "../../../../components/calendar";
+import ScheduleCard from "../../../../components/schedule-card";
+import style from "./style.module.css";
 import {
   CampaignDetailResult,
   CampaignTokenIdResult,
@@ -17,15 +18,14 @@ import {
   CAMPAIGN_TOKEN_ID,
   PersonalPunchResult,
   PERSONAL_PUNCH,
-} from "../../../utils/graph";
-import Campaign_ABI from "../../../contracts/Campaign.json";
+} from "../../../../utils/graph";
+import Campaign_ABI from "../../../../contracts/Campaign.json";
 
-import { weekMap } from "../../../utils/time";
-import { now } from "../../../utils/convert";
-import { useCurrentEpoch } from "../../../hooks/useCampaginRead";
-import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
-import { useCampaignRewardResultOnModal } from "../../../hooks/useCampaign";
-import { modalContext } from "../../../components/modal";
+import { weekMap } from "../../../../utils/time";
+import { now } from "../../../../utils/convert";
+import { useCurrentEpoch } from "../../../../hooks/useCampaginRead";
+import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
+import { useCampaignRewardResultOnModal } from "../../../../hooks/useCampaign";
 const Progress = () => {
   const { address } = useAccount();
   const { data: signer } = useSigner();
@@ -34,7 +34,6 @@ const Progress = () => {
 
   const { data: detail } = useQuery<CampaignDetailResult>(CAMPAIGN_DETAIL, {
     variables: { addr: campaignAddr },
-    onCompleted() {},
   });
 
   const currentEpoch = useCurrentEpoch(router.query.id as string);
@@ -155,34 +154,35 @@ const Progress = () => {
   }, [detail, dayLength]);
 
   return (
-    <div>
-      <Calendar
-        nextToDo={detail?.campaign.endTime > now() ? "Check" : "Claim"}
-        checkedTimeStamp={CheckInHistory?.userCampaign?.records?.map(
-          (record) => {
-            return Number(record?.timestamp);
-          }
-        )}
-        onCheckClick={onCheckClick}
-        onClaimClick={onClaimClick}
-        options={options}
-        checked={checked}
-        claimed={claimed}
-        dayLength={dayLength}
-        timeToClaim={timeToClaim}
-      />
-      <div
-        style={{ position: "fixed", bottom: "0.8451rem", left: "0.1927rem" }}
-      >
-        <ScheduleCard
-          address={campaignAddr}
-          isFinish={false}
-          uri={detail?.campaign.uri}
-          startTime={detail?.campaign.startTime}
-          endTime={detail?.campaign.endTime}
-          scheduleName={"Writing Schedule"}
-          lastingDays={detail?.campaign.epochCount}
-        />
+    <div className={style["bg"]}>
+      <div className="fixed flex-y top-0 bottom-3 w-screen overflow-y-auto">
+        <Calendar
+          nextToDo={detail?.campaign.endTime > now() ? "Check" : "Claim"}
+          checkedTimeStamp={CheckInHistory?.userCampaign?.records?.map(
+            (record) => {
+              return Number(record?.timestamp);
+            }
+          )}
+          onCheckClick={onCheckClick}
+          onClaimClick={onClaimClick}
+          options={options}
+          checked={checked}
+          claimed={claimed}
+          dayLength={dayLength}
+          timeToClaim={timeToClaim}
+        >
+          <div className="mt-0.5 flex-y items-center mb-1">
+            <ScheduleCard
+              address={campaignAddr}
+              isFinish={false}
+              uri={detail?.campaign.uri}
+              startTime={detail?.campaign.startTime}
+              endTime={detail?.campaign.endTime}
+              scheduleName={"Writing Schedule"}
+              lastingDays={detail?.campaign.epochCount}
+            />
+          </div>
+        </Calendar>
       </div>
     </div>
   );

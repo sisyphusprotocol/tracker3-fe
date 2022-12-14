@@ -18,22 +18,21 @@ export declare type ICalendar = {
 
 export const Calendar = (props: ICalendar) => {
   return (
-    <div className={style["bg"]}>
-      <div className={style["wrapper-flex"]}>
-        <Top />
-        <Cal checkedTimeStamp={props.checkedTimeStamp} />
-        {props.nextToDo === "Check" ? (
-          <Info
-            buttonContent={props.checked ? "" : "Go To Check"}
-            onClick={props.onCheckClick}
-          />
-        ) : (
-          <Info
-            buttonContent={props.claimed ? "   Claimed" : "Claim"}
-            onClick={props.onClaimClick}
-          />
-        )}
-      </div>
+    <div className={style["wrapper-flex"]}>
+      <Top />
+      <Cal checkedTimeStamp={props.checkedTimeStamp} />
+      {props.nextToDo === "Check" ? (
+        <Info
+          buttonContent={props.checked ? "" : "Go To Check"}
+          onClick={props.onCheckClick}
+        />
+      ) : (
+        <Info
+          buttonContent={props.claimed ? "   Claimed" : "Claim"}
+          onClick={props.onClaimClick}
+        />
+      )}
+      {props.children}
     </div>
   );
 };

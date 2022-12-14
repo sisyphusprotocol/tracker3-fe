@@ -201,7 +201,7 @@ function Find() {
   const tabItems = [
     {
       label: "OnGoing",
-      activeCb: () => setCurrentTab("OnGoing"), // 
+      activeCb: () => setCurrentTab("OnGoing"), //
     },
     {
       label: "Not Started",
@@ -219,35 +219,37 @@ function Find() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
-        <Info id={shortenAddress(address, 2)} />
-      </div>
-      <div className={styles["find-img"]}>
-        <Image src={_img} alt="" />
-      </div>
-      <div className={styles["host-yellow"]}>
-        <div className={styles["yellow-title"]}>Hi, Jerry!</div>
-        <div className={styles["yellow-desc"]}>
-          {"It always seems impossible until it's done."}
+      <div className="relative flex flex-col h-screen items-center w-screen ">
+        <div className={styles.top}>
+          <Info id={shortenAddress(address, 2)} />
         </div>
+        <div className={styles["find-img"]}>
+          <Image src={_img} alt="" />
+        </div>
+        <div className={styles["host-yellow"]}>
+          <div className={styles["yellow-title"]}>Hi, Jerry!</div>
+          <div className={styles["yellow-desc"]}>
+            {"It always seems impossible until it's done."}
+          </div>
+        </div>
+        <div className={styles["campaign-tabs"]}>
+          <Tab tabItems={tabItems} />
+        </div>
+        {(() => {
+          switch (currentTab) {
+            case "Created":
+              return <CreatedCampaigns />;
+            case "NotStart":
+              return <NotStartCampaigns />;
+            case "OnGoing":
+              return <OnGoingCampaigns />;
+            case "Finished":
+              return <FinishedCampaigns />;
+            default:
+              return <div></div>;
+          }
+        })()}
       </div>
-      <div className={styles["campaign-tabs"]}>
-        <Tab tabItems={tabItems} />
-      </div>
-      {(() => {
-        switch (currentTab) {
-          case "Created":
-            return <CreatedCampaigns />;
-          case "NotStart":
-            return <NotStartCampaigns />;
-          case "OnGoing":
-            return <OnGoingCampaigns />;
-          case "Finished":
-            return <FinishedCampaigns />;
-          default:
-            return <div></div>;
-        }
-      })()}
     </div>
   );
 }

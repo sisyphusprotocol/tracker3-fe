@@ -1,12 +1,12 @@
 .container {
   background: linear-gradient(180deg, #fff8f2 0%, #fef0be 43.23%, #edc2fe 100%);
   height: 100vh;
+  weight: 100vw;
 }
 
 .top {
-  position: fixed;
+  position: relative;
   top: 0.4rem;
-  left: 0.24rem;
 }
 
 .item-icon {
@@ -14,10 +14,8 @@
 }
 
 .find-img {
-  position: fixed;
-  left: calc((100vw - 3.4rem) / 2);
-  top: 1.05rem;
-  width: 3.4rem;
+  position: relative;
+  top: 0.6rem;
   height: 1.9099rem;
 }
 
@@ -45,9 +43,8 @@
 .host-yellow {
   width: 3.4rem;
   height: 0.74rem;
-  position: fixed;
-  left: calc((100vw - 3.4rem) / 2);
-  bottom: 4.27rem;
+  position: relative;
+  top: 0.7rem;
   background: #7b60c4;
   border-radius: 0.2rem;
 }
@@ -78,14 +75,13 @@
 }
 
 .campaign-tabs {
-  position: fixed;
-  bottom: 3.71rem;
-  left: calc((100vw - 3.4rem) / 2);
+  position: relative;
+  top: 1.15rem;
 }
 
 .schedule-list {
-  position: fixed;
-  top: 4.66rem;
+  position: relative;
+  top: 1.3rem;
   left: 0.1901rem;
   width: 3.8rem;
   height: 2.6rem;

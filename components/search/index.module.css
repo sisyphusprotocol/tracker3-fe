@@ -7,6 +7,7 @@
 .input {
     width: 3.4rem;
     height: 0.32rem;
+    font-size: 0.16rem;
     background: rgba(255, 255, 255, 0.5);
     border: 0.01rem solid #7B60C4;
     border-radius: 0.1rem;
