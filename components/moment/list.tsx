@@ -33,7 +33,7 @@ function MomentPart(props: IMomentPart) {
     props.userAddr
   );
 
-  const { data: cDetail } = useCampaignDetails(props.campaignAddr);
+  const { data: cDetail } = useCampaignDetails(props?.campaignAddr);
 
   const {
     execute: startChallenge,
