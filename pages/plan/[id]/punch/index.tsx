@@ -17,7 +17,7 @@ import { useCampaignCheckIn } from "../../../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
 import { useCampaignDetails } from "../../../../hooks/useCampaginRead";
 
-function Sign() {
+function Punch() {
   const { address } = useAccount();
   const uploadRef = useRef<any>();
   const router = useRouter();
@@ -32,12 +32,15 @@ function Sign() {
 
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
+  const [record, setRecord] = useState<{
+    text: string;
+    images: string[];
+    timestamp: number;
+  }>(undefined);
   const [enableUpload, setEnableUpload] = useState(false);
 
   const { data: cid } = useUploadRecordUri({
-    text: text,
-    images: images,
-    timestamp: now(),
+    ...record,
     enable: enableUpload,
   });
 
@@ -69,6 +72,7 @@ function Sign() {
   };
 
   const confirm = () => {
+    setRecord({ text, images, timestamp: now() });
     setEnableUpload(true);
   };
 
@@ -138,4 +142,4 @@ function Sign() {
   );
 }
 
-export default Sign;
+export default Punch;

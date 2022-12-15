@@ -13,8 +13,8 @@ import { useRouter } from "next/router";
 const Create = () => {
   const router = useRouter();
   const [metadata, setMetadata] = useState({
-    name: "Writing Campaign",
-    desc: "Writing protocol is a 21 day tracker to ...",
+    name: "Test Campaign",
+    desc: "As you know, it is just a test...",
     days: 1,
     token: "0xA3F2ba60353b9af0A3524eE4a7C206D4335A9784",
     startDate: moment().add(5, "minutes").format("YYYY-MM-DDTHH:mm"),

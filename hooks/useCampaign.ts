@@ -1,20 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { BigNumber, ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
-import {
-  useAccount,
-  useContract,
-  useContractRead,
-  useContractWrite,
-  usePrepareContractWrite,
-  useSigner,
-} from "wagmi";
+
 import { modalContext } from "../components/modal";
-import { Campaign_ABI } from "../contracts/contants";
-import { Campaign } from "../contracts/types";
+
 import { getRecordDetail, RecordDetail } from "../utils/campaign";
 import { CampaignTokenIdResult, CAMPAIGN_TOKEN_ID } from "../utils/graph";
-import { uploadJson } from "../utils/ipfs";
+import { useJsonCid, useUploadJson } from "./useJson";
 
 export function useRecordContentList(recordUris: string[]) {
   const [data, setData] = useState(null);
@@ -89,22 +80,15 @@ export function useUploadCampaignUri({
   description: string;
   enable: boolean;
 }) {
-  const [cid, setCid] = useState(null);
+  const json = {
+    title: name,
+    description: description,
+  };
 
-  useEffect(() => {
-    // TODO: clear old
-    setCid(null);
-    if (enable) {
-      uploadJson({
-        title: name,
-        description: description,
-      }).then((cid) => {
-        setCid(cid);
-      });
-    }
-  }, [name, description, enable]);
+  const cid = useJsonCid(json);
+  const { data: success } = useUploadJson(json, enable);
 
-  return { data: cid };
+  return { data: success && cid };
 }
 
 // update campaign info to ipfs and return uri
@@ -119,20 +103,14 @@ export function useUploadRecordUri({
   timestamp: number;
   enable: boolean;
 }) {
-  const [cid, setCid] = useState(null);
+  const json = {
+    text: text,
+    images: images,
+    timestamp: timestamp,
+  };
 
-  useEffect(() => {
-    if (enable) {
-      // TODO: clear old
-      uploadJson({
-        text: text,
-        images: images,
-        timestamp: timestamp,
-      }).then((cid) => {
-        setCid(cid);
-      });
-    }
-  }, [text, images, enable]);
+  const cid = useJsonCid(json);
+  const { data: success } = useUploadJson(json, enable);
 
-  return { data: cid };
+  return { data: success && cid };
 }

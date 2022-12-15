@@ -1,4 +1,6 @@
 import { NFTStorage, File } from "nft.storage";
+import Hash from "ipfs-only-hash";
+import { Blob } from "buffer";
 
 // It doesn't matter as it's a temporary plan
 const NFT_STORAGE_KEY =
@@ -25,6 +27,16 @@ export async function uploadJson(json: Object) {
   return nftstorage.storeBlob(
     new Blob([JSON.stringify(json)], {
       type: "application/json",
-    })
+    }) as any
   );
+}
+
+export async function calculateJsonCid(json: Object): Promise<string> {
+  const str = JSON.stringify(json);
+  return await Hash.of(str, {
+    onlyHash: true,
+    cidVersion: 1,
+    chunker: "rabin",
+    rawLeaves: true,
+  });
 }
