@@ -8,7 +8,7 @@ import { useCallback } from "react";
 import { useStartChallenge } from "../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../hooks/useTraceTransaction";
 import ButtonList from "./buttonList";
-import { useCampaignDetails } from "../../hooks/useCampaginRead";
+import { useCampaignDetails } from "../../hooks/useCampaignRead";
 
 interface IMomentPart {
   id: string;

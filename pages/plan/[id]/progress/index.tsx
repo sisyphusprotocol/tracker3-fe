@@ -23,7 +23,7 @@ import Campaign_ABI from "../../../../contracts/Campaign.json";
 
 import { weekMap } from "../../../../utils/time";
 import { now } from "../../../../utils/convert";
-import { useCurrentEpoch } from "../../../../hooks/useCampaginRead";
+import { useCurrentEpoch } from "../../../../hooks/useCampaignRead";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
 import { useCampaignRewardResultOnModal } from "../../../../hooks/useCampaign";
 const Progress = () => {

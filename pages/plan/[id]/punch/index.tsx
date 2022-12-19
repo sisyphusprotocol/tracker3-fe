@@ -15,7 +15,7 @@ import {
 } from "../../../../hooks/useCampaign";
 import { useCampaignCheckIn } from "../../../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
-import { useCampaignDetails } from "../../../../hooks/useCampaginRead";
+import { useCampaignDetails } from "../../../../hooks/useCampaignRead";
 
 function Punch() {
   const { address } = useAccount();

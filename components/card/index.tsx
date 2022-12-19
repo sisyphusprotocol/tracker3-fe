@@ -8,7 +8,7 @@ import styles from "./index.module.css";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { getCampaignDetail } from "../../utils/campaign";
-import { useCampaignHost } from "../../hooks/useCampaginRead";
+import { useCampaignHost } from "../../hooks/useCampaignRead";
 
 interface ICard {
   children?: React.ReactNode;

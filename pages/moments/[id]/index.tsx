@@ -11,7 +11,7 @@ import { useRecordContent } from "../../../hooks/useCampaign";
 import { useQuery } from "@apollo/client";
 import { MomentDetail, MOMENT_Detail } from "../../../utils/graph";
 import ButtonList from "../../../components/moment/buttonList";
-import { useCampaignDetails } from "../../../hooks/useCampaginRead";
+import { useCampaignDetails } from "../../../hooks/useCampaignRead";
 
 interface IMomentDetailPart {
   id: string;

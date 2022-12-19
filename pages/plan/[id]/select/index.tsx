@@ -9,7 +9,7 @@ import { CampaignSignedResult, CAMPAIGN_SIGNED } from "../../../../utils/graph";
 import { shortenAddress } from "../../../../utils/convert";
 import { useCampaignAdmit } from "../../../../hooks/useCampaignWrite";
 import { useTraceTransaction } from "../../../../hooks/useTraceTransaction";
-import { useCampaignDetails } from "../../../../hooks/useCampaginRead";
+import { useCampaignDetails } from "../../../../hooks/useCampaignRead";
 
 type Info = {
   id: string;
