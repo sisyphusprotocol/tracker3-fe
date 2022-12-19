@@ -39,7 +39,7 @@ const Selects = () => {
     onCompleted(data) {
       console.log(data);
       setList(
-        data.campaign.users.map((userCampaign) => ({
+        data?.campaign?.users.map((userCampaign) => ({
           id: shortenAddress(userCampaign.user.id),
           config: genConfig(),
           isSelect:
