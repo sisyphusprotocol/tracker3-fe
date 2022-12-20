@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { BigNumber } from "ethers";
+import useSWR from "swr";
 import { useContractRead } from "wagmi";
 import { Campaign_ABI } from "../contracts/contants";
 import { getCampaignDetail } from "../utils/campaign";
@@ -58,12 +58,11 @@ export function useCampaignDetails(campaign: string) {
     suspense: true,
   });
 
-  const { data, isLoading } = useQuery<{ title: string; description: string }>(
-    ["metadata", uri],
-    () => {
-      return getCampaignDetail(uri.toString());
-    },
-    { retry: 10, enabled: !!uri }
+  const { data, isLoading } = useSWR<{ title: string; description: string }>(
+    uri,
+    (uri) => {
+      return getCampaignDetail(uri);
+    }
   );
 
   return { data, isLoading };

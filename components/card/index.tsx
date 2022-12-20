@@ -6,13 +6,19 @@ import _emoji from "../../assets/defaultCampaign.svg";
 import { shortenDes } from "../../utils/convert";
 import styles from "./index.module.css";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
 import { getCampaignDetail } from "../../utils/campaign";
-import { useCampaignHost } from "../../hooks/useCampaignRead";
+import {
+  useCampaignDetails,
+  useCampaignHost,
+} from "../../hooks/useCampaignRead";
+import useSWR from "swr";
 
 interface ICard {
   children?: React.ReactNode;
   className?: any;
+  /**
+   * Also the address of the campaign
+   */
   id?: string;
   uri?: string;
   name?: string;
@@ -28,13 +34,7 @@ function Card(props: ICard) {
   const { address } = useAccount();
   const { host } = useCampaignHost(props.id.toLowerCase());
 
-  const { data, isLoading } = useQuery<{ title: string; description: string }>(
-    ["metadata", props.uri],
-    () => {
-      return getCampaignDetail(props.uri);
-    },
-    { retry: 10, enabled: !!props.uri }
-  );
+  const { data } = useCampaignDetails(props?.id);
 
   useEffect(() => {
     if (address?.toLowerCase() === host?.toLowerCase() && address) {

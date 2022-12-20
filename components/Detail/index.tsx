@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { CampaignDetail, getCampaignDetail } from "../../utils/campaign";
 import style from "./style.module.css";
 import { shortenAddress, timeStampToPeriodLength } from "../../utils/convert";
-import { useQuery } from "@tanstack/react-query";
 import { packTokenAmountToFix } from "../../utils/token";
 import { TokenMap } from "../../contracts/contants";
+import { useCampaignDetails } from "../../hooks/useCampaignRead";
 
 function timeStampToDate(timestamp: number): string {
   return new Date(timestamp).toLocaleString();
@@ -21,13 +21,7 @@ export declare type IDetail = {
 };
 
 const Detail = (props: IDetail) => {
-  const { data, isLoading } = useQuery<{ title: string; description: string }>(
-    ["metadata", props.uri],
-    () => {
-      return getCampaignDetail(props.uri);
-    },
-    { retry: 10, enabled: !!props.uri }
-  );
+  const { data } = useCampaignDetails(props?.id) 
 
   return (
     <>

@@ -10,13 +10,10 @@ import { WagmiConfig } from "wagmi";
 
 import Nav from "../components/nav";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import WalletAuth from "../components/Auth";
 import { ModalProvider } from "../components/modal";
 import ReactLoading from "react-loading";
 import { wagmiClient } from "../utils/wagmiConfig";
-
-const queryClient = new QueryClient();
 
 function NextWeb3App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -44,36 +41,34 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <ApolloProvider client={client}>
-        <QueryClientProvider client={queryClient}>
-          <WagmiConfig client={wagmiClient}>
-            <WalletAuth>
-              {visible && !isMobile ? (
-                <div
-                  style={{
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: 300,
-                  }}
-                >
-                  <ReactLoading
-                    type={"spin"}
-                    color="#d3a2d7"
-                    height={100}
-                    width={100}
-                  />
-                </div>
-              ) : (
-                <>
-                  <ModalProvider>
-                    <Component {...pageProps} />
-                    <Nav />
-                  </ModalProvider>
-                </>
-              )}
-            </WalletAuth>
-          </WagmiConfig>
-        </QueryClientProvider>
+        <WagmiConfig client={wagmiClient}>
+          <WalletAuth>
+            {visible && !isMobile ? (
+              <div
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: 300,
+                }}
+              >
+                <ReactLoading
+                  type={"spin"}
+                  color="#d3a2d7"
+                  height={100}
+                  width={100}
+                />
+              </div>
+            ) : (
+              <>
+                <ModalProvider>
+                  <Component {...pageProps} />
+                  <Nav />
+                </ModalProvider>
+              </>
+            )}
+          </WalletAuth>
+        </WagmiConfig>
       </ApolloProvider>
     </Web3ReactProvider>
   );

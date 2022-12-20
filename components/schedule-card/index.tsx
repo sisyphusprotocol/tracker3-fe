@@ -5,12 +5,12 @@ import failure from "./images/w.png";
 import * as React from "react";
 import Progress from "../../components/progress/index";
 import Tag from "../tag";
-import { useQuery } from "@tanstack/react-query";
 import { getCampaignDetail } from "../../utils/campaign";
 import moment from "moment";
 import { packTokenAmount, packTokenAmountToFix } from "../../utils/token";
 import { TokenMap } from "../../contracts/contants";
 import { useRouter } from "next/router";
+import { useCampaignDetails } from "../../hooks/useCampaignRead";
 
 interface IScheduleCard {
   type?: "ongoing" | "notStarted" | "created" | undefined; // type
@@ -23,7 +23,9 @@ interface IScheduleCard {
   // counts?: string; // 20 USDC
   progressCurrent?: number;
   progressSchedule?: number;
-  // campaign contract address
+  /** 
+   * campaign contract address
+   */
   address: string;
   // ipfs uri,  ipfs 
   uri: string;
@@ -57,13 +59,7 @@ function formatPeriodLength(periodLength: number) {
 function ScheduleCard(props: IScheduleCard) {
   const router = useRouter();
 
-  const { data } = useQuery<{ title: string; description: string }>(
-    ["metadata", props.uri],
-    () => {
-      return getCampaignDetail(props.uri);
-    },
-    { retry: 10, enabled: !!props.uri }
-  );
+  const { data } = useCampaignDetails(props?.address) 
 
   return (
     <div className={styles.wrapper}>
