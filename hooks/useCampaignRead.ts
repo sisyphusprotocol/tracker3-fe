@@ -55,7 +55,6 @@ export function useCampaignDetails(campaign: string) {
     args: [],
     scopeKey: campaign,
     cacheTime: 100_000,
-    suspense: true,
   });
 
   const { data, isLoading } = useSWR<{ title: string; description: string }>(
