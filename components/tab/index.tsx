@@ -13,7 +13,7 @@ interface ITabProps {
 function Tab(props: ITabProps) {
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  const switchActiveTab = (index:number, cb : ()=>any) => {
+  const switchActiveTab = (index: number, cb: () => any) => {
     setActiveTab(index);
     cb && cb();
   };
@@ -31,7 +31,16 @@ function Tab(props: ITabProps) {
             key={item.label}
             onClick={() => switchActiveTab(index, item.activeCb)}
           >
-            <div className={styles["tab-item-text"]}  key={item.label}>{item.label}</div>
+            <div
+              className={
+                index === activeTab
+                  ? styles["tab-item-text-selected"]
+                  : styles["tab-item-text"]
+              }
+              key={item.label}
+            >
+              {item.label}
+            </div>
           </div>
         );
       })}

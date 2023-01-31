@@ -40,3 +40,13 @@
     color: #3F3F3F;
 }
 
+.tab-item-text-selected {
+    margin-left: 0.11rem;
+    margin-right: 0.11rem;
+    font-family: 'SF Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    color: #FFFFFF;
+}
