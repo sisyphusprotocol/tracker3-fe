@@ -106,7 +106,7 @@ function Find() {
 
   if (!address) return null;
 
-  // 
+  //
   const onSearch = (ref: any) => console.log(ref.current.value);
 
   const handleClick = () => {
@@ -120,35 +120,37 @@ function Find() {
     },
     {
       label: "OnGoing",
-      activeCb: () => setCurrentTab("OnGoing"), // 
+      activeCb: () => setCurrentTab("OnGoing"), //
     },
   ];
 
   return (
     <div className={styles.container}>
-      <Info id={shortenAddress(address, 2)} className={styles.info} />
-      <Search onSearch={onSearch} className={styles.search} />
-      <div className={styles["host-img"]}>
-        <Image src={_img} className={styles["host-img"]} alt="" />
-      </div>
-      <div onClick={handleClick} className={styles["host-button-wrapper"]}>
-        <div>
-          <div className={styles["host-button-title"]}>Create Protocol</div>
-          <div className={styles["host-button-desc"]}>
-            You can create a new protocol of your own!
+      <div className="relative flex flex-col h-screen items-center w-auto">
+        <Info id={shortenAddress(address)} className={styles.info} />
+        <Search onSearch={onSearch} className="relative m-1" />
+        <div className={styles["host-img"]}>
+          <Image src={_img} className={styles["host-img"]} alt="" />
+        </div>
+        <div onClick={handleClick} className={styles["host-button-wrapper"]}>
+          <div>
+            <div className={styles["host-button-title"]}>Create Protocol</div>
+            <div className={styles["host-button-desc"]}>
+              You can create a new protocol of your own!
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* tab */}
-      <div className={styles["campaign-tabs"]}>
-        <Tab tabItems={tabItems} />
+        {/* tab */}
+        <div className={styles["campaign-tabs"]}>
+          <Tab tabItems={tabItems} />
+        </div>
+        {currentTab === "OnGoing" ? (
+          <OnGoingCampaigns />
+        ) : (
+          <NotStartedCampaigns />
+        )}
       </div>
-      {currentTab === "OnGoing" ? (
-        <OnGoingCampaigns />
-      ) : (
-        <NotStartedCampaigns />
-      )}
     </div>
   );
 }

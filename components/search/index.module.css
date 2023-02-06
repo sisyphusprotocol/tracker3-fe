@@ -2,6 +2,9 @@
     width: 3.4rem;
     height: 0.32rem;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center
 }
 
 .input {
@@ -14,8 +17,8 @@
 }
 
 .search {
-    position: absolute;
-    right: 0.058rem;
+    position: relative;
+    right: 0.258rem;
     top: 0.06rem;
     width: 0.202rem;
     height: 0.202rem;

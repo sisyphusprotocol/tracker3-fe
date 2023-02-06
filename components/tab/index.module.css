@@ -1,52 +1,64 @@
 .tabs {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.13rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.13rem;
+  position: relative;
+  width: 3.4rem;
+  margin-top: 0.17rem;
+  margin-bottom: 0.1rem;
 }
 
 .tab-item {
-    width: auto;
-    height: 0.24rem;   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
-    backdrop-filter: blur(0.02rem);
-    background: linear-gradient(95.34deg, rgba(255, 255, 255, 0.8) 19.94%, rgba(255, 255, 255, 0.48) 89.63%);
+  width: auto;
+  height: 0.24rem;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
+  backdrop-filter: blur(0.02rem);
+  background: linear-gradient(
+    95.34deg,
+    rgba(255, 255, 255, 0.8) 19.94%,
+    rgba(255, 255, 255, 0.48) 89.63%
+  );
 }
 
 .tab-item-selected {
-    width: auto;
-    height: 0.24rem;   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
-    backdrop-filter: blur(0.02rem);
-    background: #7B60C4;
+  width: auto;
+  height: 0.24rem;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0.02rem 0.03rem 0.02rem -0.06rem rgba(120, 61, 140, 0.15);
+  backdrop-filter: blur(0.02rem);
+  background: #7b60c4;
 }
 
 .tab-item-text {
-    margin-left: 0.11rem;
-    margin-right: 0.11rem;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.14rem;
-    line-height: 0.17rem;
-    color: #3F3F3F;
+  margin-left: 0.11rem;
+  margin-right: 0.11rem;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  color: #3f3f3f;
 }
 
 .tab-item-text-selected {
-    margin-left: 0.11rem;
-    margin-right: 0.11rem;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.14rem;
-    line-height: 0.17rem;
-    color: #FFFFFF;
+  margin-left: 0.11rem;
+  margin-right: 0.11rem;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.14rem;
+  line-height: 0.17rem;
+  color: #ffffff;
 }
