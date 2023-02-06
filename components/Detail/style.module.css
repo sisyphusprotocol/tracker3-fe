@@ -1,5 +1,5 @@
 .title {
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 800;
   font-size: .16rem;
@@ -17,7 +17,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: .16rem;
@@ -27,7 +27,7 @@
 }
 
 .content {
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: .16rem;
@@ -37,7 +37,7 @@
 
 .desctitle {
   margin-top: .58rem;
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: .16rem;
@@ -48,7 +48,7 @@
 }
 
 .desc {
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-size: .16rem;
   line-height: .19rem;

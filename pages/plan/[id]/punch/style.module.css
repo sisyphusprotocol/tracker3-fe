@@ -36,7 +36,7 @@
   flex-direction: column;
 }
 .rule-title {
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 0.16rem;
@@ -49,7 +49,7 @@
 }
 
 .rule-desc {
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;

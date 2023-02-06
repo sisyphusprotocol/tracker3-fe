@@ -39,7 +39,7 @@
 .yellow-title {
   /* position: absolute; */
 
-  font-family: "Inter";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.2rem;
@@ -50,7 +50,7 @@
 }
 
 .yellow-desc {
-  font-family: "Inter";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;

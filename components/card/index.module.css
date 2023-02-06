@@ -12,7 +12,7 @@
 }
 
 .card-programName {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.18rem;
@@ -29,7 +29,7 @@
 
 .card-dayCount {
   margin-left: 0.27rem;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.13rem;
@@ -44,7 +44,7 @@
   width: 2.3rem;
   margin-top: 0.1rem;
   margin-left: 0.27rem;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.13rem;
@@ -97,7 +97,7 @@
     left: 274.63px;
     top: 701.33px; */
 
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;

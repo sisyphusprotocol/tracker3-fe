@@ -30,7 +30,7 @@
 }
 
 .top-nav-left {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.18rem;
@@ -40,7 +40,7 @@
 }
 
 .top-nav-right {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;
@@ -51,7 +51,7 @@
 }
 
 .title {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.2rem;
@@ -88,7 +88,7 @@
 }
 
 .day {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.38rem;
@@ -100,7 +100,7 @@
 }
 
 .day-label {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;
@@ -127,7 +127,7 @@
   height: 0.3rem;
   background: #8b7fa3;
   border-radius: 22.9761px;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.14rem;
@@ -140,7 +140,7 @@
 }
 
 .choost-info {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.12rem;
@@ -185,7 +185,7 @@
 }
 
 .check-info {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.18rem;

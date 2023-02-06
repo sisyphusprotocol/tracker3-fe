@@ -45,7 +45,7 @@
 }
 
 .desc {
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.2rem;
@@ -72,7 +72,7 @@
   width: 2.85rem;
   display: flex;
   flex-direction: column;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.13rem;

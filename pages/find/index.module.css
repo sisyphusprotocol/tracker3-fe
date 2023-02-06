@@ -34,7 +34,7 @@
   margin-top: 0.17rem;
   width: 0.57rem;
   height: 0.34rem;
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 510;
   font-size: 0.14rem;
@@ -47,7 +47,7 @@
   margin-left: 0.1012rem;
   width: 0.8rem;
   height: 0.3471rem;
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 274;
   font-size: 0.11rem;
@@ -78,7 +78,7 @@
 .yellow-title {
   /* position: absolute; */
 
-  font-family: "Inter";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.2rem;
@@ -90,7 +90,7 @@
 }
 
 .yellow-desc {
-  font-family: "Inter";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;
@@ -107,7 +107,7 @@
   height: 0.29rem;
   left: 0.83rem;
   top: 4rem;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 0.2rem;

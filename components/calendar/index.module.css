@@ -16,7 +16,7 @@
 }
 
 .title{
-    font-family: 'SF Pro';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: .24rem;
@@ -50,7 +50,7 @@
 }
 
 .month{
-    font-family: 'SF Pro';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: .24rem;
@@ -68,7 +68,7 @@
 .days{
     display: flex;
     align-items: center;
-    font-family: 'SF Pro';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: .14rem;
@@ -96,7 +96,7 @@
 }
 
 .day{
-    font-family: 'SF Pro';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: .14rem;
@@ -149,7 +149,7 @@
     background: #8870CA;
     border-radius: .266rem;
 
-    font-family: 'SF Pro Text';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: .17rem;
@@ -160,7 +160,7 @@
 .right-info{
     flex:1;
     margin-left: .25rem;
-    font-family: 'SF Pro Text';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: .14rem;
@@ -183,7 +183,7 @@
     height: .41rem;
     margin-top: .18rem;
     border-radius: .2rem;
-    font-family: 'SF Pro Text';
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: .17rem;

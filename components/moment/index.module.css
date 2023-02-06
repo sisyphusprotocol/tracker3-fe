@@ -9,7 +9,7 @@
   justify-content: space-between;
   padding: 0 .16rem;
   padding-top: .2rem;
-  font-family: 'SF Pro';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: .24rem;
@@ -51,7 +51,7 @@
 }
 
 .card-info-id{
-  font-family: 'SF Pro';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: .13rem;
@@ -60,7 +60,7 @@
 }
 
 .card-info-other{
-  font-family: 'SF Pro';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: .1rem;
@@ -78,7 +78,7 @@
 }
 
 .card-content{
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: .14rem;
@@ -112,7 +112,7 @@
 .button-list-wrapper{
   width: 100%;
   display: flex;
-  font-family: 'Inter';
+  font-family: "Roboto", sans-serif;
   justify-content: space-between;
   font-style: normal;
   font-weight: 400;

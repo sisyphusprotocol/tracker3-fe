@@ -12,7 +12,7 @@
   position: fixed;
   left: 2.64rem;
   top: 0.38rem;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;
@@ -41,7 +41,7 @@
   line-height: 0.43rem;
   font-feature-settings: "pnum" on, "lnum" on;
   color: #ffffff;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
 }
 
@@ -51,7 +51,7 @@
   bottom: 1.6rem;
   width: 2.58rem;
   height: 0.709rem;
-  font-family: "Jost";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.14rem;

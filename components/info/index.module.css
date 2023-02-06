@@ -3,7 +3,7 @@
   margin-right: calc((100vw - 2rem) / 2);
   width: 1rem;
   height: 0.2rem;
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 510;
   font-size: 0.16rem;
@@ -17,7 +17,7 @@
   margin-right: 0rem;
   width: 0.97rem;
   height: 0.19rem;
-  font-family: "SF Pro";
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 510;
   font-size: 0.16rem;
