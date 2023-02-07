@@ -139,8 +139,8 @@
 }
 
 .schedule-list {
-  position: fixed;
-  top: 3.37rem;
+  position: relative;
+  top: 1.90rem;
   left: 0.1901rem;
   width: 3.8rem;
   height: 4rem;

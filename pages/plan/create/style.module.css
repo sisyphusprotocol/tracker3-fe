@@ -15,7 +15,6 @@
 .outer {
   position: relative;
   width: 3.4rem;
-  left: 0.17rem;
   top: 0.45rem;
   background: #ffffff;
   border-radius: 0.2rem;
@@ -24,4 +23,5 @@
   padding-left: 0.28rem;
   padding-right: 0.28rem;
   padding-bottom: 0.1rem;
+  margin-bottom: 1rem;
 }

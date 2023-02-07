@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import style from "../style.module.css";
+import { useEffect, useState, memo } from "react";
+import style from "./style.module.css";
 import Detail from "../../../components/Detail";
 import {
   CampaignDetailResult,
@@ -18,12 +18,14 @@ import {
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import Button from "../../../components/button";
-import { now } from "../../../utils/convert";
+import { now, shortenAddress } from "../../../utils/convert";
 import { useTokenAllowance } from "../../../hooks/useAllowance";
 import { BigNumber } from "ethers";
 import { Campaign_ABI, ERC20_ABI } from "../../../contracts/contants";
 
 import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
+import { AddressCard } from "../../../components/info";
+import { BackSpace } from "../../../components/backspace";
 
 // example Id: 0x90a3c9178fd231b9b9c8928beeb1aa4bdce8b642
 
@@ -33,6 +35,7 @@ const Plan = () => {
   const router = useRouter();
   const { data: signer } = useSigner();
   const { address } = useAccount();
+  const [loading, setLoading] = useState(false);
 
   const { data: balanceData } = useBalance({
     address: address,
@@ -54,16 +57,14 @@ const Plan = () => {
     variables: { addr: router.query.id },
   });
 
-  const {
-    loading,
-    error,
-    data,
-    refetch: refetchUserStatus,
-  } = useQuery<UserCampaignResult>(USER_CAMPAIGN_DETAIL, {
-    variables: {
-      userCampaign: `${address?.toLowerCase()}-${router.query.id}`,
-    },
-  });
+  const { data, refetch: refetchUserStatus } = useQuery<UserCampaignResult>(
+    USER_CAMPAIGN_DETAIL,
+    {
+      variables: {
+        userCampaign: `${address?.toLowerCase()}-${router.query.id}`,
+      },
+    }
+  );
 
   const { config: signUpConfig, refetch } = usePrepareContractWrite({
     address: props?.data?.campaign.id,
@@ -78,7 +79,11 @@ const Plan = () => {
   // sign up tx
   const { write: signUpWrite, data: signUpTxData } =
     useContractWrite(signUpConfig);
-  useTraceTransaction(signUpTxData?.hash, { type: "sign" });
+  useTraceTransaction(signUpTxData?.hash, { type: "sign" }, () => {
+    refetchUserStatus().then(() => {
+      setLoading(false);
+    });
+  });
 
   const { config } = usePrepareContractWrite({
     address: props.data?.campaign.targetToken.id,
@@ -93,6 +98,7 @@ const Plan = () => {
   const { write, data: approveTxData } = useContractWrite(config);
   useTraceTransaction(approveTxData?.hash, { type: "approve" }, () => {
     refetch();
+    setLoading(false);
   });
 
   const currentAllowance = useTokenAllowance(
@@ -150,6 +156,7 @@ const Plan = () => {
   // TODO: approved status
   const approve = () => {
     write();
+    setLoading(true);
   };
 
   const handleClick = async () => {
@@ -167,6 +174,7 @@ const Plan = () => {
     } else if (status === 1) {
       // refetch after the tx confirmed
       signUpWrite();
+      setLoading(true);
     } else if (status === 6 || status === 7) {
       router.push(`/plan/${router.query.id}/progress`);
     }
@@ -174,27 +182,38 @@ const Plan = () => {
 
   return (
     <div className={style.bg}>
-      <div className={style.outer}>
-        <Detail
-          uri={props.data?.campaign.uri}
-          id={props.data?.campaign.id}
-          startTime={props.data?.campaign.startTime}
-          totalTime={props.data?.campaign.totalTime}
-          requiredAmount={props.data?.campaign.requiredAmount}
-          token={props.data?.campaign.targetToken.id}
-          memberCount={props.data?.campaign.memberCount}
-        />
-        <Button
-          onClick={() => {
-            handleClick();
-          }}
-          className={style.mt}
-        >
-          {buttonText}
-        </Button>
+      <div className="relative flex flex-col items-center w-auto h-auto ">
+        <div className="relative flex flex-row  top-1.5  items-center w-auto">
+          <div className="relative ">
+            <BackSpace />
+          </div>
+          <div className="ml-7">
+            <AddressCard addr={shortenAddress(address)} />{" "}
+          </div>
+        </div>
+        <div className={style.outer}>
+          <Detail
+            uri={props.data?.campaign.uri}
+            id={props.data?.campaign.id}
+            startTime={props.data?.campaign.startTime}
+            totalTime={props.data?.campaign.totalTime}
+            requiredAmount={props.data?.campaign.requiredAmount}
+            token={props.data?.campaign.targetToken.id}
+            memberCount={props.data?.campaign.memberCount}
+          />
+          <Button
+            onClick={() => {
+              handleClick();
+            }}
+            className={style.mt}
+            loading={loading}
+          >
+            {buttonText}
+          </Button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Plan;
+export default memo(Plan);

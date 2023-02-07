@@ -111,24 +111,26 @@ const Create = () => {
   ];
   return (
     <div className={style.bg}>
-      <div className="relative flex flex-row top-1.5 left-1 items-center w-auto">
-        <div className="relative ">
-          <BackSpace />
+      <div className="relative flex flex-col items-center w-auto h-auto ">
+        <div className="relative flex flex-row  top-1.5  items-center w-auto">
+          <div className="relative ">
+            <BackSpace />
+          </div>
+          <div className="ml-7">
+            <AddressCard addr={shortenAddress(address)} />{" "}
+          </div>{" "}
         </div>
-        <div className="ml-7">
-          <AddressCard addr={shortenAddress(address)} />{" "}
+        <div className={style.outer}>
+          <Form
+            onClick={handleClick}
+            config={formConfig}
+            data={metadata}
+            update={setMetadata}
+          />
+          <Button onClick={handleClick} loading={loading}>
+            Confirm
+          </Button>
         </div>
-      </div>
-      <div className={style.outer}>
-        <Form
-          onClick={handleClick}
-          config={formConfig}
-          data={metadata}
-          update={setMetadata}
-        />
-        <Button onClick={handleClick} loading={loading}>
-          Confirm
-        </Button>
       </div>
     </div>
   );

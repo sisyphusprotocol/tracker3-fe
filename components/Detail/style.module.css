@@ -2,12 +2,12 @@
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 800;
-  font-size: .16rem;
-  line-height: .19rem;
-  color: #000000;
-  margin-top: .54rem;
-  margin-bottom: .42rem;
-  text-align: center;
+  font-size: 0.24rem;
+  line-height: 0.29rem;
+  color: #8870ca;
+  margin-top: 0.54rem;
+  margin-bottom: 0.25rem;
+  text-align: left;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -20,44 +20,43 @@
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: .16rem;
-  line-height: .19rem;
+  font-size: 0.16rem;
+  line-height: 0.19rem;
   color: #000000;
-  margin-top: .18rem;
+  margin-top: 0.18rem;
 }
 
 .content {
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: .16rem;
-  line-height: .19rem;
+  font-size: 0.16rem;
+  line-height: 0.19rem;
   color: #000000;
 }
 
 .desctitle {
-  margin-top: .58rem;
+  margin-top: 0.125rem;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: .16rem;
-  line-height: .19rem;
+  font-size: 0.16rem;
+  line-height: 0.19rem;
   color: #000000;
-  padding-bottom: .1rem;
-  border-bottom: 2px solid rgba(160, 160, 160, 0.54);
+  padding-bottom: 0.1rem;
 }
 
 .desc {
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  font-size: .16rem;
-  line-height: .19rem;
+  font-size: 0.16rem;
+  line-height: 0.19rem;
   color: #000000;
-  margin-top: .09rem;
+  margin-top: 0.09rem;
   height: 1.3rem;
   overflow-y: auto;
 }
 
 .mt {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }

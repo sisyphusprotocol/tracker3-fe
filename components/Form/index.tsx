@@ -1,6 +1,5 @@
 import React, { memo, useState } from "react";
 import style from "./style.module.css";
-import Button from "../button";
 
 export type FormConfig = {
   name: string;

@@ -1,14 +1,12 @@
-import React, { memo } from "react";
-import { CampaignDetail, getCampaignDetail } from "../../utils/campaign";
+import { memo } from "react";
 import style from "./style.module.css";
 import { shortenAddress, timeStampToPeriodLength } from "../../utils/convert";
 import { packTokenAmountToFix } from "../../utils/token";
 import { TokenMap } from "../../contracts/contants";
 import { useCampaignDetails } from "../../hooks/useCampaignRead";
-
-function timeStampToDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleString();
-}
+import { dayjs } from "../../utils/dayjs";
+import line from "./line.svg";
+import Image from "next/image";
 
 export declare type IDetail = {
   id: string;
@@ -21,34 +19,29 @@ export declare type IDetail = {
 };
 
 const Detail = (props: IDetail) => {
-  const { data } = useCampaignDetails(props?.id) 
+  const { data } = useCampaignDetails(props?.id);
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className={style.title}>{data?.title || "Loading..."}</div>
 
       <div className={style.line}>
-        <div>Starting Date</div>
+        <div>Starting Date:</div>
         <div className={style.content}>
-          {timeStampToDate(props.startTime * 1000)}
+          {dayjs.unix(props.startTime).format("MMM Do(ha z)")}
         </div>
       </div>
       <div className={style.line}>
-        <div>Duration</div>
+        <div>Total:</div>
         <div className={style.content}>
           {timeStampToPeriodLength(props.totalTime)}
         </div>
       </div>
 
       <div className={style.line}>
-        <div>Token</div>
-        <div className={style.content}>{TokenMap[props?.token]}</div>
-      </div>
-
-      <div className={style.line}>
-        <div>Stake</div>
+        <div>Stake:</div>
         <div className={style.content}>
-          {packTokenAmountToFix(props.requiredAmount)}
+          {packTokenAmountToFix(props.requiredAmount)} {TokenMap[props?.token]}
         </div>
       </div>
 
@@ -63,10 +56,12 @@ const Detail = (props: IDetail) => {
         <div>Member</div>
         <div className={style.content}>{props.memberCount}</div>
       </div>
-
+      <div className="relative self-center w-11  mt-2 mb-1 h-0">
+        <Image sizes="fill" src={line} alt=""></Image>
+      </div>
       <div className={style.desctitle}>Description</div>
       <div className={style.desc}>{data?.description || "loading..."}</div>
-    </>
+    </div>
   );
 };
 export default memo(Detail);
