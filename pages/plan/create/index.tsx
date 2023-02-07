@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import style from "../style.module.css";
+import style from "./style.module.css";
 import Form, { FormConfig } from "../../../components/Form";
 import { ethers } from "ethers";
 import moment from "moment";
@@ -8,10 +8,16 @@ import { useCreateCampaign } from "../../../hooks/useCampaignWrite";
 import { useUploadCampaignUri } from "../../../hooks/useCampaign";
 import { useTraceTransaction } from "../../../hooks/useTraceTransaction";
 import { useRouter } from "next/router";
+import { BackSpace } from "../../../components/backspace";
+import { useAccount } from "wagmi";
+import { shortenAddress } from "../../../utils/convert";
+import { AddressCard } from "../../../components/info";
+import Button from "../../../components/button";
 
 // eslint-disable-next-line react/display-name
 const Create = () => {
   const router = useRouter();
+  const { address } = useAccount();
   const [metadata, setMetadata] = useState({
     name: "Test Campaign",
     desc: "As you know, it is just a test...",
@@ -23,6 +29,7 @@ const Create = () => {
 
   const [enableUpload, setEnableUpload] = useState(false);
   const [startCreate, setStartCreate] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { data: cid } = useUploadCampaignUri({
     name: metadata.name,
@@ -43,16 +50,23 @@ const Create = () => {
     campaignUri: `ipfs://${cid}`,
   });
 
-  useTraceTransaction(data?.hash, {
-    type: "create",
-    onClick: () => {
-      router.push("/find");
+  useTraceTransaction(
+    data?.hash,
+    {
+      type: "create",
+      onClick: () => {
+        router.push("/find");
+      },
     },
-  });
+    () => {
+      setLoading(false);
+    }
+  );
 
   const handleClick = () => {
     setEnableUpload(true);
     setStartCreate(true);
+    setLoading(true);
   };
 
   useEffect(() => {
@@ -95,9 +109,16 @@ const Create = () => {
       label: "Staking amount",
     },
   ];
-
   return (
     <div className={style.bg}>
+      <div className="relative flex flex-row top-1.5 left-1 items-center w-auto">
+        <div className="relative ">
+          <BackSpace />
+        </div>
+        <div className="ml-7">
+          <AddressCard addr={shortenAddress(address)} />{" "}
+        </div>
+      </div>
       <div className={style.outer}>
         <Form
           onClick={handleClick}
@@ -105,6 +126,9 @@ const Create = () => {
           data={metadata}
           update={setMetadata}
         />
+        <Button onClick={handleClick} loading={loading}>
+          Confirm
+        </Button>
       </div>
     </div>
   );

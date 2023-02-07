@@ -230,7 +230,7 @@ function Find() {
             {"It always seems impossible until it's done."}
           </div>
         </div>
-        <Tab tabItems={tabItems} />
+        <div className="m-0.5"><Tab tabItems={tabItems} /></div>
         {(() => {
           switch (currentTab) {
             case "Created":

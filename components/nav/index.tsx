@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useAccount } from "wagmi";
 
 import navList from "./constant";
-const unShowPath = [/\/mobile/, /\/home"/, /\/moments\//, /\/$/];
+const unShowPath = [/\/mobile/, /\/home"/, /\/moments\//, /\/$/, /\plan\/create/];
 function Nav() {
   const router = useRouter();
 

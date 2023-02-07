@@ -50,7 +50,7 @@ const Select = (props: {
 };
 
 const Form = (props: FormProps) => {
-  const { data, update, config, onClick } = props;
+  const { data, update, config } = props;
   const getInput = (rowData: FormConfig) => {
     const { type } = rowData;
     if (type === "input") {
@@ -109,14 +109,6 @@ const Form = (props: FormProps) => {
           </>
         );
       })}
-      <Button
-        onClick={() => {
-          onClick(data);
-        }}
-        className={style["mt-[.53rem]"]}
-      >
-        Confirm
-      </Button>
     </>
   );
 };

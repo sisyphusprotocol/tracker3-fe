@@ -1,11 +1,13 @@
 .button {
-  width: 2.71rem;
+  width: 2.75rem;
   height: 0.6rem;
-  background: #7b61c5;
+  background: rgba(123, 97, 197, 0.9);
   border-radius: 0.38rem;
   font-size: 0.2rem;
-  line-height: 0.29rem;
+  line-height: 0.30rem;
   color: #ffffff;
+  margin-bottom: 0.125rem;
+  margin-top: 0.125rem;
   display: flex;
   justify-content: center;
   align-items: center;
