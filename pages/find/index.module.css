@@ -18,9 +18,9 @@
 .host-button-wrapper {
   width: 0.98rem;
   height: 1.08rem;
-  right: calc((100vw - 3.4rem) / 2);
-  top: 1.5784rem;
-  position: fixed;
+  margin-left: 0.05rem;
+  /* right: calc((100vw - 3.4rem) / 2); */
+  position: relative;
   background: #7b60c4;
   border-radius: 0.1rem;
 }
@@ -53,9 +53,8 @@
 }
 
 .host-img {
-  position: fixed;
-  top: 1.5784rem;
-  left: calc((100vw - 3.4rem) / 2);
+  position: relative;
+  margin-right: 0.05rem;
   width: 2.3288rem;
   height: 1.08rem;
 }
@@ -133,18 +132,16 @@
 }
 
 .campaign-tabs {
-  position: fixed;
-  top: 2.907rem;
-  left: calc((100vw - 3.4rem) / 2);
+  position: relative;
+  top: 0.25rem;
 }
 
 .schedule-list {
   position: relative;
-  top: 1.90rem;
-  left: 0.1901rem;
+  top: 0.5rem;
+  align-items: center;
   width: 3.8rem;
   height: 4rem;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 0.15rem;

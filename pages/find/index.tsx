@@ -126,17 +126,19 @@ function Find() {
 
   return (
     <div className={styles.container}>
-      <div className="relative flex flex-col h-screen items-center w-auto">
+      <div className="relative flex flex-col h-screen items-center w-auto mb-3 overflow-auto">
         <Info id={shortenAddress(address)} className={styles.info} />
         <Search onSearch={onSearch} className="relative m-1" />
-        <div className={styles["host-img"]}>
-          <Image src={_img} className={styles["host-img"]} alt="" />
-        </div>
-        <div onClick={handleClick} className={styles["host-button-wrapper"]}>
-          <div>
-            <div className={styles["host-button-title"]}>Create Protocol</div>
-            <div className={styles["host-button-desc"]}>
-              You can create a new protocol of your own!
+        <div className="relative flex flex-row self-center items-center ">
+          <div className={styles["host-img"]}>
+            <Image src={_img} alt="" />
+          </div>
+          <div onClick={handleClick} className={styles["host-button-wrapper"]}>
+            <div>
+              <div className={styles["host-button-title"]}>Create Protocol</div>
+              <div className={styles["host-button-desc"]}>
+                You can create a new protocol of your own!
+              </div>
             </div>
           </div>
         </div>

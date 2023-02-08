@@ -219,7 +219,7 @@ function Find() {
 
   return (
     <div className={styles.container}>
-      <div className="relative flex flex-col h-screen items-center w-auto">
+      <div className="relative flex flex-col items-center w-auto h-screen mb-3 overflow-scroll">
         <Info id={shortenAddress(address)} />
         <div className={styles["find-img"]}>
           <Image src={_img} alt="" />
@@ -230,7 +230,9 @@ function Find() {
             {"It always seems impossible until it's done."}
           </div>
         </div>
-        <div className="m-0.5"><Tab tabItems={tabItems} /></div>
+        <div className="m-0.5">
+          <Tab tabItems={tabItems} />
+        </div>
         {(() => {
           switch (currentTab) {
             case "Created":
