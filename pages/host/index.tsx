@@ -222,7 +222,7 @@ function Find() {
       <div className="relative flex flex-col items-center w-auto h-screen mb-3 overflow-scroll">
         <Info id={shortenAddress(address)} />
         <div className={styles["find-img"]}>
-          <Image src={_img} alt="" />
+          <Image src={_img} sizes="fill" alt="" />
         </div>
         <div className={styles["host-yellow"]}>
           <div className={styles["yellow-title"]}>Hi, Jerry!</div>

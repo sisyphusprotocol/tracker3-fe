@@ -131,7 +131,7 @@ function Find() {
         <Search onSearch={onSearch} className="relative m-1" />
         <div className="relative flex flex-row self-center items-center ">
           <div className={styles["host-img"]}>
-            <Image src={_img} alt="" />
+            <Image sizes="fill" src={_img}  alt="" />
           </div>
           <div onClick={handleClick} className={styles["host-button-wrapper"]}>
             <div>
